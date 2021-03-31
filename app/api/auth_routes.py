@@ -25,7 +25,14 @@ def authenticate():
     """
     if current_user.is_authenticated:
         return current_user.to_dict()
-    return {'errors': ['Unauthorized']}
+    return {'errors': ['Unauthorized']}, 401
+
+
+@auth_routes.route('/demo-login', methods=['POST'])
+def demoLogin():
+    user = User.query.filter(User.email == 'demo@aa.io').first()
+    login_user(user)
+    return user.to_dict()
 
 
 @auth_routes.route('/login', methods=['POST'])
@@ -34,7 +41,9 @@ def login():
     Logs a user in
     """
     form = LoginForm()
-    print(request.get_json())
+    # print(form.email)
+    # print(form.password)
+    # print(request.get_json())
     # Get the csrf_token from the request cookie and put it into the
     # form manually to validate_on_submit can be used
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -71,8 +80,12 @@ def sign_up():
         db.session.add(user)
         db.session.commit()
         login_user(user)
-        return user.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+        new_user = user.to_dict()
+        # new_image = UserImage(user_id=new_user['id'], img_url="https://skybnb.s3.amazonaws.com/porg1.jfif")
+        # db.session.add(new_image)
+        db.session.commit()
+        return new_user
+    return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
 @auth_routes.route('/unauthorized')

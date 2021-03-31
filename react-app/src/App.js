@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
+import SignupModal from './components/SignupModal';
+import LoginModal from './components/LoginModal';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
@@ -51,8 +53,19 @@ function App() {
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <MainNavbar />
+        <MainNavbar
+          authenticated={authenticated}
+          setAuthenticated={setAuthenticated}
+        />
         <NavBar setAuthenticated={setAuthenticated} />
+        <LoginModal
+          authenticated={authenticated}
+          setAuthenticated={setAuthenticated}
+        />
+        <SignupModal
+          authenticated={authenticated}
+          setAuthenticated={setAuthenticated}
+        />
         <Switch>
           <Route path="/login" exact={true}>
             <LoginForm

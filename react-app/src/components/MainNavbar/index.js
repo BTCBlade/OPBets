@@ -1,5 +1,8 @@
 import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { openSignup, openLogin } from '../../store/modal';
+import LogoutButton from '../auth/LogoutButton';
 import {
   AppBar,
   Box,
@@ -15,8 +18,8 @@ import MenuIcon from '../../icons/Menu';
 import Logo from './Logo';
 
 const MainNavbar = (props) => {
-  const { onSidebarMobileOpen } = props;
-
+  const { onSidebarMobileOpen, authenticated, setAuthenticated } = props;
+  const dispatch = useDispatch();
   return (
     <AppBar
       elevation={0}
@@ -43,56 +46,61 @@ const MainNavbar = (props) => {
         </Hidden>
         <Box sx={{ flexGrow: 1 }} />
         <Hidden mdDown>
-          <Link
-            color="textSecondary"
-            component={RouterLink}
-            to="/browse"
-            underline="none"
-            variant="body1"
-          >
-            Browse Components
-          </Link>
-          <Chip
-            color="primary"
-            label="NEW"
-            size="small"
-            sx={{
-              maxHeight: 20,
-              ml: 1,
-              mr: 2,
-            }}
-          />
-          <Link
-            color="textSecondary"
-            component={RouterLink}
-            to="/docs"
-            underline="none"
-            variant="body1"
-          >
-            Documentation
-          </Link>
-          <Divider
-            orientation="vertical"
-            sx={{
-              height: 32,
-              mx: 2,
-            }}
-          />
-          <Button
-            color="primary"
-            component="a"
-            href="https://material-ui.com/store/items/devias-kit-pro"
-            size="small"
-            target="_blank"
-            variant="contained"
-          >
-            Get the kit
-          </Button>
+          {authenticated && (
+            <>
+              <LogoutButton setAuthenticated={setAuthenticated} />
+            </>
+          )}
+          {!authenticated && (
+            <>
+              <Link
+                color="textSecondary"
+                component={RouterLink}
+                to="/about"
+                underline="none"
+                variant="body1"
+                mr={6}
+              >
+                ABOUT
+              </Link>
+              <Link
+                color="textSecondary"
+                onClick={() => dispatch(openLogin())}
+                className="login__button"
+                underline="none"
+                variant="body1"
+              >
+                LOGIN
+              </Link>
+              <Divider
+                orientation="vertical"
+                sx={{
+                  height: 32,
+                  mx: 2,
+                  mr: 3,
+                  ml: 3,
+                }}
+              />
+              <Button
+                color="primary"
+                onClick={() => dispatch(openSignup())}
+                size="medium"
+                target="_blank"
+                variant="contained"
+              >
+                JOIN
+              </Button>
+            </>
+          )}
         </Hidden>
       </Toolbar>
       <Divider />
     </AppBar>
   );
+};
+
+MainNavbar.propTypes = {
+  onSidebarMobileOpen: PropTypes.func,
 };
 
 export default MainNavbar;

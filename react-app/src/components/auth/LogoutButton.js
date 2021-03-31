@@ -1,6 +1,7 @@
 import React from 'react';
 import { logout } from '../../services/auth';
 import { useHistory } from 'react-router-dom';
+import { Button } from '@material-ui/core';
 
 const LogoutButton = ({ setAuthenticated }) => {
   const history = useHistory();
@@ -11,7 +12,17 @@ const LogoutButton = ({ setAuthenticated }) => {
     window.location.reload();
   };
 
-  return <p onClick={onLogout}>Logout</p>;
+  return (
+    <Button
+      color="primary"
+      size="medium"
+      target="_blank"
+      variant="contained"
+      onClick={onLogout}
+    >
+      Logout
+    </Button>
+  );
 };
 
 export default LogoutButton;
