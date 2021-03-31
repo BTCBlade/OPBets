@@ -3,11 +3,15 @@ import React from 'react';
 import './index.css';
 
 import ReactDOM from 'react-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { ModalProvider } from './context/Modal';
+import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
+import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
+import StyledEngineProvider from '@material-ui/core/StyledEngineProvider';
 import App from './App';
 
+import { SettingsProvider } from './context/SettingsContext.js';
 import configureStore from './store';
 import { restoreCSRF, fetch } from './store/csrf';
 import * as sessionActions from './store/session';
@@ -30,14 +34,20 @@ if (process.env.NODE_ENV !== 'production') {
 
 function Root() {
   return (
-    <ModalProvider>
+    <HelmetProvider>
       <Provider store={store}>
         <BrowserRouter>
-          <App />
-          {/* <Carrot /> */}
+          <StyledEngineProvider injectFirst>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <SettingsProvider>
+                <App />
+                {/* <Carrot /> */}
+              </SettingsProvider>
+            </LocalizationProvider>
+          </StyledEngineProvider>
         </BrowserRouter>
       </Provider>
-    </ModalProvider>
+    </HelmetProvider>
   );
 }
 
