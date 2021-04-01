@@ -15,6 +15,7 @@ from .seeds import seed_commands
 from .config import Config
 
 app = Flask(__name__)
+#seeder_path = os.path.join(app.root_path, '/seeds','/50event_seeders.json')
 
 # Setup login manager
 login = LoginManager(app)
@@ -35,6 +36,8 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(betsapi_routes, url_prefix='/api/betsapi')
 db.init_app(app)
 Migrate(app, db)
+
+
 
 # Application Security
 CORS(app)

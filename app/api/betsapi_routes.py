@@ -1,15 +1,30 @@
 import os
+import pathlib
 import requests
 import json
+
 from flask import Blueprint, jsonify, request
 
 betsapi_routes = Blueprint('betsapi', __name__)
 
 BETSAPI_KEY = os.environ.get('BETSAPI_KEY')
 
+@betsapi_routes.route('/req_seeder')
+def send_seeder_data():
+    events = ''
+
+    #PATHING PYTHON
+    dir = pathlib.Path(__file__).parent.absolute()
+    seeder_path = dir / '50events_seeder.json'
+
+    with open(seeder_path.resolve()) as json_file:
+        events = json.load(json_file)['upcoming_events']
+    return {'upcoming_events': events}
 
 
-@betsapi_routes.route('/')
+
+
+@betsapi_routes.route('/req_50')
 def get_seed_data():
     # Step 1 Query for upcoming events, using betsapi eventsAPI, might need multiple request as its 50 per page
     # https://betsapi.com/docs/events/upcoming.html
