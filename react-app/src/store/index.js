@@ -2,10 +2,12 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import modalReducer from './modal';
 import sessionReducer from './session';
+import betsapiReducer from './betsapi';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   modal: modalReducer,
+  betsapi: betsapiReducer,
 });
 
 let enhancer;

@@ -14,8 +14,9 @@ import {
   Link,
   Toolbar,
 } from '@material-ui/core';
-import MenuIcon from '../../icons/Menu';
+import MenuIcon from './Menu';
 import Logo from './Logo';
+import './MainNavbar.css';
 
 const MainNavbar = (props) => {
   const { onSidebarMobileOpen, authenticated, setAuthenticated } = props;
@@ -66,7 +67,7 @@ const MainNavbar = (props) => {
               <Link
                 color="textSecondary"
                 onClick={() => dispatch(openLogin())}
-                className="login__button"
+                id="nav-login__button"
                 underline="none"
                 variant="body1"
               >

@@ -10,20 +10,24 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './services/auth';
 import * as sessionActions from './store/session';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { ThemeProvider } from '@material-ui/core';
 import { createTheme } from './theme';
+import GlobalStyles from './components/GlobalStyles';
 import useSettings from './hooks/useSettings';
 import SettingsMenu from './components/SettingsMenu';
-import GlobalStyles from './components/GlobalStyles';
+
 import MainNavbar from './components/MainNavbar';
+
+import PublicLandingPage from './components/PublicLandingPage';
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const { settings } = useSettings();
   const dispatch = useDispatch();
+  const sessionUser = useSelector((state) => state.session);
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setLoaded(true));
@@ -53,11 +57,11 @@ function App() {
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
+        <GlobalStyles />
         <MainNavbar
           authenticated={authenticated}
           setAuthenticated={setAuthenticated}
         />
-        <NavBar setAuthenticated={setAuthenticated} />
         <LoginModal
           authenticated={authenticated}
           setAuthenticated={setAuthenticated}
@@ -67,23 +71,34 @@ function App() {
           setAuthenticated={setAuthenticated}
         />
         <Switch>
-          <Route path="/login" exact={true}>
-            <LoginForm
-              authenticated={authenticated}
-              setAuthenticated={setAuthenticated}
-            />
+          <Route exact path="/">
+            <PublicLandingPage />
           </Route>
-          <Route path="/sign-up" exact={true}>
+          {/* <ProtectedRoute
+            path="/"
+            exact={true}
+            authenticated={authenticated}
+            setAuthenticated={setAuthenticated}
+          >
+            <h1>My Home Page</h1>
+          </ProtectedRoute> */}
+          {/* <Route path="/login" exact={true}>
+            <LoginForm
+            authenticated={authenticated}
+            setAuthenticated={setAuthenticated}
+            />
+            </Route>
+            <Route path="/sign-up" exact={true}>
             <SignUpForm
               authenticated={authenticated}
               setAuthenticated={setAuthenticated}
             />
-          </Route>
-          <ProtectedRoute
+            </Route>
+            <ProtectedRoute
             path="/users"
             exact={true}
             authenticated={authenticated}
-          >
+            >
             <UsersList />
           </ProtectedRoute>
           <ProtectedRoute
@@ -92,10 +107,7 @@ function App() {
             authenticated={authenticated}
           >
             <User />
-          </ProtectedRoute>
-          <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
-            <h1>My Home Page</h1>
-          </ProtectedRoute>
+          </ProtectedRoute> */}
         </Switch>
         <SettingsMenu />
       </ThemeProvider>
