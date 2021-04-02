@@ -1,8 +1,7 @@
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-import datetime
-from sqlalchemy.sql import func
+from sqlalchemy.orm import relationship
 
 
 class User(db.Model, UserMixin):
@@ -13,8 +12,10 @@ class User(db.Model, UserMixin):
   email = db.Column(db.String(255), nullable = False, unique = True)
   hashed_password = db.Column(db.String(255), nullable = False)
   balance = db.Column(db.Float, nullable = False, default=1000)
-  time_created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-  time_updated = db.Column(db.DateTime, default=datetime.datetime.utcnow, onupdate=func.now())
+  time_created = db.Column(db.DateTime, default=db.func.current_timestamp())
+  time_updated = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
+
+  wagers = relationship('Wager', back_populates='placed_by_user_id')
 
 
   @property

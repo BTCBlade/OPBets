@@ -26,7 +26,7 @@ export default function PublicLandingPage() {
         color: 'text.secondary',
       }}
     >
-      <Box mt="5%" width="90%" mx="auto">
+      <Box height="300px" mt="5%" width="90%" mx="auto">
         <LandingPageCarousel />
       </Box>
 

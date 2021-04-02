@@ -1,6 +1,6 @@
 import React from 'react';
 import Carousel from 'react-material-ui-carousel';
-import { Paper, Button } from '@material-ui/core';
+import { Box, Paper, Button } from '@material-ui/core';
 import Image from 'material-ui-image';
 import esports_stadium_img from './esports_stadium.jpeg';
 
@@ -28,8 +28,11 @@ export default function LandingPageCarousel(props) {
 
 function Item(props) {
   return (
-    <Paper>
-      <Image src={props.image} />
+    <Paper height="100%" width="100%">
+      <Box height="100px" width="100px">
+        <Image className="carousel-img" src={props.item.image} />
+      </Box>
+
       <h2>{props.item.name}</h2>
       <p>{props.item.description}</p>
 
