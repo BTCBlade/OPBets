@@ -14,7 +14,7 @@ class Wager(db.Model):
     time_created = db.Column(db.DateTime, default=db.func.current_timestamp())
     time_updated = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
-    mainbets_id = db.Column(db.Integer, db.ForeignKey('mainbets.id'), nullable=False)
+    prediction_id = db.Column(db.Integer, db.ForeignKey('predictions.id'), nullable=False)
     placed_by_user_id = relationship('User', back_populates='wagers')
     matched_wagers = relationship('MatchedWager', back_populates='wager')
-    betinfo_mainbets = relationship('Mainbets', back_populates='wagers')
+    prediction = relationship('Prediction', back_populates='wagers')

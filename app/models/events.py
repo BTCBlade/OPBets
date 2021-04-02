@@ -16,4 +16,4 @@ class Event(db.Model):
     time_created = db.Column(db.DateTime, default=db.func.current_timestamp())
     time_updated = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
-    mainbets = relationship('Mainbets', back_populates='event')
+    predictions = relationship('Prediction', back_populates='event')
