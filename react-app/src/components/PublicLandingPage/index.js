@@ -1,15 +1,19 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Box, Button, Container } from '@material-ui/core';
-
+import { Typography, Box, Button, Container } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import LandingPageCarousel from './LandingPageCarousel';
 
 import { testLoad } from '../../store/betsapi';
+const useStyles = makeStyles((theme) => ({
+  span: { marginTop: '1rem', marginBot: '1rem', color: 'primaryMain' },
+}));
 
-export default function PublicLandingPage() {
+export default function PublicLandingPage(props) {
   const dispatch = useDispatch();
   const betsapi = useSelector((state) => state.betsapi);
-
+  console.log(props);
+  const classes = useStyles(props.theme);
   const handleTest = () => {
     dispatch(testLoad());
   };
@@ -26,7 +30,33 @@ export default function PublicLandingPage() {
         color: 'text.secondary',
       }}
     >
-      <Box height="300px" mt="5%" width="90%" mx="auto">
+      <Box height="600px" mt="65px" width="80%" mx="auto">
+        <Typography
+          sx={{
+            backgroundColor: 'background.paper',
+            fontSize: '0.75rem',
+            color: 'primary.main',
+            marginTop: '1rem',
+            marginBottom: '0',
+            textAlign: 'center',
+            fontWeight: '600',
+          }}
+        >
+          INTRODUCING
+        </Typography>
+        <Typography
+          sx={{
+            backgroundColor: 'background.paper',
+            fontSize: '2rem',
+            color: 'text.primary',
+            marginTop: '0.4rem',
+            marginBottom: '0.6rem',
+            textAlign: 'center',
+            fontWeight: '800',
+          }}
+        >
+          The Worlds Only Esports Matchbook
+        </Typography>
         <LandingPageCarousel />
       </Box>
 

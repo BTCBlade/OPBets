@@ -15,7 +15,7 @@ class User(db.Model, UserMixin):
   time_created = db.Column(db.DateTime, default=db.func.current_timestamp())
   time_updated = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
-  wagers = relationship('Wager', back_populates='placed_by_user_id')
+  wagers = relationship('Wager', back_populates='user')
 
 
   @property

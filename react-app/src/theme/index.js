@@ -94,7 +94,6 @@ const themesOptions = {
           input: {
             '&::placeholder': {
               opacity: 0.86,
-              color: '#42526e',
             },
           },
         },

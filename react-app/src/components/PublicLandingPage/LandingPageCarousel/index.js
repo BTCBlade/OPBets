@@ -1,24 +1,53 @@
 import React from 'react';
 import Carousel from 'react-material-ui-carousel';
-import { Box, Paper, Button } from '@material-ui/core';
+import { Grid, Box, Paper, Button, Typography } from '@material-ui/core';
 import Image from 'material-ui-image';
 import esports_stadium_img from './esports_stadium.jpeg';
+import sportsbook_img from './sportsbook.jpeg';
+import forex_img from './forex_pic.jpeg';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  h3: { marginBottom: '0.25rem', marginTop: '1rem' },
+  carouselPaper: {
+    height: '100%',
+    width: '100%',
+    mx: 'auto',
+  },
+}));
 
 export default function LandingPageCarousel(props) {
-  var items = [
+  const items = [
     {
       image: esports_stadium_img,
-      name: 'Random Name #1',
-      description: 'Probably the most random thing you have ever seen!',
+      name:
+        'Esports viewership is blowing up! Sporting events numbers are proof',
+      description:
+        'LoL WorldsChampionship: 23 million' +
+        '   ·  ' +
+        'NHL StanleyCup: 1 million' +
+        '   ·  ' +
+        'MLB Finals: 9.78 million ',
+      button_text: 'Wager on Esports!',
     },
     {
-      name: 'Random Name #2',
-      description: 'Hello World!',
+      image: sportsbook_img,
+      name: 'The truth behind traditional sportsbooks',
+      description:
+        'Most sportsbooks remove at least 5% of the probability spectrum. No one can beat that much implied probability removal long term',
+      button_text: 'Find the truth!',
+    },
+    {
+      image: forex_img,
+      name: 'The forex/stock exchanges approach',
+      description:
+        'All modern markets incentives users to add liquidity, and charges more for removing liquidity. ie. The Bid/Ask systems that HFTs operate on',
+      button_text: 'OPBets Approach',
     },
   ];
 
   return (
-    <Carousel>
+    <Carousel alignItems="center" alignContent="center" justify="center">
       {items.map((item, i) => (
         <Item key={i} item={item} />
       ))}
@@ -27,16 +56,43 @@ export default function LandingPageCarousel(props) {
 }
 
 function Item(props) {
+  const classes = useStyles(props);
   return (
-    <Paper height="100%" width="100%">
-      <Box height="100px" width="100px">
-        <Image className="carousel-img" src={props.item.image} />
+    <Paper className={classes.carouselPaper}>
+      <Box
+        className="carousel-main-box"
+        id="carousel-main-box"
+        display="flex"
+        flexDirection="column"
+        height="100%"
+        width="100%"
+      >
+        <Box
+          height="400px"
+          width="900px"
+          display="flex"
+          flexDirection="column"
+          alignSelf="center"
+          className="carousel-img-container"
+          overflow="hidden"
+        >
+          <img
+            alignSelf="center"
+            className="carousel-img"
+            src={props.item.image}
+          />
+        </Box>
+        <Box className="carousel-header-box" alignSelf="center">
+          <h3 className={classes.h3} mt="0" mb="0" alignSelf="center">
+            {props.item.name}
+          </h3>
+        </Box>
+        <Box alignSelf="center">
+          <p alignSelf="center">{props.item.description}</p>
+        </Box>
+
+        <Button className="CheckButton">{props.item.button_text}</Button>
       </Box>
-
-      <h2>{props.item.name}</h2>
-      <p>{props.item.description}</p>
-
-      <Button className="CheckButton">Check it out!</Button>
     </Paper>
   );
 }

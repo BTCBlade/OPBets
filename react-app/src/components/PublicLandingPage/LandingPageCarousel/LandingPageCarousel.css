@@ -1,3 +1,24 @@
+.CarouselItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+}
+.carousel-paper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carousel-main-box #carousel-main-box {
+}
+.carousel-img-container {
+  align-self: center;
+  width: 1000px;
+  height: 400px;
+}
 .carousel-img {
+  align-self: center;
   object-fit: fill;
+  overflow: hidden;
 }

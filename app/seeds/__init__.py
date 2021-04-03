@@ -1,5 +1,9 @@
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
+from .wagers import seed_wagers
+from .predictions import seed_predictions
+from .events import seed_events
+from .matchedwagers import seed_matched_wagers
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
@@ -9,6 +13,10 @@ seed_commands = AppGroup('seed')
 @seed_commands.command('all')
 def seed():
     seed_users()
+    seed_events()
+    seed_predictions()
+    seed_wagers()
+    seed_matched_wagers()
     # Add other seed functions here
 
 # Creates the `flask seed undo` command

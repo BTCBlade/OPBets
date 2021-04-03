@@ -4,7 +4,7 @@ import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import SignupModal from './components/SignupModal';
 import LoginModal from './components/LoginModal';
-import NavBar from './components/NavBar';
+
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
@@ -19,6 +19,7 @@ import useSettings from './hooks/useSettings';
 import SettingsMenu from './components/SettingsMenu';
 
 import MainNavbar from './components/MainNavbar';
+import SecondNavbar from './components/SecondNavbar';
 
 import PublicLandingPage from './components/PublicLandingPage';
 
@@ -57,11 +58,11 @@ function App() {
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <GlobalStyles />
         <MainNavbar
           authenticated={authenticated}
           setAuthenticated={setAuthenticated}
         />
+
         <LoginModal
           authenticated={authenticated}
           setAuthenticated={setAuthenticated}

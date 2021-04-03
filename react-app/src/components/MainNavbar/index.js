@@ -21,6 +21,7 @@ import './MainNavbar.css';
 const MainNavbar = (props) => {
   const { onSidebarMobileOpen, authenticated, setAuthenticated } = props;
   const dispatch = useDispatch();
+  console.log('mainnav', props);
   return (
     <AppBar
       elevation={0}
