@@ -18,4 +18,5 @@ class Wager(db.Model):
     prediction_id = db.Column(db.Integer, db.ForeignKey('predictions.id'), nullable=False)
     user = relationship('User', back_populates='wagers')
     prediction = relationship('Prediction', back_populates='wagers')
-    matched_wagers = relationship('MatchedWager', back_populates='wager')
+    # liquidity_provider_matched_wagers = relationship('MatchedWager', backref='liquidity_provider_wager')
+    # liquidity_remover_matched_wagers = relationship('MatchedWager', backref='liquidity_remover_wager')

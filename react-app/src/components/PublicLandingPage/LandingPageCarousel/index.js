@@ -8,11 +8,22 @@ import forex_img from './forex_pic.jpeg';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-  h3: { marginBottom: '0.25rem', marginTop: '1rem' },
+  h3: { fontSize: '1.2rem', marginBottom: '0.15rem', marginTop: '0.5rem' },
   carouselPaper: {
     height: '100%',
     width: '100%',
     mx: 'auto',
+  },
+  p: {
+    marginTop: '0.15rem',
+    marginBottom: '0.15rem',
+    fontSize: '0.9rem',
+  },
+  button: {
+    width: '200px',
+    marginTop: '0.4rem',
+    marginBottom: '0.6rem',
+    borderRadius: '.75rem',
   },
 }));
 
@@ -74,6 +85,7 @@ function Item(props) {
           flexDirection="column"
           alignSelf="center"
           className="carousel-img-container"
+          borderRadius="1rem"
           overflow="hidden"
         >
           <img
@@ -88,10 +100,19 @@ function Item(props) {
           </h3>
         </Box>
         <Box alignSelf="center">
-          <p alignSelf="center">{props.item.description}</p>
+          <p className={classes.p} alignSelf="center">
+            {props.item.description}
+          </p>
         </Box>
-
-        <Button className="CheckButton">{props.item.button_text}</Button>
+        <Box alignSelf="center">
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+          >
+            {props.item.button_text}
+          </Button>
+        </Box>
       </Box>
     </Paper>
   );

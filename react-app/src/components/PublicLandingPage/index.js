@@ -30,16 +30,16 @@ export default function PublicLandingPage(props) {
         color: 'text.secondary',
       }}
     >
-      <Box height="600px" mt="65px" width="80%" mx="auto">
+      <Box height="500px" mt="65px" width="80%" mx="auto">
         <Typography
           sx={{
             backgroundColor: 'background.paper',
             fontSize: '0.75rem',
             color: 'primary.main',
-            marginTop: '1rem',
-            marginBottom: '0',
+            marginTop: '0.2rem',
+            marginBottom: 0,
             textAlign: 'center',
-            fontWeight: '600',
+            fontWeight: '500',
           }}
         >
           INTRODUCING
@@ -49,7 +49,7 @@ export default function PublicLandingPage(props) {
             backgroundColor: 'background.paper',
             fontSize: '2rem',
             color: 'text.primary',
-            marginTop: '0.4rem',
+            marginTop: 0,
             marginBottom: '0.6rem',
             textAlign: 'center',
             fontWeight: '800',

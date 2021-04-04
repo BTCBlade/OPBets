@@ -20,6 +20,7 @@ class MatchedWager(db.Model):
     liquidity_remover_wager_id = db.Column(db.Integer, db.ForeignKey('wagers.id'), nullable=False)
 
 
-    wager = relationship('Wager', back_populates='matched_wagers')
+    liquidity_provider_wager = relationship('Wager', foreign_keys='MatchedWager.liquidity_provider_wager_id')
+    liquidity_remover_wager = relationship('Wager', foreign_keys='MatchedWager.liquidity_remover_wager_id')
     time_created = db.Column(db.DateTime, default=db.func.current_timestamp())
     time_updated = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())

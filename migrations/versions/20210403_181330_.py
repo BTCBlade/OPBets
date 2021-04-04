@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: c7a0fa1df48b
+Revision ID: 190fa6c8021e
 Revises: 
-Create Date: 2021-04-02 01:28:49.120717
+Create Date: 2021-04-03 18:13:30.756738
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'c7a0fa1df48b'
+revision = '190fa6c8021e'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -32,8 +32,7 @@ def upgrade():
     sa.Column('time_updated', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('bet365_id'),
-    sa.UniqueConstraint('betsapi_id'),
-    sa.UniqueConstraint('sport_id')
+    sa.UniqueConstraint('betsapi_id')
     )
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -50,12 +49,12 @@ def upgrade():
     op.create_table('predictions',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('is_home', sa.Boolean(), nullable=False),
-    sa.Column('event_line', sa.Text(), nullable=False),
+    sa.Column('event_line', sa.Text(), nullable=True),
     sa.Column('odds', sa.Text(), nullable=True),
-    sa.Column('time_status', sa.Text(), nullable=True),
     sa.Column('db_event_id', sa.Integer(), nullable=False),
-    sa.Column('bet365_id', sa.Text(), nullable=True),
-    sa.Column('betsapi_id', sa.Text(), nullable=True),
+    sa.Column('betsapi_event_id', sa.Text(), nullable=True),
+    sa.Column('bet365_bet_id', sa.Text(), nullable=True),
+    sa.Column('time_status', sa.Text(), nullable=True),
     sa.Column('time_created', sa.DateTime(), nullable=True),
     sa.Column('time_updated', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['db_event_id'], ['events.id'], ),

@@ -7,7 +7,7 @@ class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     betsapi_id = db.Column(db.Text, nullable=True, unique=True)
     bet365_id = db.Column(db.Text, nullable=True, unique=True)
-    sport_id = db.Column(db.Text, nullable=True, unique=True)
+    sport_id = db.Column(db.Text, nullable=True)
     home = db.Column(db.Text, nullable=True)
     away = db.Column(db.Text, nullable=True)
     league = db.Column(db.Text, nullable=True)

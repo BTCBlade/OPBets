@@ -8,3 +8,6 @@ def seed_matched_wagers():
                                 paidOutBool=False,
                                 liquidity_provider_wager_id=2,
                                 liquidity_remover_wager_id=3, )
+
+    db.session.add(matchedwager1)
+    db.session.commit()
