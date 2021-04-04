@@ -12,7 +12,6 @@ export const testLoad = () => async (dispatch) => {
   const data = await res.json();
 
   dispatch(loadData(data));
-  console.log(data);
   return data;
 };
 

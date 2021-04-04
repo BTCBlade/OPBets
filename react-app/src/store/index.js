@@ -3,11 +3,13 @@ import thunk from 'redux-thunk';
 import modalReducer from './modal';
 import sessionReducer from './session';
 import betsapiReducer from './betsapi';
+import eventsReducer from './events';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   modal: modalReducer,
   betsapi: betsapiReducer,
+  events: eventsReducer,
 });
 
 let enhancer;

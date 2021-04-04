@@ -17,3 +17,19 @@ class Event(db.Model):
     time_updated = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
     predictions = relationship('Prediction', back_populates='event')
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "betsapi_id": self.betsapi_id,
+            "bet365_id": self.bet365_id,
+            "sport_id": self.sport_id,
+            "home": self.home,
+            "away": self.away,
+            "league": self.league,
+            "time": self.time,
+            "time_status": self.time_status,
+            "time_created": self.time_created,
+            "time_updated": self.time_updated,
+            "predictions": [prediction.to_dict() for prediction in predictions]
+        }

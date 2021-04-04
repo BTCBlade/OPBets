@@ -20,3 +20,18 @@ class Wager(db.Model):
     prediction = relationship('Prediction', back_populates='wagers')
     # liquidity_provider_matched_wagers = relationship('MatchedWager', backref='liquidity_provider_wager')
     # liquidity_remover_matched_wagers = relationship('MatchedWager', backref='liquidity_remover_wager')
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "initial_event_line": self.initial_event_line,
+            "initial_odds": self.initial_odds,
+            "initial_amount": self.initial_amount,
+            "current_amount": self.current_amount,
+            "initial_fill": self.initial_fill,
+            "liquidityProviderBool": self.liquidityProviderBool,
+            "time_created": self.time_created,
+            "time_updated": self.time_updated,
+            "user": self.user.to_dict(),
+            "prediction": self.prediction.to_dict(),
+        }

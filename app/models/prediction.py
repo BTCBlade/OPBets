@@ -20,3 +20,19 @@ class Prediction(db.Model):
 
     wagers = relationship('Wager', back_populates='prediction')
     event = relationship('Event', back_populates='predictions')
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "is_home": self.is_home,
+            "event_line": self.event_line,
+            "odds": self.odds,
+            "db_event_id": self.db_event_id,
+            "betsapi_event_id": self.betsapi_event_id,
+            "bet365_bet_id": self.bet365_bet_id,
+            "time_status": self.time_status,
+            "time_created": self.time_created,
+            "time_update": self.time_updated,
+            "wagers": [wager.to_dict() for wager in wagers],
+            "event": [event.to_dict() for event in events],
+        }

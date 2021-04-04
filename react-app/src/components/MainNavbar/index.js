@@ -16,6 +16,7 @@ import {
 } from '@material-ui/core';
 import MenuIcon from './Menu';
 import Logo from './Logo';
+import OPBLOGO from './OPBLOGO.png';
 import './MainNavbar.css';
 
 const MainNavbar = (props) => {
@@ -38,12 +39,16 @@ const MainNavbar = (props) => {
         </Hidden>
         <Hidden lgDown>
           <RouterLink to="/">
-            <Logo
+            <Box sx={{ marginTop: '5px', height: 60, width: 60 }}>
+              <img className="logo-image" src={OPBLOGO} />
+            </Box>
+
+            {/* <Logo
               sx={{
                 height: 40,
                 width: 40,
               }}
-            />
+            /> */}
           </RouterLink>
         </Hidden>
         <Box sx={{ flexGrow: 1 }} />

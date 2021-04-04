@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import LandingPageCarousel from './LandingPageCarousel';
 
 import { testLoad } from '../../store/betsapi';
+import { loadEventsAll } from '../../store/events';
+import PredictionsDisplay from '../PredictionsDisplay';
 const useStyles = makeStyles((theme) => ({
   span: { marginTop: '1rem', marginBot: '1rem', color: 'primaryMain' },
 }));
@@ -12,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 export default function PublicLandingPage(props) {
   const dispatch = useDispatch();
   const betsapi = useSelector((state) => state.betsapi);
-  console.log(props);
+
   const classes = useStyles(props.theme);
   const handleTest = () => {
     dispatch(testLoad());
@@ -61,7 +63,8 @@ export default function PublicLandingPage(props) {
       </Box>
 
       <h1>Public Landing Page</h1>
-
+      <Button onClick={loadEventsAll}>loadEventsAll</Button>
+      <PredictionsDisplay></PredictionsDisplay>
       <Button onClick={handleTest}>test</Button>
       {betsapi &&
         betsapi.upcoming_events &&
