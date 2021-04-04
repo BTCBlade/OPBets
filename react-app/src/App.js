@@ -22,6 +22,8 @@ import MainNavbar from './components/MainNavbar';
 import SecondNavbar from './components/SecondNavbar';
 
 import PublicLandingPage from './components/PublicLandingPage';
+import Dashboard from './components/Dashboard';
+import EventsPage from './components/EventsPage';
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -75,6 +77,20 @@ function App() {
           <Route exact path="/">
             <PublicLandingPage />
           </Route>
+          <Route exact path="/events">
+            <EventsPage
+              authenticated={authenticated}
+              setAuthenticated={setAuthenticated}
+            />
+          </Route>
+          <ProtectedRoute
+            exact
+            path="/dashboard"
+            authenticated={authenticated}
+            setAuthenticated={setAuthenticated}
+          >
+            <Dashboard />
+          </ProtectedRoute>
           {/* <ProtectedRoute
             path="/"
             exact={true}

@@ -5,7 +5,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import LandingPageCarousel from './LandingPageCarousel';
 
 import { testLoad } from '../../store/betsapi';
-import { loadEventsAll } from '../../store/events';
 import PredictionsDisplay from '../PredictionsDisplay';
 const useStyles = makeStyles((theme) => ({
   span: { marginTop: '1rem', marginBot: '1rem', color: 'primaryMain' },
@@ -63,7 +62,7 @@ export default function PublicLandingPage(props) {
       </Box>
 
       <h1>Public Landing Page</h1>
-      <Button onClick={loadEventsAll}>loadEventsAll</Button>
+
       <PredictionsDisplay></PredictionsDisplay>
       <Button onClick={handleTest}>test</Button>
       {betsapi &&

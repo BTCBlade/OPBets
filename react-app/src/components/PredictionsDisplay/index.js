@@ -9,6 +9,8 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+import { loadEventsAll } from '../../store/events';
+
 const useStyles = makeStyles((theme) => {
   console.log('useStyles-Theme inside of predictionsdisplay');
   return {};
@@ -19,5 +21,14 @@ export default function PredictionsDisplay() {
   const classes = useStyles();
   const [loading, setLoading] = useState(true);
 
-  return <>{loading && <CircularProgress></CircularProgress>}</>;
+  const handleClick = () => {
+    dispatch(loadEventsAll()).then(() => setLoading(false));
+  };
+
+  return (
+    <>
+      <Button onClick={handleClick}>eventsalltest</Button>
+      {loading && <CircularProgress></CircularProgress>}
+    </>
+  );
 }

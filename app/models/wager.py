@@ -33,5 +33,4 @@ class Wager(db.Model):
             "time_created": self.time_created,
             "time_updated": self.time_updated,
             "user": self.user.to_dict(),
-            "prediction": self.prediction.to_dict(),
         }

@@ -31,5 +31,5 @@ class Event(db.Model):
             "time_status": self.time_status,
             "time_created": self.time_created,
             "time_updated": self.time_updated,
-            "predictions": [prediction.to_dict() for prediction in predictions]
+            "predictions": [prediction.to_dict() for prediction in self.predictions]
         }
