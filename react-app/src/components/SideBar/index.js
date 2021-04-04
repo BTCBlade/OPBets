@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
   Avatar,
@@ -16,7 +17,7 @@ import {
 // import BriefcaseIcon from '../../icons/Briefcase';
 // import CalendarIcon from '../../icons/Calendar';
 // import ChartPieIcon from '../../icons/ChartPie';
-// import ChartSquareBarIcon from '../../icons/ChartSquareBar';
+import ChartSquareBarIcon from '../../icons/ChartSquareBar';
 // import ChatAltIcon from '../../icons/ChatAlt';
 // import ClipboardListIcon from '../../icons/ClipboardList';
 // import FolderOpenIcon from '../../icons/FolderOpen';
@@ -27,174 +28,195 @@ import {
 // import UserIcon from '../../icons/User';
 // import UsersIcon from '../../icons/Users';
 // import Logo from '../Logo';
+
+import LoLIcon from '../../icons/icons8-league-of-legends.js';
+import CSGOIcon from '../../icons/icons8-counter-strike.js';
 import NavSection from './NavSection';
 import Scrollbar from './Scrollbar';
 
 const sections = [
   {
-    title: 'General',
+    title: 'Esports',
     items: [
       {
-        title: 'Overview',
-        path: '/dashboard',
-        icon: <ChartSquareBarIcon fontSize="small" />,
+        title: 'League of Legends',
+        path: '/events',
+        icon: <LoLIcon fontSize="small" />,
       },
       {
-        title: 'Analytics',
-        path: '/dashboard/analytics',
-        icon: <ChartPieIcon fontSize="small" />,
-      },
-      {
-        title: 'Finance',
-        path: '/dashboard/finance',
-        icon: <ShoppingBagIcon fontSize="small" />,
-      },
-      {
-        title: 'Account',
-        path: '/dashboard/account',
-        icon: <UserIcon fontSize="small" />,
-      },
-    ],
-  },
-  {
-    title: 'Management',
-    items: [
-      {
-        title: 'Customers',
-        path: '/dashboard/customers',
-        icon: <UsersIcon fontSize="small" />,
-        children: [
-          {
-            title: 'List',
-            path: '/dashboard/customers',
-          },
-          {
-            title: 'Details',
-            path: '/dashboard/customers/1',
-          },
-          {
-            title: 'Edit',
-            path: '/dashboard/customers/1/edit',
-          },
-        ],
-      },
-      {
-        title: 'Products',
-        path: '/dashboard/products',
-        icon: <ShoppingCartIcon fontSize="small" />,
-        children: [
-          {
-            title: 'List',
-            path: '/dashboard/products',
-          },
-          {
-            title: 'Create',
-            path: '/dashboard/products/new',
-          },
-        ],
-      },
-      {
-        title: 'Orders',
-        icon: <FolderOpenIcon fontSize="small" />,
-        path: '/dashboard/orders',
-        children: [
-          {
-            title: 'List',
-            path: '/dashboard/orders',
-          },
-          {
-            title: 'Details',
-            path: '/dashboard/orders/1',
-          },
-        ],
-      },
-      {
-        title: 'Invoices',
-        path: '/dashboard/invoices',
-        icon: <ReceiptIcon fontSize="small" />,
-        children: [
-          {
-            title: 'List',
-            path: '/dashboard/invoices',
-          },
-          {
-            title: 'Details',
-            path: '/dashboard/invoices/1',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    title: 'Platforms',
-    items: [
-      {
-        title: 'Projects',
-        path: '/dashboard/projects',
-        icon: <BriefcaseIcon fontSize="small" />,
-        children: [
-          {
-            title: 'Browse',
-            path: '/dashboard/projects/browse',
-          },
-          {
-            title: 'Details',
-            path: '/dashboard/projects/1',
-          },
-          {
-            title: 'Create',
-            path: '/dashboard/projects/new',
-          },
-        ],
-      },
-      {
-        title: 'Social',
-        path: '/dashboard/social',
-        icon: <ShareIcon fontSize="small" />,
-        children: [
-          {
-            title: 'Profile',
-            path: '/dashboard/social/profile',
-          },
-          {
-            title: 'Feed',
-            path: '/dashboard/social/feed',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    title: 'Apps',
-    items: [
-      {
-        title: 'Kanban',
-        path: '/dashboard/kanban',
-        icon: <ClipboardListIcon fontSize="small" />,
-      },
-      {
-        title: 'Mail',
-        path: '/dashboard/mail',
-        icon: <MailIcon fontSize="small" />,
-      },
-      {
-        title: 'Chat',
-        path: '/dashboard/chat',
-        icon: <ChatAltIcon fontSize="small" />,
-      },
-      {
-        title: 'Calendar',
-        path: '/dashboard/calendar',
-        icon: <CalendarIcon fontSize="small" />,
+        title: 'CS:GO',
+        path: '/events',
+        icon: <CSGOIcon fontSize="small" />,
       },
     ],
   },
 ];
 
+// const sections = [
+//   {
+//     title: 'General',
+//     items: [
+//       {
+//         title: 'Overview',
+//         path: '/dashboard',
+//         icon: <ChartSquareBarIcon fontSize="small" />,
+//       },
+//       {
+//         title: 'Analytics',
+//         path: '/dashboard/analytics',
+//         icon: <ChartPieIcon fontSize="small" />,
+//       },
+//       {
+//         title: 'Finance',
+//         path: '/dashboard/finance',
+//         icon: <ShoppingBagIcon fontSize="small" />,
+//       },
+//       {
+//         title: 'Account',
+//         path: '/dashboard/account',
+//         icon: <UserIcon fontSize="small" />,
+//       },
+//     ],
+//   },
+//   {
+//     title: 'Management',
+//     items: [
+//       {
+//         title: 'Customers',
+//         path: '/dashboard/customers',
+//         icon: <UsersIcon fontSize="small" />,
+//         children: [
+//           {
+//             title: 'List',
+//             path: '/dashboard/customers',
+//           },
+//           {
+//             title: 'Details',
+//             path: '/dashboard/customers/1',
+//           },
+//           {
+//             title: 'Edit',
+//             path: '/dashboard/customers/1/edit',
+//           },
+//         ],
+//       },
+//       {
+//         title: 'Products',
+//         path: '/dashboard/products',
+//         icon: <ShoppingCartIcon fontSize="small" />,
+//         children: [
+//           {
+//             title: 'List',
+//             path: '/dashboard/products',
+//           },
+//           {
+//             title: 'Create',
+//             path: '/dashboard/products/new',
+//           },
+//         ],
+//       },
+//       {
+//         title: 'Orders',
+//         icon: <FolderOpenIcon fontSize="small" />,
+//         path: '/dashboard/orders',
+//         children: [
+//           {
+//             title: 'List',
+//             path: '/dashboard/orders',
+//           },
+//           {
+//             title: 'Details',
+//             path: '/dashboard/orders/1',
+//           },
+//         ],
+//       },
+//       {
+//         title: 'Invoices',
+//         path: '/dashboard/invoices',
+//         icon: <ReceiptIcon fontSize="small" />,
+//         children: [
+//           {
+//             title: 'List',
+//             path: '/dashboard/invoices',
+//           },
+//           {
+//             title: 'Details',
+//             path: '/dashboard/invoices/1',
+//           },
+//         ],
+//       },
+//     ],
+//   },
+//   {
+//     title: 'Platforms',
+//     items: [
+//       {
+//         title: 'Projects',
+//         path: '/dashboard/projects',
+//         icon: <BriefcaseIcon fontSize="small" />,
+//         children: [
+//           {
+//             title: 'Browse',
+//             path: '/dashboard/projects/browse',
+//           },
+//           {
+//             title: 'Details',
+//             path: '/dashboard/projects/1',
+//           },
+//           {
+//             title: 'Create',
+//             path: '/dashboard/projects/new',
+//           },
+//         ],
+//       },
+//       {
+//         title: 'Social',
+//         path: '/dashboard/social',
+//         icon: <ShareIcon fontSize="small" />,
+//         children: [
+//           {
+//             title: 'Profile',
+//             path: '/dashboard/social/profile',
+//           },
+//           {
+//             title: 'Feed',
+//             path: '/dashboard/social/feed',
+//           },
+//         ],
+//       },
+//     ],
+//   },
+//   {
+//     title: 'Apps',
+//     items: [
+//       {
+//         title: 'Kanban',
+//         path: '/dashboard/kanban',
+//         icon: <ClipboardListIcon fontSize="small" />,
+//       },
+//       {
+//         title: 'Mail',
+//         path: '/dashboard/mail',
+//         icon: <MailIcon fontSize="small" />,
+//       },
+//       {
+//         title: 'Chat',
+//         path: '/dashboard/chat',
+//         icon: <ChatAltIcon fontSize="small" />,
+//       },
+//       {
+//         title: 'Calendar',
+//         path: '/dashboard/calendar',
+//         icon: <CalendarIcon fontSize="small" />,
+//       },
+//     ],
+//   },
+// ];
+
 const DashboardSidebar = (props) => {
   const { onMobileClose, openMobile } = props;
   const location = useLocation();
-  const { user } = useAuth();
+  const sessionUser = useSelector((state) => state.session);
 
   useEffect(() => {
     if (openMobile && onMobileClose) {
@@ -220,12 +242,12 @@ const DashboardSidebar = (props) => {
             }}
           >
             <RouterLink to="/">
-              <Logo
+              {/* <Logo
                 sx={{
                   height: 40,
                   width: 40,
                 }}
-              />
+              /> */}
             </RouterLink>
           </Box>
         </Hidden>
@@ -241,23 +263,23 @@ const DashboardSidebar = (props) => {
             }}
           >
             <RouterLink to="/dashboard/account">
-              <Avatar
+              {/* <Avatar
                 src={user.avatar}
                 sx={{
                   cursor: 'pointer',
                   height: 48,
                   width: 48,
                 }}
-              />
+              /> */}
             </RouterLink>
             <Box sx={{ ml: 2 }}>
               <Typography color="textPrimary" variant="subtitle2">
-                {user.name}
+                {sessionUser.username}
               </Typography>
               <Typography color="textSecondary" variant="body2">
                 Your plan:{' '}
                 <Link color="primary" component={RouterLink} to="/pricing">
-                  {user.plan}
+                  {sessionUser.balance}
                 </Link>
               </Typography>
             </Box>
@@ -326,8 +348,8 @@ const DashboardSidebar = (props) => {
           PaperProps={{
             sx: {
               backgroundColor: 'background.paper',
-              height: 'calc(100% - 64px) !important',
-              top: '64px !Important',
+              height: 'calc(100% - 64x) !important',
+              top: '67px !Important',
               width: 280,
             },
           }}

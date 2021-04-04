@@ -39,6 +39,8 @@ const sessionReducer = (state = initialState, action) => {
     case LOGIN: {
       const newState = {};
       newState.username = action.user.username;
+      newState.balance = action.user.balance;
+      newState.email = action.user.email;
       newState.id = action.user.id;
       return newState;
     }
