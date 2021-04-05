@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { openSignup, openLogin } from '../../store/modal';
 import LogoutButton from '../auth/LogoutButton';
@@ -54,6 +54,26 @@ const MainNavbar = (props) => {
         <Hidden mdDown>
           {authenticated && (
             <>
+              <Link
+                component={RouterLink}
+                color="textSecondary"
+                to="/dashboard"
+                id="nav-login__button"
+                underline="none"
+                variant="body1"
+              >
+                Dashboard
+              </Link>
+
+              <Divider
+                orientation="vertical"
+                sx={{
+                  height: 32,
+                  mx: 2,
+                  mr: 3,
+                  ml: 3,
+                }}
+              />
               <LogoutButton setAuthenticated={setAuthenticated} />
             </>
           )}

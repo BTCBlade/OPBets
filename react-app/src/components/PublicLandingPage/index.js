@@ -29,15 +29,17 @@ export default function PublicLandingPage(props) {
       sx={{
         backgroundColor: 'background.paper',
         color: 'text.secondary',
+        marginLeft: 0,
+        marginRight: 0,
       }}
     >
-      <Box height="500px" mt="65px" width="80%" mx="auto">
+      <Box height="600px" mt="70px" width="80%" mx="auto">
         <Typography
           sx={{
             backgroundColor: 'background.paper',
             fontSize: '0.75rem',
             color: 'primary.main',
-            marginTop: '0.2rem',
+            marginTop: '.2rem',
             marginBottom: 0,
             textAlign: 'center',
             fontWeight: '500',
@@ -60,8 +62,9 @@ export default function PublicLandingPage(props) {
         </Typography>
         <LandingPageCarousel />
       </Box>
-
-      <h1>Public Landing Page</h1>
+      <Box>
+        <h1>Public Landing Page</h1>
+      </Box>
 
       <PredictionsDisplay></PredictionsDisplay>
       <Button onClick={handleTest}>test</Button>

@@ -12,29 +12,55 @@ import {
   Link,
   Typography,
 } from '@material-ui/core';
-// import ReceiptIcon from '@material-ui/icons/Receipt';
-// import useAuth from '../../hooks/useAuth';
-// import BriefcaseIcon from '../../icons/Briefcase';
-// import CalendarIcon from '../../icons/Calendar';
-// import ChartPieIcon from '../../icons/ChartPie';
-import ChartSquareBarIcon from '../../icons/ChartSquareBar';
-// import ChatAltIcon from '../../icons/ChatAlt';
-// import ClipboardListIcon from '../../icons/ClipboardList';
-// import FolderOpenIcon from '../../icons/FolderOpen';
-// import MailIcon from '../../icons/Mail';
-// import ShareIcon from '../../icons/Share';
-// import ShoppingBagIcon from '../../icons/ShoppingBag';
-// import ShoppingCartIcon from '../../icons/ShoppingCart';
-// import UserIcon from '../../icons/User';
-// import UsersIcon from '../../icons/Users';
-// import Logo from '../Logo';
 
+import ClipboardListIcon from '../../icons/ClipboardList';
+import UserIcon from '../../icons/User';
+import CashierIcon from '../../icons/ShoppingCart';
+
+import ProfilePic from '../../icons/Blitzcrank-Icon.png';
 import LoLIcon from '../../icons/icons8-league-of-legends.js';
 import CSGOIcon from '../../icons/icons8-counter-strike.js';
+import OverwatchIcon from '../../icons/icons8-overwatch.js';
+import Dota2Icon from '../../icons/icons8-dota-2.js';
+import ApexLegendsIcon from '../../icons/icons8-apex-legends.js';
 import NavSection from './NavSection';
 import Scrollbar from './Scrollbar';
 
 const sections = [
+  {
+    title: 'Account',
+    items: [
+      {
+        title: 'Profile',
+        path: '/',
+        icon: <UserIcon fontSize="small" />,
+      },
+      {
+        title: 'Cashier',
+        path: '/dashboard',
+        icon: <CashierIcon fontSize="small" />,
+      },
+      {
+        title: 'Wagers',
+        path: '/dashboard/wagers',
+        icon: <ClipboardListIcon fontSize="small" />,
+        children: [
+          {
+            title: 'Open Wagers',
+            path: '/dashboard/wagers',
+          },
+          {
+            title: 'Matched Wagers',
+            path: '/dashboard/wagers',
+          },
+          {
+            title: 'History',
+            path: '/dashboard/wagers/history',
+          },
+        ],
+      },
+    ],
+  },
   {
     title: 'Esports',
     items: [
@@ -48,170 +74,24 @@ const sections = [
         path: '/events',
         icon: <CSGOIcon fontSize="small" />,
       },
+      {
+        title: 'Overwatch',
+        path: './events',
+        icon: <OverwatchIcon fontSize="small" />,
+      },
+      {
+        title: 'Dota2',
+        path: './events',
+        icon: <Dota2Icon fontSize="small" />,
+      },
+      {
+        title: 'ApexLegends',
+        path: './events',
+        icon: <ApexLegendsIcon fontSize="small" />,
+      },
     ],
   },
 ];
-
-// const sections = [
-//   {
-//     title: 'General',
-//     items: [
-//       {
-//         title: 'Overview',
-//         path: '/dashboard',
-//         icon: <ChartSquareBarIcon fontSize="small" />,
-//       },
-//       {
-//         title: 'Analytics',
-//         path: '/dashboard/analytics',
-//         icon: <ChartPieIcon fontSize="small" />,
-//       },
-//       {
-//         title: 'Finance',
-//         path: '/dashboard/finance',
-//         icon: <ShoppingBagIcon fontSize="small" />,
-//       },
-//       {
-//         title: 'Account',
-//         path: '/dashboard/account',
-//         icon: <UserIcon fontSize="small" />,
-//       },
-//     ],
-//   },
-//   {
-//     title: 'Management',
-//     items: [
-//       {
-//         title: 'Customers',
-//         path: '/dashboard/customers',
-//         icon: <UsersIcon fontSize="small" />,
-//         children: [
-//           {
-//             title: 'List',
-//             path: '/dashboard/customers',
-//           },
-//           {
-//             title: 'Details',
-//             path: '/dashboard/customers/1',
-//           },
-//           {
-//             title: 'Edit',
-//             path: '/dashboard/customers/1/edit',
-//           },
-//         ],
-//       },
-//       {
-//         title: 'Products',
-//         path: '/dashboard/products',
-//         icon: <ShoppingCartIcon fontSize="small" />,
-//         children: [
-//           {
-//             title: 'List',
-//             path: '/dashboard/products',
-//           },
-//           {
-//             title: 'Create',
-//             path: '/dashboard/products/new',
-//           },
-//         ],
-//       },
-//       {
-//         title: 'Orders',
-//         icon: <FolderOpenIcon fontSize="small" />,
-//         path: '/dashboard/orders',
-//         children: [
-//           {
-//             title: 'List',
-//             path: '/dashboard/orders',
-//           },
-//           {
-//             title: 'Details',
-//             path: '/dashboard/orders/1',
-//           },
-//         ],
-//       },
-//       {
-//         title: 'Invoices',
-//         path: '/dashboard/invoices',
-//         icon: <ReceiptIcon fontSize="small" />,
-//         children: [
-//           {
-//             title: 'List',
-//             path: '/dashboard/invoices',
-//           },
-//           {
-//             title: 'Details',
-//             path: '/dashboard/invoices/1',
-//           },
-//         ],
-//       },
-//     ],
-//   },
-//   {
-//     title: 'Platforms',
-//     items: [
-//       {
-//         title: 'Projects',
-//         path: '/dashboard/projects',
-//         icon: <BriefcaseIcon fontSize="small" />,
-//         children: [
-//           {
-//             title: 'Browse',
-//             path: '/dashboard/projects/browse',
-//           },
-//           {
-//             title: 'Details',
-//             path: '/dashboard/projects/1',
-//           },
-//           {
-//             title: 'Create',
-//             path: '/dashboard/projects/new',
-//           },
-//         ],
-//       },
-//       {
-//         title: 'Social',
-//         path: '/dashboard/social',
-//         icon: <ShareIcon fontSize="small" />,
-//         children: [
-//           {
-//             title: 'Profile',
-//             path: '/dashboard/social/profile',
-//           },
-//           {
-//             title: 'Feed',
-//             path: '/dashboard/social/feed',
-//           },
-//         ],
-//       },
-//     ],
-//   },
-//   {
-//     title: 'Apps',
-//     items: [
-//       {
-//         title: 'Kanban',
-//         path: '/dashboard/kanban',
-//         icon: <ClipboardListIcon fontSize="small" />,
-//       },
-//       {
-//         title: 'Mail',
-//         path: '/dashboard/mail',
-//         icon: <MailIcon fontSize="small" />,
-//       },
-//       {
-//         title: 'Chat',
-//         path: '/dashboard/chat',
-//         icon: <ChatAltIcon fontSize="small" />,
-//       },
-//       {
-//         title: 'Calendar',
-//         path: '/dashboard/calendar',
-//         icon: <CalendarIcon fontSize="small" />,
-//       },
-//     ],
-//   },
-// ];
 
 const DashboardSidebar = (props) => {
   const { onMobileClose, openMobile } = props;
@@ -263,21 +143,21 @@ const DashboardSidebar = (props) => {
             }}
           >
             <RouterLink to="/dashboard/account">
-              {/* <Avatar
-                src={user.avatar}
+              <Avatar
+                src={ProfilePic}
                 sx={{
                   cursor: 'pointer',
                   height: 48,
                   width: 48,
                 }}
-              /> */}
+              />
             </RouterLink>
             <Box sx={{ ml: 2 }}>
               <Typography color="textPrimary" variant="subtitle2">
                 {sessionUser.username}
               </Typography>
               <Typography color="textSecondary" variant="body2">
-                Your plan:{' '}
+                Balance:{' '}
                 <Link color="primary" component={RouterLink} to="/pricing">
                   {sessionUser.balance}
                 </Link>
@@ -306,17 +186,17 @@ const DashboardSidebar = (props) => {
             Need Help?
           </Typography>
           <Typography color="textSecondary" variant="body2">
-            Check our docs
+            Contact Us
           </Typography>
           <Button
             color="primary"
             component={RouterLink}
             fullWidth
             sx={{ mt: 2 }}
-            to="/docs"
+            to="/dashboard"
             variant="contained"
           >
-            Documentation
+            Email
           </Button>
         </Box>
       </Scrollbar>
@@ -348,8 +228,8 @@ const DashboardSidebar = (props) => {
           PaperProps={{
             sx: {
               backgroundColor: 'background.paper',
-              height: 'calc(100% - 64x) !important',
-              top: '67px !Important',
+              height: 'calc(100% - 67x) !important',
+              top: '67px !important',
               width: 280,
             },
           }}
