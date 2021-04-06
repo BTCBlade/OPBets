@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -15,44 +15,33 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-// import PortfolioBuySellModal from "../../PortfolioBuySellModal";
+
+import { decimal_to_probability } from '../../../utils/odds_conversion';
+import { addOne } from '../../../store/wagerslip';
 
 const useRowStyles = makeStyles({
   root: {
     '& > *': {
       borderBottom: 'unset',
     },
+    // '&:nth-of-type(odd)': {
+    //   backgroundColor: 'lightgrey',
+    // },
+  },
+});
+const useStyles = makeStyles({
+  TableContainer: {
+    width: '600px',
+    marginRight: 0,
   },
 });
 
-function createData(
-  assetId,
-  logo,
-  name,
-  net,
-  quantity,
-  costAvg,
-  percent_change_24h,
-  percent_change_7d,
-  history
-) {
-  return {
-    assetId,
-    logo,
-    name,
-    net,
-    quantity,
-    costAvg,
-    percent_change_24h,
-    percent_change_7d,
-    history,
-  };
-}
-const handlePortfolioAssetClick = (assetId) => {
-  alert(`assetId ${assetId}`);
-};
-
 function Row(props) {
+  const dispatch = useDispatch();
+  const handlePredictionIdClick = (row) => {
+    alert(`db_prediction_id ${row}`);
+    dispatch(addOne(row));
+  };
   const { row } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
@@ -60,72 +49,59 @@ function Row(props) {
   return (
     <React.Fragment>
       <TableRow className={classes.root}>
-        <TableCell className="IconButton">
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-        </TableCell>
+        {row.wagers[0] && (
+          <TableCell className="IconButton">
+            <IconButton
+              aria-label="expand row"
+              size="small"
+              onClick={() => setOpen(!open)}
+            >
+              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </IconButton>
+          </TableCell>
+        )}
+        {!row.wagers[0] && <TableCell className="IconButton"></TableCell>}
         <TableCell
-          onClick={() => handlePortfolioAssetClick(row.assetId)}
+          onClick={() => handlePredictionIdClick(row)}
           component="th"
           scope="row"
         >
-          <img className="logo-img" alt="logo" src={row.logo}></img>
-          {row.name}
+          {row.is_home ? row.league_name : row.time}
         </TableCell>
-        <TableCell
-          onClick={() => handlePortfolioAssetClick(row.assetId)}
-          align="right"
-        >
-          {row.net}
+        <TableCell onClick={() => handlePredictionIdClick(row)} align="right">
+          {row.team_name}
         </TableCell>
-        <TableCell
-          onClick={() => handlePortfolioAssetClick(row.assetId)}
-          align="right"
-        >
-          {row.quantity}
+        <TableCell onClick={() => handlePredictionIdClick(row)} align="right">
+          {row.odds}
         </TableCell>
-        <TableCell align="right">{row.costAvg}</TableCell>
-        <TableCell align="right">{row.percent_change_24h}</TableCell>
-        <TableCell align="right">{row.percent_change_7d}</TableCell>
+        <TableCell onClick={() => handlePredictionIdClick(row)} align="right">
+          {decimal_to_probability(parseFloat(row.odds))}%
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <Typography variant="h6" gutterBottom component="div">
-                History
+                Wagers
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Quantity</TableCell>
-                    <TableCell align="right">Purchase/Sell Price</TableCell>
-                    <TableCell align="right">Total Cost ($)</TableCell>
+                    <TableCell>User</TableCell>
+                    <TableCell>Amount</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.date}>
-                      <TableCell component="th" scope="row">
-                        {historyRow.date}
-                      </TableCell>
-                      <TableCell>{historyRow.quantity}</TableCell>
-                      <TableCell align="right">
-                        {historyRow.purchasePrice}
-                      </TableCell>
-                      <TableCell align="right">
-                        {(
-                          historyRow.quantity * historyRow.purchasePrice
-                        ).toFixed(2)}
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                  {row.wagers &&
+                    row.wagers.map((historyRow) => (
+                      <TableRow key={historyRow.date}>
+                        <TableCell component="th" scope="row">
+                          {historyRow.user.username}
+                        </TableCell>
+                        <TableCell>{historyRow.current_amount}</TableCell>
+                      </TableRow>
+                    ))}
                 </TableBody>
               </Table>
             </Box>
@@ -136,58 +112,56 @@ function Row(props) {
   );
 }
 
-export default function PortfolioTable() {
-  const events = useSelector((state) => state.events.events_all);
-  //   const assets = useSelector((state) => state.assets);
-  //   const portfolio = useSelector((state) => state.portfolio);
+export default function EventsTable() {
+  const events = useSelector((state) => state.events);
+  const classes = useStyles();
 
-  //   const rows = Object.values(portfolio).map((asset) => {
-  //     const assetId = asset.id;
-  //     const logo = assets[asset.id].assetDetails.logo;
-  //     const name = assets[asset.id].name + ' ' + assets[asset.id].symbol;
-  //     const currentPrice = assets[asset.id].quote.USD.price;
-  //     const net = parseFloat(
-  //       ((currentPrice - asset.costAvg) * asset.quantityOfAsset).toFixed(2)
-  //     );
-  //     const percent_change_24h = assets[asset.id].quote.USD.percent_change_24h;
-  //     const percent_change_7d = assets[asset.id].quote.USD.percent_change_7d;
+  let rows = [];
+  Object.values(events).forEach((event, index) => {
+    const event_date = new Date(event.time * 1000);
 
-  //     asset.history.forEach((ele) => {
-  //       ele.date = new Date(ele.date).toString();
-  //     });
-
-  //     return createData(
-  //       assetId,
-  //       logo,
-  //       name,
-  //       net,
-  //       asset.quantityOfAsset,
-  //       asset.costAvg,
-  //       percent_change_24h,
-  //       percent_change_7d,
-  //       asset.history
-  //     );
-  //   });
-  const home_rows = Object.values(events).map((event) => {
-      const
+    const date_1 = event_date.toLocaleString().split(',');
+    const date_display =
+      date_1[0] + '  ' + date_1[1].slice(0, 5) + date_1[1].slice(9);
+    const home_obj = {
+      db_predictions_id: event.predictions[0].id,
+      is_home: event.predictions[0].is_home,
+      league_name: event.league.name,
+      time: date_display,
+      team_name: event.home.name,
+      team_img: event.home.image_id,
+      odds: parseFloat(event.predictions[0].odds),
+      wagers: event.predictions[0].wagers,
+    };
+    const away_obj = {
+      db_predictions_id: event.predictions[1].id,
+      is_home: event.predictions[1].is_home,
+      league_name: event.league.name,
+      time: date_display,
+      team_name: event.away.name,
+      team_img: event.away.image_id,
+      odds: parseFloat(event.predictions[1].odds),
+      wagers: event.predictions[1].wagers,
+    };
+    rows.push(home_obj);
+    rows.push(away_obj);
   });
+
   return (
-    <TableContainer component={Paper}>
+    <TableContainer className={classes.TableContainer} component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
             <TableCell />
-            <TableCell>Asset Name/Symbol</TableCell>
-            <TableCell align="right">Net Profit/Loss ($)</TableCell>
-            <TableCell align="right">Quantity</TableCell>
-            <TableCell align="right">Cost Average</TableCell>
-            <TableCell align="right">Gains/Losses 24h</TableCell>
-            <TableCell align="right">Gains/Losses 7d</TableCell>
+            <TableCell>Event/Time</TableCell>
+            <TableCell align="right">Team</TableCell>
+            <TableCell align="right">ML Odds</TableCell>
+            <TableCell align="right">Implied Probability</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <Row key={row.name} row={row} />
+          {rows.map((row, index) => (
+            <Row key={row.db_predictions_id} row={row} />
           ))}
         </TableBody>
       </Table>

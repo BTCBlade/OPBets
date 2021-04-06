@@ -4,7 +4,12 @@ import PropTypes from 'prop-types';
 const THEMES = {
   LIGHT: 'LIGHT',
   DARK: 'DARK',
-  NATURE: 'NATURE',
+};
+
+const ODDS_FORMAT = {
+  DECIMAL: 'DECIMAL',
+  AMERICAN: 'AMERICAN',
+  PERCENTAGE: 'PERCENTAGE',
 };
 
 const initialSettings = {
@@ -12,7 +17,8 @@ const initialSettings = {
   direction: 'ltr',
   responsiveFontSizes: true,
   roundedCorners: false,
-  theme: THEMES.DARK,
+  oddsFormat: ODDS_FORMAT.AMERICAN,
+  theme: THEMES.LIGHT,
 };
 
 export const restoreSettings = () => {
@@ -32,6 +38,7 @@ export const restoreSettings = () => {
         theme: window.matchMedia('(prefers-color-scheme: dark)').matches
           ? THEMES.DARK
           : THEMES.LIGHT,
+        oddsFormat: 'AMERICAN',
       };
     }
   } catch (err) {

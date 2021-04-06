@@ -11,13 +11,14 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import SideBar from '../SideBar';
 import EventsContainer from './EventsContainer';
+import WagerSlip from './WagerSlip';
 
 const useStyles = makeStyles((theme) => ({
   eventsMainContainer: {
     marginLeft: '280px',
     backgroundColor: 'background.paper',
-    width: '100%',
-    height: '1500px',
+    width: 'calc(100%-280) !important',
+    minHeight: '1500px',
   },
 }));
 
@@ -30,6 +31,7 @@ export default function EventsPage() {
           <SideBar />
           <h1>Events Page Paper Top Left</h1>
           <EventsContainer />
+          <WagerSlip />
         </Paper>
       </Hidden>
     </>

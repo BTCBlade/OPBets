@@ -23,18 +23,20 @@ const eventsReducer = (state = initialState, action) => {
     case LOAD_EVENTS_ALL:
       newState = {};
       action.payload.forEach((event) => {
-        newState[event.time] = {
-          betsapi_id: event['betsapi_id'],
-          bet365_id: event['bet365_id'],
-          id: event['id'],
-          home: JSON.parse(event['home']),
-          away: JSON.parse(event['away']),
-          league: JSON.parse(event['league']),
-          predictions: event['predictions'],
-          sport_id: event['sports_id'],
-          time: event['time'],
-          time_status: event['time_status'],
-        };
+        if (event['bet365_id']) {
+          newState[event.bet365_id] = {
+            betsapi_id: event['betsapi_id'],
+            bet365_id: event['bet365_id'],
+            id: event['id'],
+            home: JSON.parse(event['home']),
+            away: JSON.parse(event['away']),
+            league: JSON.parse(event['league']),
+            predictions: event['predictions'],
+            sport_id: event['sports_id'],
+            time: event['time'],
+            time_status: event['time_status'],
+          };
+        }
       });
       return newState;
     default:

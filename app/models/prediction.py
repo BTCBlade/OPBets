@@ -33,5 +33,5 @@ class Prediction(db.Model):
             "time_status": self.time_status,
             "time_created": self.time_created,
             "time_update": self.time_updated,
-            "wagers": [wager.to_dict() for wager in self.wagers],
+            "wagers": [wager.to_dict() for wager in self.wagers if wager.current_amount > 0 ],
         }

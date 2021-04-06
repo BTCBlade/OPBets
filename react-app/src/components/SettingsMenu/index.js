@@ -16,7 +16,11 @@ import AdjustmentsIcon from './AdjustmentsIcon';
 const THEMES = {
   LIGHT: 'LIGHT',
   DARK: 'DARK',
-  NATURE: 'NATURE',
+};
+const ODDS_FORMAT = {
+  DECIMAL: 'DECIMAL',
+  AMERICAN: 'AMERICAN',
+  PERCENTAGE: 'PERCENTAGE',
 };
 
 const getValues = (settings) => ({
@@ -88,26 +92,60 @@ const SettingsDrawer = () => {
         <Typography color="textPrimary" variant="h6">
           Settings
         </Typography>
+
         <Box sx={{ mt: 3 }}>
           <TextField
             fullWidth
-            label="Theme"
-            name="theme"
-            onChange={(event) => handleChange('theme', event.target.value)}
+            label="Odds Format"
+            name="oddsFormat"
+            onChange={(event) => handleChange('oddsFormat', event.target.value)}
             select
             SelectProps={{ native: true }}
-            value={values.theme}
+            value={values.oddsFormat}
             variant="outlined"
           >
-            {Object.keys(THEMES).map((theme) => (
-              <option key={theme} value={theme}>
-                {theme
+            {Object.keys(ODDS_FORMAT).map((format) => (
+              <option key={format} value={format}>
+                {format
                   .split('_')
                   .map((w) => w[0].toUpperCase() + w.substr(1).toLowerCase())
                   .join(' ')}
               </option>
             ))}
           </TextField>
+        </Box>
+
+        <Box
+          sx={{
+            mt: 2,
+            px: 1.5,
+          }}
+        >
+          <FormControlLabel
+            control={
+              <Switch
+                checked={values.theme === 'DARK'}
+                color="primary"
+                edge="start"
+                name="theme"
+                onChange={(event) =>
+                  handleChange('theme', event.target.checked ? 'DARK' : 'LIGHT')
+                }
+              />
+            }
+            label={
+              <div>
+                Theme
+                <Typography
+                  color="textSecondary"
+                  component="p"
+                  variant="caption"
+                >
+                  Activate DarkMode
+                </Typography>
+              </div>
+            }
+          />
         </Box>
 
         <Box sx={{ mt: 3 }}>

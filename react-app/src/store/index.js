@@ -4,12 +4,14 @@ import modalReducer from './modal';
 import sessionReducer from './session';
 import betsapiReducer from './betsapi';
 import eventsReducer from './events';
+import wagerslipReducer from './wagerslip';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   modal: modalReducer,
   betsapi: betsapiReducer,
   events: eventsReducer,
+  wagerslip: wagerslipReducer,
 });
 
 let enhancer;

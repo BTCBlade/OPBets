@@ -19,7 +19,6 @@ import useSettings from './hooks/useSettings';
 import SettingsMenu from './components/SettingsMenu';
 
 import MainNavbar from './components/MainNavbar';
-import SecondNavbar from './components/SecondNavbar';
 
 import PublicLandingPage from './components/PublicLandingPage';
 import Dashboard from './components/Dashboard';

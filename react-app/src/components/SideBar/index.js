@@ -142,7 +142,7 @@ const DashboardSidebar = (props) => {
               p: 2,
             }}
           >
-            <RouterLink to="/dashboard/account">
+            <RouterLink to="/dashboard/dashboard">
               <Avatar
                 src={ProfilePic}
                 sx={{
@@ -158,7 +158,7 @@ const DashboardSidebar = (props) => {
               </Typography>
               <Typography color="textSecondary" variant="body2">
                 Balance:{' '}
-                <Link color="primary" component={RouterLink} to="/pricing">
+                <Link color="primary" component={RouterLink} to="/dashboard">
                   {sessionUser.balance}
                 </Link>
               </Typography>
