@@ -48,7 +48,7 @@ def add_wager():
                       placed_by_user_id=req_obj['user_id'], prediction_id=req_obj['db_predictions_id'])
     db.session.add(new_wager)
   # 3. Opposite side wager amount > req.amount
-  elif (prediction.is_home and)
+
   # 4. Opposite side wager amount < req.amount
   db.session.commit()
 
