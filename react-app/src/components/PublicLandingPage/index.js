@@ -65,14 +65,6 @@ export default function PublicLandingPage(props) {
       <Box>
         <h1>Public Landing Page</h1>
       </Box>
-
-      <PredictionsDisplay></PredictionsDisplay>
-      <Button onClick={handleTest}>test</Button>
-      {betsapi &&
-        betsapi.upcoming_events &&
-        betsapi.upcoming_events.map((event) => {
-          return <p>EventID {event.id}</p>;
-        })}
     </Box>
   );
 }

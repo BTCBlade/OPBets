@@ -29,7 +29,7 @@ export default function EventsPage() {
       <Hidden lgDown>
         <Paper className={classes.eventsMainContainer}>
           <SideBar />
-          <h1>Events Page Paper Top Left</h1>
+          <h1>Upcoming Esports Events</h1>
           <EventsContainer />
           <WagerSlip />
         </Paper>

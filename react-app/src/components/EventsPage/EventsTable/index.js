@@ -39,7 +39,6 @@ const useStyles = makeStyles({
 function Row(props) {
   const dispatch = useDispatch();
   const handlePredictionIdClick = (row) => {
-    alert(`db_prediction_id ${row}`);
     dispatch(addOne(row));
   };
   const { row } = props;

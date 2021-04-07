@@ -10,6 +10,7 @@ from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.betsapi_routes import betsapi_routes
 from .api.events_routes import events_routes
+from .api.wagers_routes import wagers_routes
 
 
 from .seeds import seed_commands
@@ -37,6 +38,7 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(betsapi_routes, url_prefix='/api/betsapi')
 app.register_blueprint(events_routes, url_prefix='/api/events')
+app.register_blueprint(wagers_routes, url_prefix='/api/wagers')
 
 db.init_app(app)
 Migrate(app, db)

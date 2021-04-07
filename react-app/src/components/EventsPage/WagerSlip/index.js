@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { TextField, Typography, Divider, Paper, Box } from '@material-ui/core/';
+import {
+  Button,
+  TextField,
+  Typography,
+  Divider,
+  Paper,
+  Box,
+} from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 import { decimal_to_american } from '../../../utils/odds_conversion';
+import { removeOne, submitWager } from '../../../store/wagerslip';
 
 import './WagerSlip.css';
 
@@ -29,8 +37,13 @@ const useStyles = makeStyles({
 });
 
 function OneWager({ wager }) {
-  const [risk, setRisk] = useState();
+  const [riskAmount, setRiskAmount] = useState();
   const [win, setWin] = useState();
+  const session = useSelector((state) => state.session);
+  const dispatch = useDispatch();
+  const createWager = () => {
+    dispatch(submitWager(session.id, wager.db_predictions_id, riskAmount));
+  };
 
   return (
     <Box sx={{ marginBottom: '15px' }}>
@@ -38,6 +51,13 @@ function OneWager({ wager }) {
         <h5 id="onewager_team_name">{wager.team_name}</h5>
         <h5 id="onewager_header_odds">
           {wager.odds.toFixed(2)} {decimal_to_american(wager.odds)}
+        </h5>
+        <h5
+          hover="pointer"
+          onClick={() => dispatch(removeOne(wager.db_predictions_id))}
+          id="onewager_remove"
+        >
+          x
         </h5>
       </Box>
       <Box
@@ -52,8 +72,11 @@ function OneWager({ wager }) {
           size="small"
           variant="outlined"
           label="Risk"
-          onChange={(e) => setRisk(e.target.value)}
-          value={risk}
+          onChange={(e) => {
+            setRiskAmount(e.target.value);
+          }}
+          inputRef={(input) => input && input.focus()}
+          value={riskAmount}
           sx={{ width: '46%' }}
         ></TextField>
         <TextField
@@ -64,13 +87,27 @@ function OneWager({ wager }) {
           sx={{ width: '46%' }}
         ></TextField>
       </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          marginTop: '5px',
+        }}
+      >
+        <Button onClick={createWager} align="center" mx="auto" size="small">
+          Attempt Matching
+        </Button>
+      </Box>
     </Box>
   );
 }
 
 export default function WagerSlip() {
-  const incoming_wagers = useSelector((state) => state.wagerslip.wagers);
-  const incoming_wagers_arr = Object.values(incoming_wagers);
+  const incoming_wagers = useSelector((state) => state.wagerslip);
+  const incoming_wagers_arr = incoming_wagers.order.map((ele) => {
+    return incoming_wagers.wagers[ele];
+  });
   const classes = useStyles();
   return (
     <Paper

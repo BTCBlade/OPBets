@@ -1,14 +1,18 @@
 #onewager_team_name {
-  margin-left: 15px;
+  margin-left: 10px;
   margin-right: 0;
 }
 
 #onewager_header_odds {
   position: absolute;
-  right: 15px;
+  right: 35px;
+}
+#onewager_remove {
+  position: absolute;
+  right: 10px;
+  font-weight: 400;
 }
 
-#wagerslip_textfield {
-  width: 40%;
-  height: 1.5rem;
+#onewager_remove:hover {
+  cursor: pointer;
 }
