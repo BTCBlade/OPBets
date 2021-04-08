@@ -3,8 +3,8 @@ from app.models import db, User
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
-    demo = User(username='Demo', email='demo@aa.io', balance=1000 , password='password')
-    tuna = User(username='tuna', email='tuna@gmail.com', balance=1000, password='password')
+    demo = User(username='Demo', email='demo@aa.io', balance=5000 , password='password')
+    tuna = User(username='tuna', email='tuna@gmail.com', balance=5000, password='password')
     btcblade = User(username='btcblade', email='btcblade@gmail.com', balance=10000, password='password')
 
     db.session.add(demo)

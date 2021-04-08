@@ -32,7 +32,7 @@ const sections = [
     items: [
       {
         title: 'Profile',
-        path: '/',
+        path: '/dashboard',
         icon: <UserIcon fontSize="small" />,
       },
       {

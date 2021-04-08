@@ -49,9 +49,7 @@ function OneWager({ wager }) {
     <Box sx={{ marginBottom: '15px' }}>
       <Box sx={{ position: 'relative', display: 'flex', flexDirection: 'row' }}>
         <h5 id="onewager_team_name">{wager.team_name}</h5>
-        <h5 id="onewager_header_odds">
-          {wager.odds.toFixed(2)} {decimal_to_american(wager.odds)}
-        </h5>
+        <h5 id="onewager_header_odds">{wager.odds}</h5>
         <h5
           hover="pointer"
           onClick={() => dispatch(removeOne(wager.db_predictions_id))}
@@ -117,8 +115,10 @@ export default function WagerSlip() {
         flexDirection: 'column',
         width: '300px',
         height: '400px',
+        padding: '0',
         top: '125px',
         right: '200px',
+        overflow: 'auto',
       }}
     >
       <Box className={classes.header}>

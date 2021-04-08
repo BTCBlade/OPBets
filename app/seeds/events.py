@@ -1,5 +1,6 @@
 import json
 import pathlib
+from random import randint
 from app.models import db, Event, Prediction
 
 dir = pathlib.Path(__file__).parent.absolute()
@@ -20,13 +21,18 @@ def seed_events_predictions():
                             league=json.dumps(event['league']),
                             time=event['time'], time_status=event['time_status'])
         if event.get('prematch_odds'):
+            fake_home_odds = 0
+            while fake_home_odds < 100 and fake_home_odds > -100:
+                fake_home_odds = randint(-900, 900)
+            fake_away_odds = fake_home_odds * -1
+            #### betsapi bet365 format odds=event['prematch_odds']['schedule']['sp']['main'][0]['odds'],
             seed_Prediction1 = Prediction(db_event_id=db_event_id, is_home=True, event_line='0',
-                                        odds=event['prematch_odds']['schedule']['sp']['main'][0]['odds'],
+                                        odds=fake_home_odds,
                                         betsapi_event_id=event['prematch_odds']['event_id'],
                                         bet365_bet_id=event['prematch_odds']['FI'],
                                         time_status=event['time_status'])
             seed_Prediction2 = Prediction(db_event_id=db_event_id, is_home=False, event_line='0',
-                                        odds=event['prematch_odds']['schedule']['sp']['main'][1]['odds'],
+                                        odds=fake_away_odds,
                                         betsapi_event_id=event['prematch_odds']['event_id'],
                                         bet365_bet_id=event['prematch_odds']['FI'],
                                         time_status=event['time_status'])

@@ -16,7 +16,11 @@ import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
-import { decimal_to_probability } from '../../../utils/odds_conversion';
+import {
+  decimal_to_probability,
+  db_american_to_string,
+  american_to_probability,
+} from '../../../utils/odds_conversion';
 import { addOne } from '../../../store/wagerslip';
 
 const useRowStyles = makeStyles({
@@ -74,7 +78,7 @@ function Row(props) {
           {row.odds}
         </TableCell>
         <TableCell onClick={() => handlePredictionIdClick(row)} align="right">
-          {decimal_to_probability(parseFloat(row.odds))}%
+          {american_to_probability(parseInt(row.odds))}%
         </TableCell>
       </TableRow>
       <TableRow>
@@ -129,7 +133,7 @@ export default function EventsTable() {
       time: date_display,
       team_name: event.home.name,
       team_img: event.home.image_id,
-      odds: parseFloat(event.predictions[0].odds),
+      odds: db_american_to_string(event.predictions[0].odds),
       wagers: event.predictions[0].wagers,
     };
     const away_obj = {
@@ -139,7 +143,7 @@ export default function EventsTable() {
       time: date_display,
       team_name: event.away.name,
       team_img: event.away.image_id,
-      odds: parseFloat(event.predictions[1].odds),
+      odds: db_american_to_string(event.predictions[1].odds),
       wagers: event.predictions[1].wagers,
     };
     rows.push(home_obj);

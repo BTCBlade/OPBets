@@ -55,6 +55,16 @@ const MainNavbar = (props) => {
           {authenticated && (
             <>
               <Link
+                color="textSecondary"
+                component={RouterLink}
+                to="/events"
+                underline="none"
+                variant="body1"
+                mr={4}
+              >
+                Events
+              </Link>
+              <Link
                 component={RouterLink}
                 color="textSecondary"
                 to="/dashboard"
@@ -82,7 +92,7 @@ const MainNavbar = (props) => {
               <Link
                 color="textSecondary"
                 component={RouterLink}
-                to="/about"
+                to="/"
                 underline="none"
                 variant="body1"
                 mr={6}

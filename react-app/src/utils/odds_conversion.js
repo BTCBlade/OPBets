@@ -1,3 +1,11 @@
+export function db_american_to_string(str) {
+  if (parseInt(str) > 0) {
+    return '+' + str;
+  } else {
+    return str;
+  }
+}
+
 export function decimal_to_probability(decimal) {
   return ((1 / decimal) * 100).toFixed(2);
 }
