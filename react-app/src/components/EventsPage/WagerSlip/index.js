@@ -36,7 +36,7 @@ const useStyles = makeStyles({
   },
 });
 
-function OneWager({ wager }) {
+const OneWager = ({ wager }) => {
   const [riskAmount, setRiskAmount] = useState();
   const [win, setWin] = useState();
   const session = useSelector((state) => state.session);
@@ -99,7 +99,7 @@ function OneWager({ wager }) {
       </Box>
     </Box>
   );
-}
+};
 
 export default function WagerSlip() {
   const incoming_wagers = useSelector((state) => state.wagerslip);

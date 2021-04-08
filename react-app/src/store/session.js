@@ -42,7 +42,6 @@ export const updateBalance = (user_id) => async (dispatch) => {
   const data = await res.json();
 
   dispatch(update_balance(data.balance));
-  console.log('DATA.BALANCE', data.balance);
   return data.balance;
 };
 

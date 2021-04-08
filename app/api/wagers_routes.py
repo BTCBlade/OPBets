@@ -23,6 +23,8 @@ def add_wager():
   event = Event.query.get(prediction.db_event_id)
   event_home_prediction_wagers = event.predictions[0].wagers
   event_away_prediction_wagers = event.predictions[1].wagers
+  def sortFunc(wager):
+    return wager.id
   event_home_prediction_wagers_arr = [wager for wager in event_home_prediction_wagers if wager.current_amount > 0.0001]
   event_away_prediction_wagers_arr = [wager for wager in event_away_prediction_wagers if wager.current_amount > 0.0001]
   total_home_liquidity = 0
@@ -53,7 +55,7 @@ def add_wager():
                         initial_fill=0, liquidityProviderBool=True,
                         placed_by_user_id=req_obj['user_id'], prediction_id=req_obj['db_predictions_id'])
       db.session.add(new_wager)
-    elif (prediction.is_away and (len(event_home_prediction_wagers_arr) == 0)):
+    elif ((prediction.is_home is False) and (len(event_home_prediction_wagers_arr) == 0)):
       new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,
                         initial_amount=float(req_obj['amount']), current_amount=float(req_obj['amount']),
                         initial_fill=0, liquidityProviderBool=True,
@@ -70,7 +72,7 @@ def add_wager():
       db.session.add(new_wager)
       db.session.commit()
       while new_wager.current_amount > 0:
-        for wager in event_home_prediction_wagers_arr:
+        for wager in event_away_prediction_wagers_arr:
           if new_wager.current_amount <= 0:
             break
           # wager queue's first in line wager is smaller than req_amount
@@ -96,7 +98,7 @@ def add_wager():
           db.session.add(new_matchedwager)
     # 3.b Opposite side wager amount > req.amount
     # away
-    elif (prediction.is_away and (total_home_liquidity > ( float(req_obj['amount']) * (int(prediction.odds)/100) ) ) ):
+    elif ((prediction.is_home is False) and (total_home_liquidity > ( float(req_obj['amount']) * (int(prediction.odds)/100) ) ) ):
       new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,
                         initial_amount=float(req_obj['amount']), current_amount=float(req_obj['amount']),
                         initial_fill=float(req_obj['amount']), liquidityProviderBool=False,
@@ -104,14 +106,18 @@ def add_wager():
       db.session.add(new_wager)
       db.session.commit()
       while new_wager.current_amount > 0:
-        for wager in event_away_prediction_wagers_arr:
+        for wager in event_home_prediction_wagers_arr:
           if new_wager.current_amount <= 0:
             break
           # wager queue's first in line wager is smaller than req_amount
           if (wager.current_amount < ( new_wager.current_amount * (int(prediction.odds)/100) ) ):
-            dog_deduction = ( (wager.current_amount /  ( int(prediction.odds) - 100 ) ) * 100 )
-            total_amount_matched = dog_deduction + wager.current_amount
-            new_wager.current_amount = new_wager.current_amount -  dog_deduction
+            dog_deduction_for_favorite = ( (wager.current_amount /  ( int(prediction.odds) - 100 ) ) * 100 )
+            total_amount_matched = dog_deduction_for_favorite + wager.current_amount
+            print('------------- new_wager.current_amount pre dog_deduction')
+            print(new_wager.current_amount)
+            print('-------------- wager.current_amount pre deduction')
+            print(wager.current_amount)
+            new_wager.current_amount = new_wager.current_amount -  wager.current_amount
             wager.current_amount = 0
             new_matchedwager = MatchedWager(amount= total_amount_matched, event_line='0', matched_odds_home=str(int(prediction.odds) * -1), matched_odds_away=prediction.odds,
                                             time_status=prediction.time_status, paidOutBool=False,
@@ -140,7 +146,7 @@ def add_wager():
       db.session.add(new_wager)
       db.session.commit()
       # Loop through opposite side wager queue until all liquidity has been taken
-      for wager in event_home_prediction_wagers_arr:
+      for wager in event_away_prediction_wagers_arr:
         dog_deduction = ( (wager.current_amount /  ( int(prediction.odds) - 100 ) ) * 100 )
         total_amount_matched = dog_deduction + wager.current_amount
         new_wager.current_amount = new_wager.current_amount - dog_deduction
@@ -153,7 +159,7 @@ def add_wager():
         db.session.add(new_matchedwager)
     # 4.b Opposite side wager amount < req.amount
     # away
-    elif (prediction.is_away and (total_home_liquidity < ( float(req_obj['amount']) * (int(prediction.odds)/100) ) ) ):
+    elif ((prediction.is_home is False) and (total_home_liquidity < ( float(req_obj['amount']) * (int(prediction.odds)/100) ) ) ):
       initial_fill_amount = total_home_liquidity
       new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,
                         initial_amount=float(req_obj['amount']), current_amount=float(req_obj['amount']),
@@ -162,7 +168,7 @@ def add_wager():
       db.session.add(new_wager)
       db.session.commit()
       # Loop through opposite side wager queue until all liquidity has been taken
-      for wager in event_away_prediction_wagers_arr:
+      for wager in event_home_prediction_wagers_arr:
         dog_deduction = ( (wager.current_amount /  ( int(prediction.odds) - 100 ) ) * 100 )
         total_amount_matched = dog_deduction + wager.current_amount
         new_wager.current_amount = new_wager.current_amount - dog_deduction
@@ -176,12 +182,13 @@ def add_wager():
 
     #### Deduct User Balance ####
     req_user.balance -= req_amount
-#########################################################################################################################################
+    ################################################################################################
   else:
   # B if prediction.odds < 0 (betting on favorite)
-    fav_deduction_multiplier = float(prediction.odds * -1)
+    fav_deduction_multiplier = float(prediction.odds) * -1
     # a. Check if User has enough balance
     ################### Potential negative balance point implement something later #############################
+
     if req_amount > req_user.balance:
       return 'Not enough balance to make wager'
     ################### Potential negative balance point implement something later #############################
@@ -194,6 +201,7 @@ def add_wager():
                         placed_by_user_id=req_obj['user_id'], prediction_id=req_obj['db_predictions_id'])
       db.session.add(new_wager)
 
+
     # 2. No Opposite side wagers YES same side wagers in queue
     elif (prediction.is_home and (len(event_away_prediction_wagers_arr) == 0)):
       new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,
@@ -201,7 +209,7 @@ def add_wager():
                         initial_fill=0, liquidityProviderBool=True,
                         placed_by_user_id=req_obj['user_id'], prediction_id=req_obj['db_predictions_id'])
       db.session.add(new_wager)
-    elif (prediction.is_away and (len(event_home_prediction_wagers_arr) == 0)):
+    elif ((prediction.is_home is False) and (len(event_home_prediction_wagers_arr) == 0)):
       new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,
                         initial_amount=float(req_obj['amount']), current_amount=float(req_obj['amount']),
                         initial_fill=0, liquidityProviderBool=True,
