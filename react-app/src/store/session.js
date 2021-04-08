@@ -1,10 +1,15 @@
 import { login, authenticate, demoLogin } from '../services/auth';
 
 const LOGIN = 'session/LOGIN';
+const UPDATE_BALANCE = 'session/UPDATE_BALANCE';
 
 const loginAction = (user) => ({
   type: LOGIN,
   user,
+});
+const update_balance = (balance) => ({
+  type: UPDATE_BALANCE,
+  payload: balance,
 });
 
 export const loginUser = ({ email, password }) => async (dispatch) => {
@@ -32,6 +37,15 @@ export const restoreUser = () => async (dispatch) => {
   return user;
 };
 
+export const updateBalance = (user_id) => async (dispatch) => {
+  const res = await fetch(`/api/users/${user_id}`);
+  const data = await res.json();
+
+  dispatch(update_balance(data.balance));
+  console.log('DATA.BALANCE', data.balance);
+  return data.balance;
+};
+
 const initialState = { user: null };
 
 const sessionReducer = (state = initialState, action) => {
@@ -42,6 +56,11 @@ const sessionReducer = (state = initialState, action) => {
       newState.balance = action.user.balance;
       newState.email = action.user.email;
       newState.id = action.user.id;
+      return newState;
+    }
+    case UPDATE_BALANCE: {
+      const newState = JSON.parse(JSON.stringify(state));
+      newState.balance = action.payload;
       return newState;
     }
     default:

@@ -1,4 +1,5 @@
 import { loadEventsAll } from './events';
+import { updateBalance } from './session';
 
 const ADD_ONE = 'wagerslip/ADD_ONE';
 const REMOVE_ONE = 'wagerslip/REMOVE_ONE';
@@ -32,7 +33,9 @@ export const submitWager = (user_id, db_predictions_id, amount) => async (
       amount: amount,
     }),
   });
-  //2. update/reload store.events
+  //2. update session.balance
+  await dispatch(updateBalance(user_id));
+  //3. update/reload store.events
   await dispatch(loadEventsAll());
 };
 
