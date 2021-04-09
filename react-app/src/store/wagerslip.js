@@ -36,7 +36,7 @@ export const submitWager = (user_id, db_predictions_id, amount) => async (
   // 2. update session.balance
   await dispatch(updateBalance(user_id));
   // 3. update/reload store.events
-  // await dispatch(loadEventsAll());
+  await dispatch(loadEventsAll());
 };
 
 const initialState = { wagers: {}, order: [] };

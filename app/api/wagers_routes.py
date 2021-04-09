@@ -77,7 +77,7 @@ def add_wager():
             break
           # wager queue's first in line wager is smaller than req_amount
           if (wager.current_amount < ( new_wager.current_amount * (int(prediction.odds)/100) ) ):
-            dog_deduction = ( (wager.current_amount /  ( int(prediction.odds) - 100 ) ) * 100 )
+            dog_deduction = ( (wager.current_amount /  ( int(prediction.odds) ) ) * 100 )
             total_amount_matched = dog_deduction + wager.current_amount
             new_wager.current_amount = new_wager.current_amount -  dog_deduction
             wager.current_amount = 0
@@ -107,21 +107,12 @@ def add_wager():
       db.session.commit()
       while new_wager.current_amount > 0:
         for wager in event_home_prediction_wagers_arr:
-          print('********** new_wager.current_amount *********')
-          print(new_wager.current_amount)
-          print('********** new_wager.current_amount *********')
           if new_wager.current_amount <= 0:
             break
           # wager queue's first in line wager is smaller than req_amount
           if (wager.current_amount < ( new_wager.current_amount * (int(prediction.odds)/100) ) ):
             dog_deduction = ( (wager.current_amount /  ( int(prediction.odds) ) ) * 100 )
             total_amount_matched = dog_deduction + wager.current_amount
-            print('------------- new_wager.current_amount pre dog_deduction')
-            print(new_wager.current_amount)
-            print('-------------- wager.current_amount pre deduction')
-            print(wager.current_amount)
-            print('---------------------------- dog_deduction')
-            print(dog_deduction)
             new_wager.current_amount = new_wager.current_amount -  dog_deduction
             wager.current_amount = 0
             new_matchedwager = MatchedWager(amount= total_amount_matched, event_line='0', matched_odds_home=str(int(prediction.odds) * -1), matched_odds_away=prediction.odds,
@@ -130,7 +121,6 @@ def add_wager():
                                             liquidity_remover_wager_id=new_wager.id)
           else:
             #if wager queue's first in line wager is bigger than req_amount
-            print('**************** from **************')
             fav_deduction = new_wager.current_amount * (int(prediction.odds)/100)
             total_amount_matched = new_wager.current_amount + fav_deduction
             wager.current_amount = wager.current_amount - fav_deduction
@@ -144,19 +134,19 @@ def add_wager():
     # 4.a Opposite side wager amount < req.amount
     # home
     elif (prediction.is_home and (total_away_liquidity < ( float(req_obj['amount']) * (int(prediction.odds)/100) ) ) ):
-      initial_fill_amount = total_away_liquidity
+
       new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,
                         initial_amount=float(req_obj['amount']), current_amount=float(req_obj['amount']),
-                        initial_fill=initial_fill_amount, liquidityProviderBool=True,
+                        initial_fill=0, liquidityProviderBool=True,
                         placed_by_user_id=req_obj['user_id'], prediction_id=req_obj['db_predictions_id'])
       db.session.add(new_wager)
       db.session.commit()
       # Loop through opposite side wager queue until all liquidity has been taken
       for wager in event_away_prediction_wagers_arr:
-        dog_deduction = ( (wager.current_amount /  ( int(prediction.odds) - 100 ) ) * 100 )
+        dog_deduction = ( (wager.current_amount /  ( int(prediction.odds) ) ) * 100 )
         total_amount_matched = dog_deduction + wager.current_amount
         new_wager.current_amount = new_wager.current_amount - dog_deduction
-        new_wager.initial_fill = new_wager.initial_fill - dog_deduction
+        new_wager.initial_fill = new_wager.initial_fill + dog_deduction
         wager.current_amount = 0
         new_matchedwager = MatchedWager(amount= total_amount_matched, event_line='0', matched_odds_home=prediction.odds, matched_away_odds=str(int(prediction.odds) * -1),
                                         time_status=prediction.time_status, paidOutBool=False,
@@ -166,19 +156,19 @@ def add_wager():
     # 4.b Opposite side wager amount < req.amount
     # away
     elif ((prediction.is_home is False) and (total_home_liquidity < ( float(req_obj['amount']) * (int(prediction.odds)/100) ) ) ):
-      initial_fill_amount = total_home_liquidity
+
       new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,
                         initial_amount=float(req_obj['amount']), current_amount=float(req_obj['amount']),
-                        initial_fill=initial_fill_amount, liquidityProviderBool=True,
+                        initial_fill=0, liquidityProviderBool=True,
                         placed_by_user_id=req_obj['user_id'], prediction_id=req_obj['db_predictions_id'])
       db.session.add(new_wager)
       db.session.commit()
       # Loop through opposite side wager queue until all liquidity has been taken
       for wager in event_home_prediction_wagers_arr:
-        dog_deduction = ( (wager.current_amount /  ( int(prediction.odds) - 100 ) ) * 100 )
+        dog_deduction = ( (wager.current_amount /  ( int(prediction.odds) ) ) * 100 )
         total_amount_matched = dog_deduction + wager.current_amount
         new_wager.current_amount = new_wager.current_amount - dog_deduction
-        new_wager.initial_fill = new_wager.initial_fill - dog_deduction
+        new_wager.initial_fill = new_wager.initial_fill + dog_deduction
         wager.current_amount = 0
         new_matchedwager = MatchedWager(amount= total_amount_matched, event_line='0', matched_odds_home=str(int(prediction.odds) * -1), matched_odds_away=prediction.odds,
                                         time_status=prediction.time_status, paidOutBool=False,
