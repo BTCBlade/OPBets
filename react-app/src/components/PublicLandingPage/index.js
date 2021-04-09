@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import LandingPageCarousel from './LandingPageCarousel';
 
 import { testLoad } from '../../store/betsapi';
-import PredictionsDisplay from '../PredictionsDisplay';
+
 const useStyles = makeStyles((theme) => ({
   span: { marginTop: '1rem', marginBot: '1rem', color: 'primaryMain' },
 }));

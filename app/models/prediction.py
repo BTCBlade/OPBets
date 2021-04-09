@@ -18,7 +18,7 @@ class Prediction(db.Model):
     time_created = db.Column(db.DateTime, default=db.func.current_timestamp())
     time_updated = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
-    wagers = relationship('Wager', back_populates='prediction')
+    wagers = relationship('Wager', back_populates='prediction', order_by="Wager.id")
     event = relationship('Event', back_populates='predictions')
 
     def to_dict(self):

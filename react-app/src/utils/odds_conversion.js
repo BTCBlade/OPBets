@@ -31,9 +31,9 @@ export function decimal_to_american(decimal) {
 
 export function american_to_decimal(integer) {
   if (integer > 0) {
-    return (integer / 100 + 1).toFixed(2);
+    return integer / 100 + 1;
   } else if (integer < 0) {
-    return (100 / (integer * -1) + 1).toFixed(2);
+    return 100 / (integer * -1) + 1;
   } else {
     return '0';
   }
