@@ -23,19 +23,23 @@ import {
 } from '../../../utils/odds_conversion';
 import { addOne } from '../../../store/wagerslip';
 
-const useRowStyles = makeStyles({
+const useRowStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       borderBottom: 'unset',
+    },
+    '&:hover': {
+      cursor: 'pointer',
+      backgroundColor: theme.palette.action.hover,
     },
     // '&:nth-of-type(odd)': {
     //   backgroundColor: 'lightgrey',
     // },
   },
-});
+}));
 const useStyles = makeStyles({
   TableContainer: {
-    width: '600px',
+    width: '700px',
     marginRight: 0,
   },
 });
@@ -48,6 +52,7 @@ function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
+  const team_img_url = `https://assets.b365api.com/images/team/s/${row.team_img}.png`;
 
   return (
     <React.Fragment>
@@ -72,6 +77,7 @@ function Row(props) {
           {row.is_home ? row.league_name : row.time}
         </TableCell>
         <TableCell onClick={() => handlePredictionIdClick(row)} align="right">
+          {/* <img src={team_img_url} alt=""></img>  */}
           {row.team_name}
         </TableCell>
         <TableCell onClick={() => handlePredictionIdClick(row)} align="right">
@@ -124,8 +130,10 @@ export default function EventsTable() {
     const event_date = new Date(event.time * 1000);
 
     const date_1 = event_date.toLocaleString().split(',');
+    const time_parts = date_1[1].split(' ');
+    const hour_min = time_parts[1].split(':');
     const date_display =
-      date_1[0] + '  ' + date_1[1].slice(0, 5) + date_1[1].slice(9);
+      date_1[0] + '  ' + hour_min[0] + ':' + hour_min[1] + ' ' + time_parts[2];
     const home_obj = {
       db_predictions_id: event.predictions[0].id,
       is_home: event.predictions[0].is_home,

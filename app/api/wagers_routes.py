@@ -250,7 +250,7 @@ def add_wager():
           db.session.add(new_matchedwager)
     # 3.b Opposite side total wagers amount > req.amount
     # away
-    elif ((prediction.is_home is False) and (total_home_liquidity >= ( float(req_obj['amount']) * (int(prediction.odds)/100) ) ) ):
+    elif ((prediction.is_home is False) and (total_home_liquidity >= ( float(req_obj['amount']) / (int(prediction.odds)/100) * -1 ) ) ):
       new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,
                         initial_amount=float(req_obj['amount']), current_amount=float(req_obj['amount']),
                         initial_fill=float(req_obj['amount']), liquidityProviderBool=False,
