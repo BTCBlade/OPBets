@@ -8,6 +8,7 @@ wagers_routes = Blueprint('wagers', __name__)
 def wagers_root():
   return "hello world"
 
+
 @wagers_routes.route('/add', methods=['POST'])
 def add_wager():
   req_obj = request.get_json()

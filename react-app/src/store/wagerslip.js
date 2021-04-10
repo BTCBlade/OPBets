@@ -5,7 +5,6 @@ const ADD_ONE = 'wagerslip/ADD_ONE';
 const REMOVE_ONE = 'wagerslip/REMOVE_ONE';
 
 export const addOne = (row) => {
-  console.log(row);
   return {
     type: ADD_ONE,
     payload: row,

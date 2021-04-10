@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required
-from app.models import User
+from app.models import User, Wager
 
 user_routes = Blueprint('users', __name__)
 
@@ -17,3 +17,9 @@ def users():
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
+
+@user_routes.route('/active_wagers/<int:id>')
+@login_required
+def active_wagers(id):
+    wagers = Wager.query.filter_by(placed_by_user_id=id)
+    return {"active_wagers": [wager.to_dict() for wager in wagers if wager.current_amount > 0.001] }

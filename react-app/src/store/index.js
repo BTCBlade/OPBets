@@ -5,6 +5,7 @@ import sessionReducer from './session';
 import betsapiReducer from './betsapi';
 import eventsReducer from './events';
 import wagerslipReducer from './wagerslip';
+import active_wagersReducer from './active_wagers';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   betsapi: betsapiReducer,
   events: eventsReducer,
   wagerslip: wagerslipReducer,
+  active_wagers: active_wagersReducer,
 });
 
 let enhancer;

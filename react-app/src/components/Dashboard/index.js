@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Hidden, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import SideBar from '../SideBar';
+import ActiveWagersTableContainer from './ActiveWagersTableContainer';
 
 const useStyles = makeStyles((theme) => ({
   eventsMainContainer: {
@@ -21,6 +22,7 @@ export default function Dashboard() {
         <Paper className={classes.eventsMainContainer}>
           <SideBar />
           <h1>Dashboard</h1>
+          <ActiveWagersTableContainer />
         </Paper>
       </Hidden>
     </>

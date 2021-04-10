@@ -9,7 +9,6 @@ import EventsTable from '../EventsTable';
 const EventsContainer = () => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  let events = useSelector((state) => state.events);
 
   useEffect(() => {
     dispatch(loadEventsAll()).then(() => setLoading(false));

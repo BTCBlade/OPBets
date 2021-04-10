@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { format } from 'date-fns';
-import numeral from 'numeral';
+
 import PropTypes from 'prop-types';
 import {
   Box,
@@ -18,6 +19,7 @@ import {
   TableRow,
   Typography,
 } from '@material-ui/core';
+import CancelIcon from '@material-ui/icons/Cancel';
 
 const applyPagination = (orders, page, limit) =>
   orders.slice(page * limit, page * limit + limit);
@@ -25,6 +27,8 @@ const applyPagination = (orders, page, limit) =>
 const ActiveWagersTable = () => {
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(5);
+  const activeWagers = useSelector((state) => state.active_wagers);
+  const dispatch = useDispatch();
 
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
@@ -81,12 +85,16 @@ const ActiveWagersTable = () => {
                     </TableCell>
                     <TableCell>{order.paymentMethod}</TableCell>
                     <TableCell>
-                      {numeral(order.totalAmount).format(
+                      {/* {numeral(order.totalAmount).format(
                         `${order.currency}0,0.00`
-                      )}
+                      )} */}
                     </TableCell>
                     <TableCell></TableCell>
-                    <TableCell align="right"></TableCell>
+                    <TableCell align="right">
+                      <IconButton>
+                        <CancelIcon fontSize="small" />
+                      </IconButton>
+                    </TableCell>
                   </TableRow>
                 );
               })}
