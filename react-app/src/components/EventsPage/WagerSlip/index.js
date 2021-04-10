@@ -9,7 +9,10 @@ import {
   Box,
 } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
-import { decimal_to_american } from '../../../utils/odds_conversion';
+import {
+  decimal_to_american,
+  american_to_decimal,
+} from '../../../utils/odds_conversion';
 import { removeOne, submitWager } from '../../../store/wagerslip';
 
 import './WagerSlip.css';
@@ -36,7 +39,7 @@ const useStyles = makeStyles({
   },
 });
 
-function OneWager({ wager }) {
+const OneWager = ({ wager }) => {
   const [riskAmount, setRiskAmount] = useState();
   const [win, setWin] = useState();
   const session = useSelector((state) => state.session);
@@ -72,6 +75,12 @@ function OneWager({ wager }) {
           label="Risk"
           onChange={(e) => {
             setRiskAmount(e.target.value);
+            setWin(
+              e.target.value
+                ? e.target.value * american_to_decimal(parseInt(wager.odds)) -
+                    e.target.value
+                : ''
+            );
           }}
           inputRef={(input) => input && input.focus()}
           value={riskAmount}
@@ -80,7 +89,6 @@ function OneWager({ wager }) {
         <TextField
           size="small"
           variant="outlined"
-          label="Win"
           value={win}
           sx={{ width: '46%' }}
         ></TextField>
@@ -99,7 +107,7 @@ function OneWager({ wager }) {
       </Box>
     </Box>
   );
-}
+};
 
 export default function WagerSlip() {
   const incoming_wagers = useSelector((state) => state.wagerslip);
