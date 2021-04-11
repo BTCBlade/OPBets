@@ -23,6 +23,7 @@ import MainNavbar from './components/MainNavbar';
 import PublicLandingPage from './components/PublicLandingPage';
 import Dashboard from './components/Dashboard';
 import EventsPage from './components/EventsPage';
+import MatchedWagersPage from './components/MatchedWagersPage';
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -90,40 +91,14 @@ function App() {
           >
             <Dashboard />
           </ProtectedRoute>
-          {/* <ProtectedRoute
-            path="/"
-            exact={true}
-            authenticated={authenticated}
-            setAuthenticated={setAuthenticated}
-          >
-            <h1>My Home Page</h1>
-          </ProtectedRoute> */}
-          {/* <Route path="/login" exact={true}>
-            <LoginForm
-            authenticated={authenticated}
-            setAuthenticated={setAuthenticated}
-            />
-            </Route>
-            <Route path="/sign-up" exact={true}>
-            <SignUpForm
-              authenticated={authenticated}
-              setAuthenticated={setAuthenticated}
-            />
-            </Route>
-            <ProtectedRoute
-            path="/users"
-            exact={true}
-            authenticated={authenticated}
-            >
-            <UsersList />
-          </ProtectedRoute>
           <ProtectedRoute
-            path="/users/:userId"
-            exact={true}
+            exact
+            path="/dashboard/matched_wagers"
             authenticated={authenticated}
+            setAuthenticated={setAuthenticated}
           >
-            <User />
-          </ProtectedRoute> */}
+            <MatchedWagersPage />
+          </ProtectedRoute>
         </Switch>
         <SettingsMenu />
       </ThemeProvider>

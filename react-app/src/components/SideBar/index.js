@@ -42,20 +42,20 @@ const sections = [
       },
       {
         title: 'Wagers',
-        path: '/dashboard/wagers',
+        path: '/dashboard',
         icon: <ClipboardListIcon fontSize="small" />,
         children: [
           {
             title: 'Open Wagers',
-            path: '/dashboard/wagers',
+            path: '/dashboard',
           },
           {
             title: 'Matched Wagers',
-            path: '/dashboard/wagers',
+            path: '/dashboard/matched_wagers',
           },
           {
             title: 'History',
-            path: '/dashboard/wagers/history',
+            path: '/dashboard/history',
           },
         ],
       },
