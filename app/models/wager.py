@@ -34,3 +34,16 @@ class Wager(db.Model):
             "time_updated": self.time_updated,
             "user": self.user.to_dict(),
         }
+    def to_dict_with_prediction(self):
+        return {
+            "id": self.id,
+            "initial_event_line": self.initial_event_line,
+            "initial_odds": self.initial_odds,
+            "initial_amount": self.initial_amount,
+            "current_amount": self.current_amount,
+            "initial_fill": self.initial_fill,
+            "liquidityProviderBool": self.liquidityProviderBool,
+            "time_created": self.time_created,
+            "time_updated": self.time_updated,
+            "prediction": self.prediction.to_dict_with_event(),
+        }

@@ -21,6 +21,7 @@ import {
   db_american_to_string,
   american_to_probability,
 } from '../../../utils/odds_conversion';
+import { convert_time } from '../../../utils/time_date';
 import { addOne } from '../../../store/wagerslip';
 
 const useRowStyles = makeStyles((theme) => ({
@@ -74,7 +75,13 @@ function Row(props) {
           component="th"
           scope="row"
         >
-          {row.is_home ? row.league_name : row.time}
+          {row.is_home ? (
+            row.league_name
+          ) : (
+            <Typography color="textSecondary" variant="body2">
+              {row.time}
+            </Typography>
+          )}
         </TableCell>
         <TableCell onClick={() => handlePredictionIdClick(row)} align="right">
           {/* <img src={team_img_url} alt=""></img>  */}

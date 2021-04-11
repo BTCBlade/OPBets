@@ -11,10 +11,10 @@ export const addOne = (row) => {
   };
 };
 
-export const removeOne = (row) => {
+export const removeOne = (prediction_id) => {
   return {
     type: REMOVE_ONE,
-    payload: row,
+    payload: prediction_id,
   };
 };
 export const submitWager = (user_id, db_predictions_id, amount) => async (
@@ -41,7 +41,7 @@ export const submitWager = (user_id, db_predictions_id, amount) => async (
 const initialState = { wagers: {}, order: [] };
 
 export default function wagerslipReducer(state = initialState, action) {
-  const newState = JSON.parse(JSON.stringify(state));
+  let newState = JSON.parse(JSON.stringify(state));
   switch (action.type) {
     case ADD_ONE:
       newState.wagers[action.payload.db_predictions_id] = {
@@ -57,8 +57,8 @@ export default function wagerslipReducer(state = initialState, action) {
       }
       return newState;
     case REMOVE_ONE:
-      newState.wagers[action.payload.db_predictions_id] = undefined;
-      const idx = newState.order.indexOf(action.payload.db_predictions_id);
+      delete newState.wagers[action.payload];
+      const idx = newState.order.indexOf(action.payload);
       newState.order.splice(idx, 1);
       return newState;
     default:

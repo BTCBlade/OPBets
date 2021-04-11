@@ -136,7 +136,7 @@ const DashboardSidebar = (props) => {
             sx={{
               alignItems: 'center',
               backgroundColor: 'background.default',
-              borderRadius: 1,
+              borderRadius: 3,
               display: 'flex',
               overflow: 'hidden',
               p: 2,
@@ -159,7 +159,7 @@ const DashboardSidebar = (props) => {
               <Typography color="textSecondary" variant="body2">
                 Balance:{' '}
                 <Link color="primary" component={RouterLink} to="/dashboard">
-                  {sessionUser.balance}
+                  {Math.round(sessionUser.balance)}
                 </Link>
               </Typography>
             </Box>

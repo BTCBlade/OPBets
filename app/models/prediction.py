@@ -35,3 +35,17 @@ class Prediction(db.Model):
             "time_update": self.time_updated,
             "wagers": [wager.to_dict() for wager in self.wagers if wager.current_amount > 0 ],
         }
+    def to_dict_with_event(self):
+        return {
+            "id": self.id,
+            "is_home": self.is_home,
+            "event_line": self.event_line,
+            "odds": self.odds,
+            "db_event_id": self.db_event_id,
+            "betsapi_event_id": self.betsapi_event_id,
+            "bet365_bet_id": self.bet365_bet_id,
+            "time_status": self.time_status,
+            "time_created": self.time_created,
+            "time_update": self.time_updated,
+            "event": self.event.to_dict_no_associations(),
+        }

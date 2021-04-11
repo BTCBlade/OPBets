@@ -22,4 +22,10 @@ def user(id):
 @login_required
 def active_wagers(id):
     wagers = Wager.query.filter_by(placed_by_user_id=id)
-    return {"active_wagers": [wager.to_dict() for wager in wagers if wager.current_amount > 0.001] }
+    return {"active_wagers": [wager.to_dict_with_prediction() for wager in wagers if wager.current_amount > 0.001] }
+
+@user_routes.route('/matched_wagers/<int:id>')
+@login_required
+def matched_wagers(id):
+    wagers = Wager.query.filter_by(placed_by_user_id=id)
+    wagers_arr = [wager.to_dict_with_prediction() for wager in wagers]

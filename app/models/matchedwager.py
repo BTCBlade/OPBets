@@ -24,3 +24,18 @@ class MatchedWager(db.Model):
     liquidity_remover_wager = relationship('Wager', foreign_keys='MatchedWager.liquidity_remover_wager_id')
     time_created = db.Column(db.DateTime, default=db.func.current_timestamp())
     time_updated = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
+
+    def to_dict(self):
+        return {
+            "id":self.id,
+            "amount":self.amount,
+            "event_line":self.event_line,
+            "matched_odds_home":self.matched_odds_home,
+            "matched_odds_away":self.matched_odds_away,
+            "time_status":self.time_status,
+            "paidOutBool":self.paidOutBool,
+            "liquidity_provider_wager_id":self.liquidity_provider_wager_id,
+            "liquidity_remover_wager_id":self.liquidity_remover_wager_id,
+            "time_created":self.time_created,
+            "time_updated":self.time_updated,
+        }

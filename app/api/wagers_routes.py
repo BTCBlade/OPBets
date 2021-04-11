@@ -8,6 +8,16 @@ wagers_routes = Blueprint('wagers', __name__)
 def wagers_root():
   return "hello world"
 
+@wagers_routes.route('/cancel/<int:id>')
+def cancel_wager(id):
+  print('---------------------------------------')
+  wager = Wager.query.get(id)
+  wager.user.balance = wager.user.balance + wager.current_amount
+  wager.current_amount = 0
+  db.session.commit()
+  return {"wagerId": wager.id, "userId":wager.user.id}
+
+
 
 @wagers_routes.route('/add', methods=['POST'])
 def add_wager():

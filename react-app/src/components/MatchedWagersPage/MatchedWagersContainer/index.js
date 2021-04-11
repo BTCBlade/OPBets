@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { CircularProgress } from '@material-ui/core';
 
-import { loadAllActiveWagers } from '../../../store/active_wagers';
+// import { loadAllActiveWagers } from '../../../store/active_wagers';
+//import OneEvent from '../OneEvent';
 import ActiveWagersTable from '../ActiveWagersTable';
 
 const ActiveWagersTableContainer = () => {

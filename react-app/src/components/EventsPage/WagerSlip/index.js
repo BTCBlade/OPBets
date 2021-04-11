@@ -4,6 +4,7 @@ import {
   Button,
   TextField,
   Typography,
+  IconButton,
   Divider,
   Paper,
   Box,
@@ -49,10 +50,17 @@ const OneWager = ({ wager }) => {
   };
 
   return (
-    <Box sx={{ marginBottom: '15px' }}>
+    <Box key={wager.id} sx={{ marginBottom: '15px' }}>
       <Box sx={{ position: 'relative', display: 'flex', flexDirection: 'row' }}>
         <h5 id="onewager_team_name">{wager.team_name}</h5>
         <h5 id="onewager_header_odds">{wager.odds}</h5>
+        {/* <IconButton
+          hover="pointer"
+          onClick={() => dispatch(removeOne(wager.db_predictions_id))}
+          id="onewager_remove"
+        >
+          <ClearIcon fontSize="small" />
+        </IconButton> */}
         <h5
           hover="pointer"
           onClick={() => dispatch(removeOne(wager.db_predictions_id))}

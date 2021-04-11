@@ -38,3 +38,11 @@ export function american_to_decimal(integer) {
     return '0';
   }
 }
+
+export function american_to_str(num_str) {
+  if (parseInt(num_str) > 0) {
+    return '+' + num_str;
+  } else {
+    return num_str;
+  }
+}
