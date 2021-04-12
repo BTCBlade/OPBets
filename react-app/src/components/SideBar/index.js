@@ -23,6 +23,7 @@ import CSGOIcon from '../../icons/icons8-counter-strike.js';
 import OverwatchIcon from '../../icons/icons8-overwatch.js';
 import Dota2Icon from '../../icons/icons8-dota-2.js';
 import ApexLegendsIcon from '../../icons/icons8-apex-legends.js';
+import AAIcon from '../../icons/aA_favicon';
 import NavSection from './NavSection';
 import Scrollbar from './Scrollbar';
 
@@ -88,6 +89,16 @@ const sections = [
         title: 'ApexLegends',
         path: './events',
         icon: <ApexLegendsIcon fontSize="small" />,
+      },
+    ],
+  },
+  {
+    title: 'Misc',
+    items: [
+      {
+        title: 'App Academy',
+        path: '/events/app_academy',
+        icon: <AAIcon fontSize="small" />,
       },
     ],
   },
