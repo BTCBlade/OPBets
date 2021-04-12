@@ -62,9 +62,7 @@ export default function PublicLandingPage(props) {
         </Typography>
         <LandingPageCarousel />
       </Box>
-      <Box>
-        <h1>Public Landing Page</h1>
-      </Box>
+      <Box></Box>
     </Box>
   );
 }

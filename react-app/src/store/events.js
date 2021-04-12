@@ -1,10 +1,25 @@
 const LOAD_EVENTS_ALL = 'events/LOAD_EVENTS_ALL';
+const LOAD_AA_EVENTS_ALL = 'events/LOAD_AA_EVENTS_ALL';
 
 const EventsAll = (events_data) => {
   return {
     type: LOAD_EVENTS_ALL,
     payload: events_data,
   };
+};
+const AAEventsAll = (events_data) => {
+  return {
+    type: LOAD_AA_EVENTS_ALL,
+    payload: events_data,
+  };
+};
+
+export const loadAAEventsAll = () => async (dispatch) => {
+  const res = await fetch('/api/events/all/AA');
+  const data = await res.json();
+
+  dispatch(AAEventsAll(data['events_all']));
+  return data;
 };
 
 export const loadEventsAll = () => async (dispatch) => {
@@ -21,6 +36,25 @@ const eventsReducer = (state = initialState, action) => {
   let newState = JSON.parse(JSON.stringify(state));
   switch (action.type) {
     case LOAD_EVENTS_ALL:
+      newState = {};
+      action.payload.forEach((event) => {
+        if (event['bet365_id']) {
+          newState[event.bet365_id] = {
+            betsapi_id: event['betsapi_id'],
+            bet365_id: event['bet365_id'],
+            id: event['id'],
+            home: JSON.parse(event['home']),
+            away: JSON.parse(event['away']),
+            league: JSON.parse(event['league']),
+            predictions: event['predictions'],
+            sport_id: event['sports_id'],
+            time: event['time'],
+            time_status: event['time_status'],
+          };
+        }
+      });
+      return newState;
+    case LOAD_AA_EVENTS_ALL:
       newState = {};
       action.payload.forEach((event) => {
         if (event['bet365_id']) {

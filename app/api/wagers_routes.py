@@ -273,7 +273,7 @@ def add_wager():
           if new_wager.current_amount <= 0:
             break
           # wager queue's first in line wager is smaller than req_amount
-          if (wager.current_amount < ( new_wager.current_amount * (int(prediction.odds)/100 * -1) ) ):
+          if (wager.current_amount < ( new_wager.current_amount / (int(prediction.odds)/100 * -1) ) ):
             fav_deduction = wager.current_amount * (int(prediction.odds) * -1 /100)
             total_amount_matched = fav_deduction + wager.current_amount
             new_wager.current_amount = new_wager.current_amount -  fav_deduction

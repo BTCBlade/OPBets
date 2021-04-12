@@ -43,6 +43,84 @@ def seed_events_predictions():
         db.session.add(seed_Prediction1)
         db.session.add(seed_Prediction2)
         db_event_id += 1
+    ## aa event lols seeds
+    aaEvent1 = Event(betsapi_id='0', bet365_id='0',
+                        sport_id='1', home=json.dumps({'name': "YES - a/A Nov Cohort" }),
+                        away=json.dumps({'name': 'NO - a/A Nov Cohort'}),
+                        league=json.dumps({'name': "Career Quest - More than 30 Students have jobs before end of 2021"}),
+                        time='1640947624', time_status='0')
+    aaPrediction1 = Prediction(db_event_id=db_event_id, is_home=True, event_line='0',
+                                    odds='-800',
+                                    betsapi_event_id='0',
+                                    bet365_bet_id='0',
+                                    time_status='0')
+    aaPrediction2 = Prediction(db_event_id=db_event_id, is_home=False, event_line='0',
+                                    odds='800',
+                                    betsapi_event_id='0',
+                                    bet365_bet_id='0',
+                                    time_status='0')
+    db_event_id += 1
+    aaEvent2 = Event(betsapi_id='1', bet365_id='1',
+                                    sport_id='1', home=json.dumps({'name': "YES - Jesse or Michelle will quit" }),
+                                    away=json.dumps({'name': 'NO - Good coaches never quit'}),
+                                    league=json.dumps({'name': "PTM Consistency - Module 7 PTM quits before graduation"}),
+                                    time='1618195624', time_status='0')
+    aaPrediction3 = Prediction(db_event_id=db_event_id, is_home=True, event_line='0',
+                                    odds='300',
+                                    betsapi_event_id='0',
+                                    bet365_bet_id='0',
+                                    time_status='0')
+    aaPrediction4 = Prediction(db_event_id=db_event_id, is_home=False, event_line='0',
+                                    odds='-300',
+                                    betsapi_event_id='0',
+                                    bet365_bet_id='0',
+                                    time_status='0')
+    db_event_id += 1
+    aaEvent3 = Event(betsapi_id='2', bet365_id='2',
+                                    sport_id='1', home=json.dumps({'name': "YES - We've all tried so hard..." }),
+                                    away=json.dumps({'name': 'NO - No project no snaps'}),
+                                    league=json.dumps({'name': "Students - Everyone will graduate "}),
+                                    time='1618195624', time_status='0')
+    aaPrediction5 = Prediction(db_event_id=db_event_id, is_home=True, event_line='0',
+                                    odds='-950',
+                                    betsapi_event_id='0',
+                                    bet365_bet_id='0',
+                                    time_status='0')
+    aaPrediction6 = Prediction(db_event_id=db_event_id, is_home=False, event_line='0',
+                                    odds='950',
+                                    betsapi_event_id='0',
+                                    bet365_bet_id='0',
+                                    time_status='0')
+    db_event_id += 1
+    aaEvent4 = Event(betsapi_id='3', bet365_id='3',
+                                    sport_id='1', home=json.dumps({'name': "YES - Hired" }),
+                                    away=json.dumps({'name': 'NO - Not Hilarious'}),
+                                    league=json.dumps({'name': "OPBets - The maker of this app gets hired by App Academy to integrate this feature into progress tracker"}),
+                                    time='1618195624', time_status='0')
+    aaPrediction7 = Prediction(db_event_id=db_event_id, is_home=True, event_line='0',
+                                    odds='-150',
+                                    betsapi_event_id='0',
+                                    bet365_bet_id='0',
+                                    time_status='0')
+    aaPrediction8 = Prediction(db_event_id=db_event_id, is_home=False, event_line='0',
+                                    odds='150',
+                                    betsapi_event_id='0',
+                                    bet365_bet_id='0',
+                                    time_status='0')
+
+    db.session.add(aaEvent1)
+    db.session.add(aaPrediction1)
+    db.session.add(aaPrediction2)
+    db.session.add(aaEvent2)
+    db.session.add(aaPrediction3)
+    db.session.add(aaPrediction4)
+    db.session.add(aaEvent3)
+    db.session.add(aaPrediction5)
+    db.session.add(aaPrediction6)
+    db.session.add(aaEvent4)
+    db.session.add(aaPrediction7)
+    db.session.add(aaPrediction8)
+
     # event1 = Event(betsapi_id='3391106', bet365_id='100822105',
     #                 sport_id='151', home= json.dumps({"cc": null, "id": "193777", "image_id": "402893", "name": "Bilibili Gaming"}),
     #                 away=json.dumps({"cc": null,"id": "328908","image_id": null,"name": "First Fabulous Fighter"}),

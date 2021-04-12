@@ -1,4 +1,4 @@
-import { loadEventsAll } from './events';
+import { loadEventsAll, loadAAEventsAll } from './events';
 import { updateBalance } from './session';
 
 const ADD_ONE = 'wagerslip/ADD_ONE';
@@ -38,6 +38,26 @@ export const submitWager = (user_id, db_predictions_id, amount) => async (
   await dispatch(loadEventsAll());
 };
 
+export const submitWagerAA = (user_id, db_predictions_id, amount) => async (
+  dispatch
+) => {
+  //1. send db_predictions_id in req.body to /api/wagers/
+  const res = await fetch('/api/wagers/add', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      user_id: user_id,
+      db_predictions_id: db_predictions_id,
+      amount: amount,
+    }),
+  });
+  // 2. update session.balance
+  await dispatch(updateBalance(user_id));
+  // 3. update/reload store.events
+  await dispatch(loadAAEventsAll());
+};
 const initialState = { wagers: {}, order: [] };
 
 export default function wagerslipReducer(state = initialState, action) {

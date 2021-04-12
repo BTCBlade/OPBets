@@ -25,6 +25,8 @@ import Dashboard from './components/Dashboard';
 import EventsPage from './components/EventsPage';
 import MatchedWagersPage from './components/MatchedWagersPage';
 
+import EventsPageAA from './components/EventsPageAA';
+
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -79,6 +81,12 @@ function App() {
           </Route>
           <Route exact path="/events">
             <EventsPage
+              authenticated={authenticated}
+              setAuthenticated={setAuthenticated}
+            />
+          </Route>
+          <Route exact path="/events/app_academy">
+            <EventsPageAA
               authenticated={authenticated}
               setAuthenticated={setAuthenticated}
             />
