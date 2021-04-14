@@ -38,7 +38,6 @@ export default function active_wagersReducer(state = initialState, action) {
       newState = action.payload.active_wagers;
       return newState;
     case CANCEL_ONE:
-      console.log('action.payload', action.payload);
       newState = newState.filter(
         (active_wager) => active_wager.id !== action.payload
       );

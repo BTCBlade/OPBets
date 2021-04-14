@@ -40,7 +40,7 @@ const useRowStyles = makeStyles((theme) => ({
 }));
 const useStyles = makeStyles({
   TableContainer: {
-    width: '900px',
+    width: '800px',
     marginRight: 0,
   },
 });

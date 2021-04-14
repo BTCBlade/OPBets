@@ -21,15 +21,15 @@ export const login = async (email, password) => {
   return await response.json();
 };
 
-export const demoLogin = async () => {
-  const response = await fetch('/api/auth/demo-login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  return await response.json();
-};
+// export const demoLogin = async () => {
+//   const response = await fetch('/api/auth/demo-login', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//   });
+//   return await response.json();
+// };
 
 export const logout = async () => {
   const response = await fetch('/api/auth/logout', {

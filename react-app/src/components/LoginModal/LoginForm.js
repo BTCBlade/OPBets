@@ -34,9 +34,18 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
     // }
   };
 
-  const onDemoLogin = async () => {
-    setAuthenticated(true);
-    await dispatch(sessionActions.demoLoginUser());
+  const onDemoLogin = async (e) => {
+    e.preventDefault();
+    setErrors(['']);
+    const user = await dispatch(sessionActions.demoLoginUser());
+    // const data = await user.json()
+
+    if (user.errors) {
+      setErrors(user.errors);
+    } else {
+      setAuthenticated(true);
+    }
+
     dispatch(closeLogin());
   };
 

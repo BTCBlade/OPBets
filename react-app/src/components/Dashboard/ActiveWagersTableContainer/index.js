@@ -6,12 +6,14 @@ import { loadAllActiveWagers } from '../../../store/active_wagers';
 import ActiveWagersTable from '../ActiveWagersTable';
 
 const ActiveWagersTableContainer = () => {
-  const sessionUserId = useSelector((state) => state.session.id);
+  const sessionUser = useSelector((state) => state.session);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(loadAllActiveWagers(sessionUserId)).then(() => setLoading(false));
+  useEffect(async () => {
+    await dispatch(loadAllActiveWagers(sessionUser.id)).then(() =>
+      setLoading(false)
+    );
   }, []);
   return (
     <>

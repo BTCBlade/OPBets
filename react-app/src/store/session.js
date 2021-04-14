@@ -17,23 +17,23 @@ export const loginUser = ({ email, password }) => async (dispatch) => {
   if (user) {
     // console.log(user);
     const loggedInUser = user;
-    dispatch(loginAction(loggedInUser));
+    await dispatch(loginAction(loggedInUser));
     return loggedInUser;
   }
 };
 
 export const demoLoginUser = () => async (dispatch) => {
-  const user = await demoLogin();
+  const user = await login('demo@aa.io', 'password');
   if (user) {
     const loggedInUser = user;
-    dispatch(loginAction(loggedInUser));
+    await dispatch(loginAction(loggedInUser));
     return loggedInUser;
   }
 };
 
 export const restoreUser = () => async (dispatch) => {
   const user = await authenticate();
-  dispatch(loginAction(user));
+  await dispatch(loginAction(user));
   return user;
 };
 
