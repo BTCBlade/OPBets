@@ -15,6 +15,7 @@ import {
   american_to_decimal,
 } from '../../../utils/odds_conversion';
 import { removeOne, submitWager } from '../../../store/wagerslip';
+import { openWagerMatchingProgress } from '../../../store/modal';
 
 import './WagerSlip.css';
 
@@ -45,7 +46,8 @@ const OneWager = ({ wager }) => {
   const [win, setWin] = useState();
   const session = useSelector((state) => state.session);
   const dispatch = useDispatch();
-  const createWager = () => {
+  const createWager = async () => {
+    dispatch(openWagerMatchingProgress());
     dispatch(submitWager(session.id, wager.db_predictions_id, riskAmount));
   };
 

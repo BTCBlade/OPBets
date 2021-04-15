@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import SideBar from '../SideBar';
 import EventsContainer from './EventsContainer';
 import WagerSlip from './WagerSlip';
+import PositionedSnackbar from '../WagerSnackBar';
 // import ProgressModal from '../WagerMatchingProgressModal';
 // import {
 //   openWagerMatchingProgress,
@@ -42,6 +43,7 @@ export default function EventsPage() {
 
           <EventsContainer />
           <WagerSlip />
+          <PositionedSnackbar />
         </Paper>
       </Hidden>
     </>
