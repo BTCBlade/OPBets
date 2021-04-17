@@ -14,6 +14,7 @@ export default function PublicLandingPage(props) {
   const dispatch = useDispatch();
   const betsapi = useSelector((state) => state.betsapi);
 
+  console.log(props.theme);
   const classes = useStyles(props.theme);
   const handleTest = () => {
     dispatch(testLoad());

@@ -9,6 +9,7 @@ import {
   Container,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core/styles';
 import SideBar from '../SideBar';
 import EventsContainer from './EventsContainer';
 import WagerSlip from './WagerSlip';
@@ -22,18 +23,16 @@ import PositionedSnackbar from '../WagerSnackBar';
 const useStyles = makeStyles((theme) => ({
   eventsMainContainer: {
     marginLeft: '280px',
-    backgroundColor: 'background.paper',
+    backgroundColor: theme.palette.background.paper,
     width: 'calc(100%-280) !important',
     minHeight: '1500px',
   },
 }));
 
 export default function EventsPage() {
-  const classes = useStyles();
-  // const dispatch = useDispatch();
-  // const modalTest = () => {
-  //   dispatch(openWagerMatchingProgress());
-  // };
+  const theme = useTheme();
+  const classes = useStyles(theme);
+
   return (
     <>
       <Hidden lgDown>

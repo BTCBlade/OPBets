@@ -48,7 +48,9 @@ const OneWager = ({ wager }) => {
   const dispatch = useDispatch();
   const createWager = async () => {
     dispatch(openWagerMatchingProgress());
-    dispatch(submitWager(session.id, wager.db_predictions_id, riskAmount));
+    let message = dispatch(
+      submitWager(session.id, wager.db_predictions_id, riskAmount)
+    );
   };
 
   return (

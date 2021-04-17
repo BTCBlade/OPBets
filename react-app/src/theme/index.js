@@ -99,6 +99,7 @@ const themesOptions = {
         },
       },
     },
+
     palette: {
       action: {
         active: '#6b778c',
