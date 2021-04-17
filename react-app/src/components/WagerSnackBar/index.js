@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PositionedSnackbar() {
   const theme = useTheme();
-  console.log(theme);
   const dispatch = useDispatch();
   const classes = useStyles(theme);
   const isOpen = useSelector(

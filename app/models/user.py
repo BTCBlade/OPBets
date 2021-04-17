@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
   username = db.Column(db.String(40), nullable = False, unique = True)
   email = db.Column(db.String(255), nullable = False, unique = True)
   hashed_password = db.Column(db.String(255), nullable = False)
-  balance = db.Column(db.Float, nullable = False, default=1000)
+  balance = db.Column(db.Float, nullable = False, default=5000)
   time_created = db.Column(db.DateTime, default=db.func.current_timestamp())
   time_updated = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 

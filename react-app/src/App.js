@@ -91,6 +91,12 @@ function App() {
               setAuthenticated={setAuthenticated}
             />
           </Route>
+          <Route exact path="/events/:query_str">
+            <EventsPage
+              authenticated={authenticated}
+              setAuthenticated={setAuthenticated}
+            />
+          </Route>
           <ProtectedRoute
             exact
             path="/dashboard"

@@ -67,27 +67,27 @@ const sections = [
     items: [
       {
         title: 'League of Legends',
-        path: '/events',
+        path: '/events/LOL',
         icon: <LoLIcon fontSize="small" />,
       },
       {
         title: 'CS:GO',
-        path: '/events',
+        path: '/events/CS:GO',
         icon: <CSGOIcon fontSize="small" />,
       },
       {
         title: 'Overwatch',
-        path: './events',
+        path: '/events/Overwatch',
         icon: <OverwatchIcon fontSize="small" />,
       },
       {
         title: 'Dota2',
-        path: './events',
+        path: '/events/DOTA2',
         icon: <Dota2Icon fontSize="small" />,
       },
       {
-        title: 'ApexLegends',
-        path: './events',
+        title: 'All Upcoming',
+        path: '/events',
         icon: <ApexLegendsIcon fontSize="small" />,
       },
     ],
