@@ -22,7 +22,7 @@ def send_seeder_data():
     return {'upcoming_events': events}
 
 
-
+@betsapi_routes.route('/new_events')
 
 @betsapi_routes.route('/req_50')
 def get_seed_data():
