@@ -28,7 +28,7 @@ export default function EventsPage() {
       <Hidden lgDown>
         <Paper className={classes.eventsMainContainer}>
           <SideBar />
-          <h1>Upcoming {query_str ? query_str : 'Esports'} Events</h1>
+          <h1>Upcoming {query_str === 'all' ? 'Esports' : query_str} Events</h1>
 
           <EventsContainer query_str={query_str} />
           <WagerSlip />

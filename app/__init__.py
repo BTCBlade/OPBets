@@ -5,17 +5,19 @@ from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
 
-from .models import db, User
+from .models import db, User, Event
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
-from .api.betsapi_routes import betsapi_routes
+from .api.betsapi_routes import betsapi_routes, update_events
 from .api.events_routes import events_routes
 from .api.wagers_routes import wagers_routes
-
 
 from .seeds import seed_commands
 
 from .config import Config
+
+from threading import Thread
+import time
 
 app = Flask(__name__)
 #seeder_path = os.path.join(app.root_path, '/seeds','/50event_seeders.json')
@@ -53,6 +55,26 @@ CORS(app)
 # Therefore, we need to make sure that in production any
 # request made over http is redirected to https.
 # Well.........
+
+#FLASK_DEBUG=1 flask run --no-reload
+
+def testing():
+    with app.app_context():
+        while True:
+        update_events()
+        time.sleep(3600)
+testing()
+
+# def testing2():
+#     with app.app_context():
+#         while True:
+#             print('+++++++++++++++++++++')
+#             time.sleep(3600)
+
+# testing2()
+# def background_loop():
+#     thread = Thread(target=testing)
+
 
 @app.before_request
 def https_redirect():

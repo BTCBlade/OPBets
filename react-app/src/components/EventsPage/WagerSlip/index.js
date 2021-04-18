@@ -15,7 +15,9 @@ import {
   american_to_decimal,
 } from '../../../utils/odds_conversion';
 import { removeOne, submitWager } from '../../../store/wagerslip';
+import { loadSpecificEvents } from '../../../store/events';
 import { openWagerMatchingProgress } from '../../../store/modal';
+import { useParams } from 'react-router-dom';
 
 import './WagerSlip.css';
 
@@ -46,11 +48,13 @@ const OneWager = ({ wager }) => {
   const [win, setWin] = useState();
   const session = useSelector((state) => state.session);
   const dispatch = useDispatch();
+  const params = useParams();
   const createWager = async () => {
     dispatch(openWagerMatchingProgress());
-    let message = dispatch(
+    let message = await dispatch(
       submitWager(session.id, wager.db_predictions_id, riskAmount)
     );
+    await dispatch(loadSpecificEvents(params.query_str));
   };
 
   return (

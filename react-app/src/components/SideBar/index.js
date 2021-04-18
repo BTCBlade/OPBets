@@ -87,7 +87,7 @@ const sections = [
       },
       {
         title: 'All Upcoming',
-        path: '/events',
+        path: '/events/all',
         icon: <ApexLegendsIcon fontSize="small" />,
       },
     ],
