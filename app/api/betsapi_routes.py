@@ -4,6 +4,7 @@ import requests
 import json
 from threading import Thread
 import time
+import math
 
 from app.models import db, Event, Prediction
 from app.utils import decimal_to_american, despread_odds_pair
@@ -23,7 +24,12 @@ BETSAPI_KEY = os.environ.get('BETSAPI_KEY')
 
 
 def update_events():
-    upcoming_events = json.loads((requests.get(f'https://api.b365api.com/v2/events/upcoming?sport_id=151&token={BETSAPI_KEY}').content).decode('utf-8'))['results']
+    upcoming_events = []
+    res = json.loads((requests.get(f'https://api.b365api.com/v2/events/upcoming?sport_id=151&token={BETSAPI_KEY}').content).decode('utf-8'))
+    total_pages = math.ceil(res['pager']['total']/50)
+    for x in range(1, total_pages + 1):
+        fifty_events = json.loads((requests.get(f'https://api.b365api.com/v2/events/upcoming?sport_id=151&token={BETSAPI_KEY}&page={x}').content).decode('utf-8'))['results']
+        upcoming_events.extend(fifty_events)
     for event in upcoming_events:
         if event.get('bet365_id'):
             db_event = Event.query.filter_by(bet365_id=event['bet365_id']).first()

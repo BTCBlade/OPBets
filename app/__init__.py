@@ -58,12 +58,12 @@ CORS(app)
 
 #FLASK_DEBUG=1 flask run --no-reload
 
-def testing():
-    with app.app_context():
-        while True:
-        update_events()
-        time.sleep(3600)
-testing()
+# def testing():
+#     with app.app_context():
+#         while True:
+#             update_events()
+#             time.sleep(3600)
+# testing()
 
 # def testing2():
 #     with app.app_context():
