@@ -22,8 +22,10 @@ BETSAPI_KEY = os.environ.get('BETSAPI_KEY')
 # # thread.start()
 # run_job()
 
-
+@betsapi_routes.route('/update_events')
 def update_events():
+    print('-------------------')
+
     upcoming_events = []
     res = json.loads((requests.get(f'https://api.b365api.com/v2/events/upcoming?sport_id=151&token={BETSAPI_KEY}').content).decode('utf-8'))
     total_pages = math.ceil(res['pager']['total']/50)
@@ -84,7 +86,8 @@ def update_events():
                 db.session.add(prediction1)
                 db.session.add(prediction2)
                 db.session.commit()
-    return None
+    print('-----++++++++++++++++++++++++------------')
+    return {'something_in_future': 'something'}
 
 # db_event = Event.query.filter_by(bet365_id='101334694').first()
 # print('---------------')

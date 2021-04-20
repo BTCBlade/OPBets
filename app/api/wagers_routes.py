@@ -200,9 +200,7 @@ def add_wager():
     if req_amount > req_user.balance:
       return 'Not enough balance to make wager'
     ################### Potential negative balance point implement something later #############################
-    print('==========================')
-    print(len(event_away_prediction_wagers_arr))
-    print('=====================')
+
     # 1. No Opposite side wagers No Same side wagers
     if ((len(event_home_prediction_wagers_arr) == 0) and (len(event_away_prediction_wagers_arr) == 0)):
       new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,

@@ -118,6 +118,7 @@ def seed_events_predictions():
                                     betsapi_event_id='0',
                                     bet365_bet_id='0',
                                     time_status='0')
+    db_event_id += 1
 
     db.session.add(aaEvent1)
     db.session.add(aaPrediction1)
@@ -132,6 +133,26 @@ def seed_events_predictions():
     db.session.add(aaPrediction7)
     db.session.add(aaPrediction8)
 
+    ## small_cap_crypto event  seeds
+    small_cap_crypto_Event1 = Event(betsapi_id='4', bet365_id='4',
+                        sport_id='2', home=json.dumps({'name': "YES - Cardano is the third into POS market" }),
+                        away=json.dumps({'name': 'NO - I hate crypto and I am jelly'}),
+                        league=json.dumps({'name': "Cardano will hit 2 USD before 06/01/2021"}),
+                        time='1622535788', time_status='0')
+    small_cap_crypto_Prediction1 = Prediction(db_event_id=db_event_id, is_home=True, event_line='0',
+                                    odds='-110',
+                                    betsapi_event_id='0',
+                                    bet365_bet_id='0',
+                                    time_status='0')
+    small_cap_crypto_Prediction2 = Prediction(db_event_id=db_event_id, is_home=False, event_line='0',
+                                    odds='110',
+                                    betsapi_event_id='0',
+                                    bet365_bet_id='0',
+                                    time_status='0')
+
+    db.session.add(small_cap_crypto_Event1)
+    db.session.add(small_cap_crypto_Prediction1)
+    db.session.add(small_cap_crypto_Prediction2)
     # event1 = Event(betsapi_id='3391106', bet365_id='100822105',
     #                 sport_id='151', home= json.dumps({"cc": null, "id": "193777", "image_id": "402893", "name": "Bilibili Gaming"}),
     #                 away=json.dumps({"cc": null,"id": "328908","image_id": null,"name": "First Fabulous Fighter"}),

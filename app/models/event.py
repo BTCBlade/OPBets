@@ -11,7 +11,7 @@ class Event(db.Model):
     home = db.Column(db.Text, nullable=True)
     away = db.Column(db.Text, nullable=True)
     league = db.Column(db.Text, nullable=True)
-    time = db.Column(db.Text)
+    time = db.Column(db.Integer)
     time_status = db.Column(db.Text)
     time_created = db.Column(db.DateTime, default=db.func.current_timestamp())
     time_updated = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
