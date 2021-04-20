@@ -79,12 +79,12 @@ function App() {
           <Route exact path="/">
             <PublicLandingPage />
           </Route>
-          <Route exact path="/events">
+          {/* <Route exact path="/events">
             <EventsPage
               authenticated={authenticated}
               setAuthenticated={setAuthenticated}
             />
-          </Route>
+          </Route> */}
           <Route exact path="/events/app_academy">
             <EventsPageAA
               authenticated={authenticated}

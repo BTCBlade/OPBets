@@ -17,6 +17,7 @@ import ClipboardListIcon from '../../icons/ClipboardList';
 import UserIcon from '../../icons/User';
 import CashierIcon from '../../icons/ShoppingCart';
 
+import MemoryIcon from '@material-ui/icons/Memory';
 import ProfilePic from '../../icons/Blitzcrank-Icon.png';
 import LoLIcon from '../../icons/icons8-league-of-legends.js';
 import CSGOIcon from '../../icons/icons8-counter-strike.js';
@@ -87,7 +88,7 @@ const sections = [
       },
       {
         title: 'All Upcoming',
-        path: '/events',
+        path: '/events/all',
         icon: <ApexLegendsIcon fontSize="small" />,
       },
     ],
@@ -99,6 +100,11 @@ const sections = [
         title: 'App Academy',
         path: '/events/app_academy',
         icon: <AAIcon fontSize="small" />,
+      },
+      {
+        title: 'Small Cap Crypto',
+        path: '/events/small_cap_crypto',
+        icon: <MemoryIcon fontSize="small" />,
       },
     ],
   },
@@ -204,7 +210,7 @@ const DashboardSidebar = (props) => {
             component={RouterLink}
             fullWidth
             sx={{ mt: 2 }}
-            to="/dashboard"
+            onClick={() => fetch('/api/betsapi/update_events')}
             variant="contained"
           >
             Email

@@ -57,7 +57,7 @@ const MainNavbar = (props) => {
               <Link
                 color="textSecondary"
                 component={RouterLink}
-                to="/events"
+                to="/events/all"
                 underline="none"
                 variant="body1"
                 mr={4}

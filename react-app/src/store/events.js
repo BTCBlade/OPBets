@@ -55,7 +55,7 @@ const eventsReducer = (state = initialState, action) => {
       newState = {};
       action.payload.forEach((event) => {
         if (event['bet365_id']) {
-          newState[event.bet365_id] = {
+          newState[event.time] = {
             betsapi_id: event['betsapi_id'],
             bet365_id: event['bet365_id'],
             id: event['id'],
@@ -73,7 +73,7 @@ const eventsReducer = (state = initialState, action) => {
       newState = {};
       action.payload.forEach((event) => {
         if (event['bet365_id']) {
-          newState[event.bet365_id] = {
+          newState[event.time] = {
             betsapi_id: event['betsapi_id'],
             bet365_id: event['bet365_id'],
             id: event['id'],
@@ -92,7 +92,7 @@ const eventsReducer = (state = initialState, action) => {
       newState = {};
       action.payload.forEach((event) => {
         if (event['bet365_id']) {
-          newState[event.bet365_id] = {
+          newState[event.time] = {
             betsapi_id: event['betsapi_id'],
             bet365_id: event['bet365_id'],
             id: event['id'],

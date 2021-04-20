@@ -2,6 +2,7 @@ import json
 import pathlib
 from random import randint
 from app.models import db, Event, Prediction
+from app.utils import decimal_to_american, despread_odds_pair
 
 dir = pathlib.Path(__file__).parent.absolute()
 seeder_path = dir / '50events_seeder.json'
@@ -21,18 +22,28 @@ def seed_events_predictions():
                             league=json.dumps(event['league']),
                             time=event['time'], time_status=event['time_status'])
         if event.get('prematch_odds'):
-            fake_home_odds = 0
-            while fake_home_odds < 100 and fake_home_odds > -100:
-                fake_home_odds = randint(-900, 900)
-            fake_away_odds = fake_home_odds * -1
+            # fake_home_odds = 0
+            # while fake_home_odds < 100 and fake_home_odds > -100:
+            #     fake_home_odds = randint(-900, 900)
+            # fake_away_odds = fake_home_odds * -1
             #### betsapi bet365 format odds=event['prematch_odds']['schedule']['sp']['main'][0]['odds'],
+            home_odds = decimal_to_american(float(event['prematch_odds']['schedule']['sp']['main'][0]['odds']))
+            away_odds = decimal_to_american(float(event['prematch_odds']['schedule']['sp']['main'][1]['odds']))
+            pair_odds = despread_odds_pair(home_odds, away_odds)
+            if home_odds > away_odds:
+                home_odds = pair_odds
+                away_odds = pair_odds * -1
+            else:
+                home_odds = pair_odds * -1
+                away_odds = pair_odds
+
             seed_Prediction1 = Prediction(db_event_id=db_event_id, is_home=True, event_line='0',
-                                        odds=fake_home_odds,
+                                        odds=home_odds,
                                         betsapi_event_id=event['prematch_odds']['event_id'],
                                         bet365_bet_id=event['prematch_odds']['FI'],
                                         time_status=event['time_status'])
             seed_Prediction2 = Prediction(db_event_id=db_event_id, is_home=False, event_line='0',
-                                        odds=fake_away_odds,
+                                        odds=away_odds,
                                         betsapi_event_id=event['prematch_odds']['event_id'],
                                         bet365_bet_id=event['prematch_odds']['FI'],
                                         time_status=event['time_status'])
@@ -107,6 +118,7 @@ def seed_events_predictions():
                                     betsapi_event_id='0',
                                     bet365_bet_id='0',
                                     time_status='0')
+    db_event_id += 1
 
     db.session.add(aaEvent1)
     db.session.add(aaPrediction1)
@@ -121,6 +133,26 @@ def seed_events_predictions():
     db.session.add(aaPrediction7)
     db.session.add(aaPrediction8)
 
+    ## small_cap_crypto event  seeds
+    small_cap_crypto_Event1 = Event(betsapi_id='4', bet365_id='4',
+                        sport_id='2', home=json.dumps({'name': "YES - Cardano is the third into POS market" }),
+                        away=json.dumps({'name': 'NO - I hate crypto and I am jelly'}),
+                        league=json.dumps({'name': "Cardano will hit 2 USD before 06/01/2021"}),
+                        time='1622535788', time_status='0')
+    small_cap_crypto_Prediction1 = Prediction(db_event_id=db_event_id, is_home=True, event_line='0',
+                                    odds='-110',
+                                    betsapi_event_id='0',
+                                    bet365_bet_id='0',
+                                    time_status='0')
+    small_cap_crypto_Prediction2 = Prediction(db_event_id=db_event_id, is_home=False, event_line='0',
+                                    odds='110',
+                                    betsapi_event_id='0',
+                                    bet365_bet_id='0',
+                                    time_status='0')
+
+    db.session.add(small_cap_crypto_Event1)
+    db.session.add(small_cap_crypto_Prediction1)
+    db.session.add(small_cap_crypto_Prediction2)
     # event1 = Event(betsapi_id='3391106', bet365_id='100822105',
     #                 sport_id='151', home= json.dumps({"cc": null, "id": "193777", "image_id": "402893", "name": "Bilibili Gaming"}),
     #                 away=json.dumps({"cc": null,"id": "328908","image_id": null,"name": "First Fabulous Fighter"}),

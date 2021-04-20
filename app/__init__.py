@@ -5,17 +5,20 @@ from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
 
-from .models import db, User
+from .models import db, User, Event
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.betsapi_routes import betsapi_routes
 from .api.events_routes import events_routes
 from .api.wagers_routes import wagers_routes
 
-
 from .seeds import seed_commands
 
 from .config import Config
+
+# from threading import Thread
+# import time
+# from celery import Celery
 
 app = Flask(__name__)
 #seeder_path = os.path.join(app.root_path, '/seeds','/50event_seeders.json')
@@ -53,6 +56,43 @@ CORS(app)
 # Therefore, we need to make sure that in production any
 # request made over http is redirected to https.
 # Well.........
+
+#FLASK_DEBUG=1 flask run --no-reload
+
+# def make_celery(app):
+#     celery = Celery(
+#         app.import_name,
+#         backend=app.config['CELERY_RESULT_BACKEND'],
+#         broker=app.config['CELERY_BROKER_URL']
+#     )
+#     celery.conf.update(app.config)
+
+#     class ContextTask(celery.Task):
+#         def __call__(self, *args, **kwargs):
+#             with app.app_context():
+#                 return self.run(*args, **kwargs)
+
+#     celery.Task = ContextTask
+#     return celery
+
+# def testing():
+#     with app.app_context():
+#         while True:
+#             update_events()
+#             time.sleep(3600)
+# testing()
+
+# def testing2():
+#     with app.app_context():
+#         while True:
+#             print('+++++++++++++++++++++')
+#             time.sleep(3600)
+
+
+# def background_loop():
+#     thread = Thread(target=testing2)
+#     thread.start()
+
 
 @app.before_request
 def https_redirect():
