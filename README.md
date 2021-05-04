@@ -9,7 +9,7 @@
   <h3 align="center">OPBets</h3>
 
   <p align="center">
-    My interpretation of the best prediction market UI for esports other interesting wagers. Users are incentivized to provide liquidity via meticulous matched wager live odds time stamped tracking. Prediction pair orders float with up to the minute market aggregate odds and can be canceled from the dashboard at anytime.
+    My interpretation of the best prediction market UI for esports and other interesting wagers. Users are incentivized to provide liquidity via meticulous matched wager live odds time stamped tracking. Prediction pair orders float with up to the minute market aggregate odds and can be canceled from the dashboard at anytime.
     <br />
     <a href="https://github.com/btcblade/opbets/wiki"><strong>Explore the docs »</strong></a>
     <br />
