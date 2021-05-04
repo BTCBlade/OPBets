@@ -3,13 +3,13 @@
 <br />
 <p align="center">
   <a href="https://github.com/btcblade/opbets">
-    <img src="https://live.staticflickr.com/65535/51157342289_151fdf5efc_z.jpg" alt="Logo" width="80" height="80" style="background-color:white">
+    <img src="react-app/public/favicon.ico" alt="Logo" width="80" height="80" style="background-color:white">
   </a>
 
   <h3 align="center">OPBets</h3>
 
   <p align="center">
-    My interpretation of the best prediction market UI for esports other interesting wagers. Users are incentivized to provide liquidity via meticulous matched wager live odds time stamped tracking. Prediction pair orders float with up to the minute market aggregate odds.
+    My interpretation of the best prediction market UI for esports other interesting wagers. Users are incentivized to provide liquidity via meticulous matched wager live odds time stamped tracking. Prediction pair orders float with up to the minute market aggregate odds and can be canceled from the dashboard at anytime.
     <br />
     <a href="https://github.com/btcblade/opbets/wiki"><strong>Explore the docs »</strong></a>
     <br />
