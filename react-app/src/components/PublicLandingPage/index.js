@@ -63,7 +63,25 @@ export default function PublicLandingPage(props) {
         </Typography>
         <LandingPageCarousel />
       </Box>
-      <Box></Box>
+      {/* <Box
+        sx={{
+          backgroundColor: 'primary.main',
+          color: 'primary.contrastText',
+          marginTop: '50px',
+          marginLeft: 0,
+          marginRight: 0,
+        }}
+      >
+        HELLO WORLD
+      </Box> */}
+      <Box
+        sx={{
+          backgroundColor: 'background.paper',
+          color: 'text.primary',
+          marginTop: 0,
+          height: 500,
+        }}
+      ></Box>
     </Box>
   );
 }

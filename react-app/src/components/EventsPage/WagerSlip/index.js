@@ -141,7 +141,7 @@ export default function WagerSlip() {
         height: '400px',
         padding: '0',
         top: '125px',
-        right: '200px',
+        right: '100px',
         overflow: 'auto',
       }}
     >

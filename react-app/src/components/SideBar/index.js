@@ -57,7 +57,7 @@ const sections = [
           },
           {
             title: 'History',
-            path: '/dashboard/history',
+            path: '/dashboard/matched_wagers',
           },
         ],
       },

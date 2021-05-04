@@ -40,7 +40,7 @@ const useRowStyles = makeStyles((theme) => ({
 }));
 const useStyles = makeStyles({
   TableContainer: {
-    width: '700px',
+    width: '775px',
     marginRight: 0,
   },
 });
@@ -84,8 +84,7 @@ function Row(props) {
           )}
         </TableCell>
         <TableCell onClick={() => handlePredictionIdClick(row)} align="right">
-          {/* <img src={team_img_url} alt=""></img>  */}
-          {row.team_name}
+          <img src={team_img_url} alt=""></img> {row.team_name}
         </TableCell>
         <TableCell onClick={() => handlePredictionIdClick(row)} align="right">
           {row.odds}
@@ -170,9 +169,11 @@ export default function EventsTable() {
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
-            <TableCell />
+            <TableCell width={37} height />
             <TableCell>Event/Time</TableCell>
-            <TableCell align="right">Team</TableCell>
+            <TableCell minWidth={75} align="right">
+              Team
+            </TableCell>
             <TableCell align="right">ML Odds</TableCell>
             <TableCell align="right">Implied Probability</TableCell>
           </TableRow>

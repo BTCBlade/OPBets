@@ -38,7 +38,7 @@ export default function PositionedSnackbar() {
         }}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         sx={{
-          marginRight: '160px',
+          marginRight: '90px',
           marginBottom: '8px',
         }}
         open={isOpen}

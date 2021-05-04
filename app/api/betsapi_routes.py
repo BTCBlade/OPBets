@@ -24,7 +24,6 @@ BETSAPI_KEY = os.environ.get('BETSAPI_KEY')
 
 @betsapi_routes.route('/update_events')
 def update_events():
-    print('-------------------')
 
     upcoming_events = []
     res = json.loads((requests.get(f'https://api.b365api.com/v2/events/upcoming?sport_id=151&token={BETSAPI_KEY}').content).decode('utf-8'))

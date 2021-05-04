@@ -12,6 +12,10 @@ const useStyles = makeStyles((theme) => ({
     width: 'calc(100%-280) !important',
     minHeight: '1500px',
   },
+  header: {
+    marginLeft: '2rem',
+    paddingTop: '1rem',
+  },
 }));
 
 export default function Dashboard() {
@@ -21,7 +25,7 @@ export default function Dashboard() {
       <Hidden lgDown>
         <Paper className={classes.eventsMainContainer}>
           <SideBar />
-          <h1>Dashboard</h1>
+          <h1 className={classes.header}>Dashboard</h1>
           <ActiveWagersTableContainer />
         </Paper>
       </Hidden>
