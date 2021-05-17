@@ -19,6 +19,7 @@
     "material-ui-image": "^3.3.1",
     "notistack": "^1.0.3",
     "react": "^17.0.1",
+    "react-chat-engine": "^1.8.12",
     "react-dom": "^17.0.1",
     "react-helmet-async": "^1.0.9",
     "react-material-ui-carousel": "^2.2.2",
