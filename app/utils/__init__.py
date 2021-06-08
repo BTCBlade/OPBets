@@ -2,7 +2,10 @@ def decimal_to_american(deci):
   if deci > 2.0:
     return round(((deci - 1) * 100))
   else:
-    return round((-100 / (deci - 1)))
+    if deci == 1:
+      return -8000
+    else:
+      return round((-100 / (deci - 1)))
 
 
 def despread_odds_pair(odds1, odds2):
