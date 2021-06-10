@@ -161,7 +161,6 @@ Contributions are what make the open source community such an amazing place to b
 
 ## Contact & Acknowledgements
 
-- Tommy Nienchi ChenChen
-- Veer Singh - [LinkedIn](https://www.linkedin.com/in/tommy-nienchi-chen-a131451b3/) - [GitHub](https://github.com/btcblade)
+- Tommy Nienchi Chen - [LinkedIn](https://www.linkedin.com/in/tommy-nienchi-chen-a131451b3/) - [GitHub](https://github.com/btcblade)
 
-Project Link: [https://github.com/V3RS/skybnb/](https://github.com/btcblade/opbets/)
+Project Link: [https://github.com/btcblade/opbets/](https://github.com/btcblade/opbets/)
