@@ -9,7 +9,7 @@ import EventsTable from '../EventsTable';
 
 const useStyles = makeStyles({
   CircularProgress: {
-    marginLeft: 20,
+    marginLeft: 50,
   },
 });
 
