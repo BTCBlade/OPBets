@@ -24,10 +24,6 @@ def add_wager():
   req_obj = request.get_json()
   req_amount = float(req_obj['amount'])
   req_user = User.query.get(req_obj['user_id'])
-  #### IMPLEMENT ASAP #######
-  #  Call external API to update odds
-  #  Update database entry
-  ###########################
 
   prediction = Prediction.query.get(req_obj['db_predictions_id'])
 

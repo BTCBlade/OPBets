@@ -31,8 +31,7 @@ export default function LandingPageCarousel(props) {
   const items = [
     {
       image: esports_stadium_img,
-      name:
-        'Esports viewership is blowing up! Sporting events numbers are proof',
+      name: 'Esports viewership is blowing up! Sporting events numbers are proof',
       description:
         'LoL WorldsChampionship: 23 million' +
         '   ·  ' +
@@ -109,6 +108,9 @@ function Item(props) {
             variant="contained"
             color="primary"
             className={classes.button}
+            href="https://www.youtube.com/watch?v=QJMexFQzM8U"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             {props.item.button_text}
           </Button>

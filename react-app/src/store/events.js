@@ -59,7 +59,9 @@ const eventsReducer = (state = initialState, action) => {
           let eventTime = event.time;
           if (newState[event.time]) {
             eventTime = Math.floor(Math.random() * 1000) + 1 + event.time;
+            console.log('inside check', eventTime);
           }
+          console.log('newState', newState);
           newState[eventTime] = {
             betsapi_id: event['betsapi_id'],
             bet365_id: event['bet365_id'],
@@ -74,6 +76,7 @@ const eventsReducer = (state = initialState, action) => {
           };
         }
       });
+      return newState;
     case LOAD_EVENTS_ALL:
       newState = {};
       action.payload.forEach((event) => {

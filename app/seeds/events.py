@@ -59,7 +59,7 @@ def seed_events_predictions():
                                     sport_id='1', home=json.dumps({'name': "YES - a/A will have a live cohort before end of 2021" }),
                                     away=json.dumps({'name': 'NO - The COVID rekted the world'}),
                                     league=json.dumps({'name': "Covid - There will be a in person cohort by end of year"}),
-                                    time='1640947824', time_status='0')
+                                    time='1640947654', time_status='0')
     aaPrediction1 = Prediction(db_event_id=db_event_id, is_home=True, event_line='0',
                                     odds='105',
                                     betsapi_event_id='0',
@@ -74,8 +74,8 @@ def seed_events_predictions():
     aaEvent2 = Event(betsapi_id='2', bet365_id='2',
                                     sport_id='1', home=json.dumps({'name': "YES - SF rains alot during spring" }),
                                     away=json.dumps({'name': 'NO - Clear skies ahead'}),
-                                    league=json.dumps({'name': "Weather - It will rain in SF a/A location sometime this weekend"}),
-                                    time='1619492045', time_status='0')
+                                    league=json.dumps({'name': "Weather - Will it rain on in SF Christmas 12/23/2021"}),
+                                    time='1640301127', time_status='0')
     aaPrediction3 = Prediction(db_event_id=db_event_id, is_home=True, event_line='0',
                                     odds='-125',
                                     betsapi_event_id='0',
@@ -106,8 +106,8 @@ def seed_events_predictions():
     aaEvent4 = Event(betsapi_id='3', bet365_id='3',
                                     sport_id='1', home=json.dumps({'name': "YES - a/A whipped my mind back into shape" }),
                                     away=json.dumps({'name': 'NO - : ('}),
-                                    league=json.dumps({'name': "OPBets - The maker of this app will get his first job at age of 33 thanks to a/A : )"}),
-                                    time='1640947624', time_status='0')
+                                    league=json.dumps({'name': "OPBets - The maker of this app will get his first job before end of 2021 to a/A : )"}),
+                                    time='1640947824', time_status='0')
     aaPrediction7 = Prediction(db_event_id=db_event_id, is_home=True, event_line='0',
                                     odds='-150',
                                     betsapi_event_id='0',
@@ -137,8 +137,8 @@ def seed_events_predictions():
     small_cap_crypto_Event1 = Event(betsapi_id='4', bet365_id='4',
                         sport_id='2', home=json.dumps({'name': "YES - Cardano is the third into PoS tech market" }),
                         away=json.dumps({'name': 'NO - I hate crypto and I am jelly'}),
-                        league=json.dumps({'name': "Cardano will hit 2 USD before 06/01/2021"}),
-                        time='1622535788', time_status='0')
+                        league=json.dumps({'name': "Cardano will be over 2 USD on 12/31/2021"}),
+                        time='1640947824', time_status='0')
     small_cap_crypto_Prediction1 = Prediction(db_event_id=db_event_id, is_home=True, event_line='0',
                                     odds='-110',
                                     betsapi_event_id='0',
@@ -154,8 +154,8 @@ def seed_events_predictions():
     small_cap_crypto_Event2 = Event(betsapi_id='5', bet365_id='5',
                         sport_id='2', home=json.dumps({'name': "YES - Nothing is better than Doges" }),
                         away=json.dumps({'name': 'NO - I dont pick up doge sh*tcoins'}),
-                        league=json.dumps({'name': "Dogecoin will hit 1 USD before 06/01/2021"}),
-                        time='1622535778', time_status='0')
+                        league=json.dumps({'name': "Dogecoin will hit 1 USD before 12/31/2021"}),
+                        time='1640947824', time_status='0')
     small_cap_crypto_Prediction3 = Prediction(db_event_id=db_event_id, is_home=True, event_line='0',
                                     odds='200',
                                     betsapi_event_id='0',
@@ -173,16 +173,47 @@ def seed_events_predictions():
     db.session.add(small_cap_crypto_Event2)
     db.session.add(small_cap_crypto_Prediction3)
     db.session.add(small_cap_crypto_Prediction4)
-    # event1 = Event(betsapi_id='3391106', bet365_id='100822105',
-    #                 sport_id='151', home= json.dumps({"cc": null, "id": "193777", "image_id": "402893", "name": "Bilibili Gaming"}),
-    #                 away=json.dumps({"cc": null,"id": "328908","image_id": null,"name": "First Fabulous Fighter"}),
-    #                 league=json.dumps({"cc": null,"id": "25442","name": "Overwatch - Contenders - CN"}),
-    #                 time="1617256800", time_status='0')
-    # event2 = Event(betsapi_id='3386946', bet365_id='100736914',
-    #                 sport_id='151', home= json.dumps({"cc": null,"id": "294683","image_id": "610462","name": "Bizarre Gaming"}),
-    #                 away=json.dumps({"cc": null,"id": "382087","image_id": "783752","name": "eetswa"}),
-    #                 league=json.dumps({"cc": "nz","id": "15125","name": "CS:GO - ESL ANZ"}),
-    #                 time="1617260400", time_status='0')
+
+   ## misc event  seeds
+    misc_Event1 = Event(betsapi_id='6', bet365_id='6',
+                        sport_id='666', home=json.dumps({'name': "YES" }),
+                        away=json.dumps({'name': 'NO '}),
+                        league=json.dumps({'name': "Joe Bidden will be the US President on 06/01/2025"}),
+                        time='1748819527', time_status='0')
+    misc_Prediction1 = Prediction(db_event_id=db_event_id, is_home=True, event_line='0',
+                                    odds='-150',
+                                    betsapi_event_id='0',
+                                    bet365_bet_id='0',
+                                    time_status='0')
+    misc_Prediction2 = Prediction(db_event_id=db_event_id, is_home=False, event_line='0',
+                                    odds='150',
+                                    betsapi_event_id='0',
+                                    bet365_bet_id='0',
+                                    time_status='0')
+
+    db_event_id += 1
+    misc_Event2 = Event(betsapi_id='7', bet365_id='7',
+                        sport_id='666', home=json.dumps({'name': "YES" }),
+                        away=json.dumps({'name': 'NO'}),
+                        league=json.dumps({'name': "Xi Jinping will be the China President on 06/01/2025"}),
+                        time='1748819527', time_status='0')
+    misc_Prediction3 = Prediction(db_event_id=db_event_id, is_home=True, event_line='0',
+                                    odds='-500',
+                                    betsapi_event_id='0',
+                                    bet365_bet_id='0',
+                                    time_status='0')
+    misc_Prediction4 = Prediction(db_event_id=db_event_id, is_home=False, event_line='0',
+                                    odds='500',
+                                    betsapi_event_id='0',
+                                    bet365_bet_id='0',
+                                    time_status='0')
+
+    db.session.add(misc_Event1)
+    db.session.add(misc_Prediction1)
+    db.session.add(misc_Prediction2)
+    db.session.add(misc_Event2)
+    db.session.add(misc_Prediction3)
+    db.session.add(misc_Prediction4)
 
     # db.session.add(event1)
     # db.session.add(event2)

@@ -1,14 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, CircularProgress } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 import { loadEventsAll, loadSpecificEvents } from '../../../store/events';
 //import OneEvent from '../OneEvent';
 import EventsTable from '../EventsTable';
 
+const useStyles = makeStyles({
+  CircularProgress: {
+    marginLeft: 20,
+  },
+});
+
 const EventsContainer = ({ query_str }) => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+  const classes = useStyles();
 
   useEffect(() => {
     if (!query_str) {
@@ -19,7 +27,7 @@ const EventsContainer = ({ query_str }) => {
   }, [dispatch, query_str]);
   return (
     <>
-      {loading && <CircularProgress />}
+      {loading && <CircularProgress className={classes.CircularProgress} />}
       {!loading && <EventsTable />}
     </>
   );

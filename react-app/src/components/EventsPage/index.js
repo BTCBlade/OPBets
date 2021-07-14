@@ -33,6 +33,8 @@ export default function EventsPage() {
     setDisplayStr = 'App Academy';
   } else if (query_str === 'small_cap_crypto') {
     setDisplayStr = 'Small Cap Crypto';
+  } else if (query_str === 'politics') {
+    setDisplayStr = 'Politics';
   } else {
     setDisplayStr = query_str;
   }

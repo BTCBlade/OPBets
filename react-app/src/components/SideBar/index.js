@@ -25,6 +25,7 @@ import OverwatchIcon from '../../icons/icons8-overwatch.js';
 import Dota2Icon from '../../icons/icons8-dota-2.js';
 import ApexLegendsIcon from '../../icons/icons8-apex-legends.js';
 import AAIcon from '../../icons/aA_favicon';
+import FlagIcon from '../../icons/flag_icon.js';
 import NavSection from './NavSection';
 import Scrollbar from './Scrollbar';
 
@@ -105,6 +106,11 @@ const sections = [
         title: 'Small Cap Crypto',
         path: '/events/small_cap_crypto',
         icon: <MemoryIcon fontSize="small" />,
+      },
+      {
+        title: 'Politics',
+        path: '/events/politics',
+        icon: <FlagIcon fontSize="small" />,
       },
     ],
   },
