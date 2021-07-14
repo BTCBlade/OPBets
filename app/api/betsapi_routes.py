@@ -85,7 +85,7 @@ def update_events():
                 db.session.add(prediction1)
                 db.session.add(prediction2)
                 db.session.commit()
-    print('-----++++++++++++++++++++++++------------')
+    # print('-----++++++++++++++++++++++++------------')
     return {'something_in_future': 'something'}
 
 # db_event = Event.query.filter_by(bet365_id='101334694').first()

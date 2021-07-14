@@ -9,51 +9,55 @@ seeder_path = dir / '50events_seeder.json'
 
 
 def seed_events_predictions():
-    null = None
-    events = ''
-    with open(seeder_path) as json_file:
-        events = json.load(json_file)['upcoming_events']
     db_event_id = 1
-    for event in events:
-        bet365_id_id = event['bet365_id'] if event.get('bet365_id') else None
-        seed_Event = Event(betsapi_id=event['id'], bet365_id=bet365_id_id,
-                            sport_id=event['sport_id'], home=json.dumps(event['home']),
-                            away=json.dumps(event['away']),
-                            league=json.dumps(event['league']),
-                            time=event['time'], time_status=event['time_status'])
-        if event.get('prematch_odds'):
-            # fake_home_odds = 0
-            # while fake_home_odds < 100 and fake_home_odds > -100:
-            #     fake_home_odds = randint(-900, 900)
-            # fake_away_odds = fake_home_odds * -1
-            #### betsapi bet365 format odds=event['prematch_odds']['schedule']['sp']['main'][0]['odds'],
-            home_odds = decimal_to_american(float(event['prematch_odds']['schedule']['sp']['main'][0]['odds']))
-            away_odds = decimal_to_american(float(event['prematch_odds']['schedule']['sp']['main'][1]['odds']))
-            pair_odds = despread_odds_pair(home_odds, away_odds)
-            if home_odds > away_odds:
-                home_odds = pair_odds
-                away_odds = pair_odds * -1
-            else:
-                home_odds = pair_odds * -1
-                away_odds = pair_odds
+    ####################################################################
+    ### Initial Dev Seeder
+    ###################################################################
+    # null = None
+    # events = ''
+    # with open(seeder_path) as json_file:
+    #     events = json.load(json_file)['upcoming_events']
+    # db_event_id = 1
+    # for event in events:
+    #     bet365_id_id = event['bet365_id'] if event.get('bet365_id') else None
+    #     seed_Event = Event(betsapi_id=event['id'], bet365_id=bet365_id_id,
+    #                         sport_id=event['sport_id'], home=json.dumps(event['home']),
+    #                         away=json.dumps(event['away']),
+    #                         league=json.dumps(event['league']),
+    #                         time=event['time'], time_status=event['time_status'])
+    #     if event.get('prematch_odds'):
+    #         # fake_home_odds = 0
+    #         # while fake_home_odds < 100 and fake_home_odds > -100:
+    #         #     fake_home_odds = randint(-900, 900)
+    #         # fake_away_odds = fake_home_odds * -1
+    #         #### betsapi bet365 format odds=event['prematch_odds']['schedule']['sp']['main'][0]['odds'],
+    #         home_odds = decimal_to_american(float(event['prematch_odds']['schedule']['sp']['main'][0]['odds']))
+    #         away_odds = decimal_to_american(float(event['prematch_odds']['schedule']['sp']['main'][1]['odds']))
+    #         pair_odds = despread_odds_pair(home_odds, away_odds)
+    #         if home_odds > away_odds:
+    #             home_odds = pair_odds
+    #             away_odds = pair_odds * -1
+    #         else:
+    #             home_odds = pair_odds * -1
+    #             away_odds = pair_odds
 
-            seed_Prediction1 = Prediction(db_event_id=db_event_id, is_home=True, event_line='0',
-                                        odds=home_odds,
-                                        betsapi_event_id=event['prematch_odds']['event_id'],
-                                        bet365_bet_id=event['prematch_odds']['FI'],
-                                        time_status=event['time_status'])
-            seed_Prediction2 = Prediction(db_event_id=db_event_id, is_home=False, event_line='0',
-                                        odds=away_odds,
-                                        betsapi_event_id=event['prematch_odds']['event_id'],
-                                        bet365_bet_id=event['prematch_odds']['FI'],
-                                        time_status=event['time_status'])
-        else:
-            seed_Prediction1 = Prediction(is_home=True, db_event_id=db_event_id)
-            seed_Prediction2 = Prediction(is_home=False, db_event_id=db_event_id)
-        db.session.add(seed_Event)
-        db.session.add(seed_Prediction1)
-        db.session.add(seed_Prediction2)
-        db_event_id += 1
+    #         seed_Prediction1 = Prediction(db_event_id=db_event_id, is_home=True, event_line='0',
+    #                                     odds=home_odds,
+    #                                     betsapi_event_id=event['prematch_odds']['event_id'],
+    #                                     bet365_bet_id=event['prematch_odds']['FI'],
+    #                                     time_status=event['time_status'])
+    #         seed_Prediction2 = Prediction(db_event_id=db_event_id, is_home=False, event_line='0',
+    #                                     odds=away_odds,
+    #                                     betsapi_event_id=event['prematch_odds']['event_id'],
+    #                                     bet365_bet_id=event['prematch_odds']['FI'],
+    #                                     time_status=event['time_status'])
+    #     else:
+    #         seed_Prediction1 = Prediction(is_home=True, db_event_id=db_event_id)
+    #         seed_Prediction2 = Prediction(is_home=False, db_event_id=db_event_id)
+    #     db.session.add(seed_Event)
+    #     db.session.add(seed_Prediction1)
+    #     db.session.add(seed_Prediction2)
+    #     db_event_id += 1
     ## aa event lols seeds
     aaEvent1 = Event(betsapi_id='1', bet365_id='1',
                                     sport_id='1', home=json.dumps({'name': "YES - a/A will have a live cohort before end of 2021" }),

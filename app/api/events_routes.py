@@ -25,10 +25,9 @@ def load_specific_events(query_str):
     elif query_str == 'app_academy':
         specific_events = Event.query.filter(Event.sport_id=="1", Event.time>=current_time).order_by(Event.time.asc()).all()
     elif query_str == 'small_cap_crypto':
-        specific_events = Event.query.filter(Event.sport_id=="2").all()
+        specific_events = Event.query.filter(Event.sport_id=="2", Event.time>=current_time).order_by(Event.time.asc()).all()
     elif query_str =='politics':
-        specific_events = Event.query.filter(Event.sport_id=='666').all()
+        specific_events = Event.query.filter(Event.sport_id=="666", Event.time>=current_time).order_by(Event.time.asc()).all()
     else:
-        specific_events = Event.query.filter(Event.league.contains(query_str), Event.time>=current_time).order_by(Event.time.asc())
-    print({"specific_events": [event.to_dict() for event in specific_events]})
+        specific_events = Event.query.filter(Event.league.contains(query_str), Event.time>=current_time).order_by(Event.time.asc()).all()
     return {"specific_events": [event.to_dict() for event in specific_events]}
