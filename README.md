@@ -1,4 +1,4 @@
-# **Welcome to the [OPBets](https://opbets.herokuapp.com/) github repo!**
+# **Welcome to the [OPBets](https://opbets.herokuapp.com/) github repo! Click here for [Demo Video](https://www.youtube.com/watch?v=QJMexFQzM8U)**
 
 <br />
 <p align="center">
@@ -161,7 +161,6 @@ Contributions are what make the open source community such an amazing place to b
 
 ## Contact & Acknowledgements
 
-- Tommy Nienchi ChenChen
-- Veer Singh - [LinkedIn](https://www.linkedin.com/in/tommy-nienchi-chen-a131451b3/) - [GitHub](https://github.com/btcblade)
+- Tommy Nienchi Chen - [LinkedIn](https://www.linkedin.com/in/tommy-nienchi-chen-a131451b3/) - [GitHub](https://github.com/btcblade)
 
-Project Link: [https://github.com/V3RS/skybnb/](https://github.com/btcblade/opbets/)
+Demo Video: [https://www.youtube.com/watch?v=QJMexFQzM8U](https://www.youtube.com/watch?v=QJMexFQzM8U)
