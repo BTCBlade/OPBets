@@ -166,7 +166,7 @@ def seed_events_predictions():
                                     betsapi_event_id='0',
                                     bet365_bet_id='0',
                                     time_status='0')
-
+    db_event_id += 1
     db.session.add(small_cap_crypto_Event1)
     db.session.add(small_cap_crypto_Prediction1)
     db.session.add(small_cap_crypto_Prediction2)
@@ -207,7 +207,7 @@ def seed_events_predictions():
                                     betsapi_event_id='0',
                                     bet365_bet_id='0',
                                     time_status='0')
-
+    db_event_id += 1
     db.session.add(misc_Event1)
     db.session.add(misc_Prediction1)
     db.session.add(misc_Prediction2)
