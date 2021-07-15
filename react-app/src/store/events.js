@@ -57,7 +57,7 @@ const eventsReducer = (state = initialState, action) => {
         if (event['bet365_id']) {
           let eventTime = event.time;
           if (newState[event.time]) {
-            eventTime = Math.floor(Math.random() * 1000) + 1 + event.time;
+            eventTime = 1 + event.time;
           }
           newState[eventTime] = {
             betsapi_id: event['betsapi_id'],

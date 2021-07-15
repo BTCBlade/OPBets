@@ -53,7 +53,9 @@ function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
-  const team_img_url = `https://assets.b365api.com/images/team/s/${row.team_img}.png`;
+  const team_img_url = row.team_img
+    ? `https://assets.b365api.com/images/team/s/${row.team_img}.png`
+    : '';
 
   return (
     <React.Fragment>
