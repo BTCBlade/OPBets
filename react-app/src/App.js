@@ -42,8 +42,8 @@ function App() {
     })();
   }, []);
   useEffect(() => {
-    setInterval(() => fetch('/api/betsapi/update_events'), 1600000);
-  });
+    setInterval(() => fetch('/api/betsapi/update_events'), 4000000);
+  }, []);
   if (!loaded) {
     return null;
   }
