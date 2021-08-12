@@ -17,47 +17,48 @@ export const removeOne = (prediction_id) => {
     payload: prediction_id,
   };
 };
-export const submitWager = (user_id, db_predictions_id, amount) => async (
-  dispatch
-) => {
-  //1. send db_predictions_id in req.body to /api/wagers/
-  const res = await fetch('/api/wagers/add', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      user_id: user_id,
-      db_predictions_id: db_predictions_id,
-      amount: amount,
-    }),
-  });
-  // 2. update session.balance
-  await dispatch(updateBalance(user_id));
-  // 3. update/reload store.events
-  // await dispatch(loadEventsAll());
-};
+export const submitWager =
+  (user_id, db_predictions_id, amount, lowest, highest) => async (dispatch) => {
+    //1. send db_predictions_id in req.body to /api/wagers/
+    console.log('highest', highest);
+    const res = await fetch('/api/wagers/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        user_id: user_id,
+        db_predictions_id: db_predictions_id,
+        amount: amount,
+        lowest: lowest ? lowest : null,
+        highest: highest ? highest : null,
+      }),
+    });
+    // 2. update session.balance
+    await dispatch(updateBalance(user_id));
+    // 3. update/reload store.events
+    // await dispatch(loadEventsAll());
+  };
 
-export const submitWagerAA = (user_id, db_predictions_id, amount) => async (
-  dispatch
-) => {
-  //1. send db_predictions_id in req.body to /api/wagers/
-  const res = await fetch('/api/wagers/add', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      user_id: user_id,
-      db_predictions_id: db_predictions_id,
-      amount: amount,
-    }),
-  });
-  // 2. update session.balance
-  await dispatch(updateBalance(user_id));
-  // 3. update/reload store.events
-  await dispatch(loadAAEventsAll());
-};
+export const submitWagerAA =
+  (user_id, db_predictions_id, amount) => async (dispatch) => {
+    //1. send db_predictions_id in req.body to /api/wagers/
+    const res = await fetch('/api/wagers/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        user_id: user_id,
+        db_predictions_id: db_predictions_id,
+        amount: amount,
+      }),
+    });
+    // 2. update session.balance
+    await dispatch(updateBalance(user_id));
+    // 3. update/reload store.events
+    await dispatch(loadAAEventsAll());
+  };
 const initialState = { wagers: {}, order: [] };
 
 export default function wagerslipReducer(state = initialState, action) {

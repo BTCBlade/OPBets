@@ -9,6 +9,11 @@ import {
   Paper,
   Box,
 } from '@material-ui/core/';
+import Switch from '@material-ui/core/Switch';
+import Hidden from '@material-ui/core/Hidden';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   decimal_to_american,
@@ -41,25 +46,59 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
   },
+  wisewager_textfields: {
+    height: '20px',
+    width: '2rem',
+  },
+  resize: {
+    fontSize: '0.75rem',
+  },
 });
 
 const OneWager = ({ wager }) => {
   const [riskAmount, setRiskAmount] = useState();
+  const [lowest, setLowest] = useState();
+  const [highest, setHighest] = useState();
+  const [checked, setChecked] = useState(false);
+  // const [wiseWagerInputs, setWiseWagerInputs] = useState('none');
   const [win, setWin] = useState();
   const session = useSelector((state) => state.session);
   const dispatch = useDispatch();
   const params = useParams();
+  const classes = useStyles();
+
+  const toggleChecked = () => {
+    setChecked((prev) => !prev);
+    // if (checked) {
+    //   setWiseWagerInputs('inline');
+    // } else {
+    //   setWiseWagerInputs('none');
+    // }
+  };
   const createWager = async () => {
     dispatch(openWagerMatchingProgress());
     let message = await dispatch(
-      submitWager(session.id, wager.db_predictions_id, riskAmount)
+      submitWager(
+        session.id,
+        wager.db_predictions_id,
+        riskAmount,
+        lowest,
+        highest
+      )
     );
     await dispatch(loadSpecificEvents(params.query_str));
   };
 
   return (
     <Box key={wager.id} sx={{ marginBottom: '15px' }}>
-      <Box sx={{ position: 'relative', display: 'flex', flexDirection: 'row' }}>
+      <Box
+        className={classes.one_wager_meta}
+        sx={{
+          position: 'relative',
+          display: 'flex',
+          flexDirection: 'row',
+        }}
+      >
         <h5 id="onewager_team_name">{wager.team_name}</h5>
         <h5 id="onewager_header_odds">{wager.odds}</h5>
         {/* <IconButton
@@ -82,6 +121,91 @@ const OneWager = ({ wager }) => {
           position: 'relative',
           display: 'flex',
           flexDirection: 'row',
+          fontSize: '0.75rem',
+          height: '3rem',
+          marginLeft: 2,
+          marginRight: 1,
+        }}
+      >
+        <FormControlLabel
+          label={
+            <span
+              style={{
+                fontSize: '0.75rem',
+              }}
+            >
+              WiseWager™
+            </span>
+          }
+          value="WiseWager™"
+          control={
+            <Switch
+              size="small"
+              color="primary"
+              checked={checked}
+              onChange={toggleChecked}
+            />
+          }
+          labelPlacement="WiseWager™"
+        />
+        {checked ? (
+          <>
+            <Box
+              sx={{
+                fontSize: '0.5rem',
+                position: 'relative',
+                display: 'flex',
+                alignSelf: 'center',
+                flexDirection: 'row',
+              }}
+            >
+              <TextField
+                classeName={classes.wisewager_textfields}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.resize,
+                  },
+                }}
+                size="small"
+                variant="outlined"
+                label="Lowest"
+                value={lowest}
+                InputProps={{
+                  classes: {
+                    input: classes.resize,
+                  },
+                }}
+                onChange={(e) => setLowest(e.target.value)}
+              ></TextField>
+              <TextField
+                InputLabelProps={{
+                  classes: {
+                    root: classes.resize,
+                  },
+                }}
+                InputProps={{
+                  classes: {
+                    input: classes.resize,
+                  },
+                }}
+                classeName={classes.wisewager_textfields}
+                size="small"
+                variant="outlined"
+                label="Highest"
+                value={highest}
+                onChange={(e) => setHighest(e.target.value)}
+              ></TextField>
+            </Box>
+          </>
+        ) : (
+          <div></div>
+        )}
+      </Box>
+      <Box
+        sx={{
+          position: 'relative',
+          display: 'flex',
+          flexDirection: 'row',
           justifyContent: 'space-around',
         }}
       >
@@ -98,7 +222,6 @@ const OneWager = ({ wager }) => {
                 : ''
             );
           }}
-          inputRef={(input) => input && input.focus()}
           value={riskAmount}
           sx={{ width: '46%' }}
         ></TextField>

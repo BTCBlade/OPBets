@@ -22,6 +22,8 @@ def cancel_wager(id):
 @wagers_routes.route('/add', methods=['POST'])
 def add_wager():
   req_obj = request.get_json()
+  print('---------------------------------------')
+  print(req_obj)
   req_amount = float(req_obj['amount'])
   req_user = User.query.get(req_obj['user_id'])
 
@@ -49,7 +51,7 @@ def add_wager():
 
     # 1. No Opposite side wagers No Same side wagers
     if ((len(event_home_prediction_wagers_arr) == 0) and (len(event_away_prediction_wagers_arr) == 0)):
-      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,
+      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds, lower_cancel_odds=req_obj['lowest'], higher_cancel_odds=req_obj['highest'],
                         initial_amount=float(req_obj['amount']), current_amount=float(req_obj['amount']),
                         initial_fill=0, liquidityProviderBool=True,
                         placed_by_user_id=req_obj['user_id'], prediction_id=req_obj['db_predictions_id'])
@@ -57,13 +59,13 @@ def add_wager():
 
     # 2. No Opposite side wagers YES same side wagers in queue
     elif (prediction.is_home and (len(event_away_prediction_wagers_arr) == 0)):
-      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,
+      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds, lower_cancel_odds=req_obj['lowest'], higher_cancel_odds=req_obj['highest'],
                         initial_amount=float(req_obj['amount']), current_amount=float(req_obj['amount']),
                         initial_fill=0, liquidityProviderBool=True,
                         placed_by_user_id=req_obj['user_id'], prediction_id=req_obj['db_predictions_id'])
       db.session.add(new_wager)
     elif ((prediction.is_home is False) and (len(event_home_prediction_wagers_arr) == 0)):
-      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,
+      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds, lower_cancel_odds=req_obj['lowest'], higher_cancel_odds=req_obj['highest'],
                         initial_amount=float(req_obj['amount']), current_amount=float(req_obj['amount']),
                         initial_fill=0, liquidityProviderBool=True,
                         placed_by_user_id=req_obj['user_id'], prediction_id=req_obj['db_predictions_id'])
@@ -72,7 +74,7 @@ def add_wager():
     # 3.a Opposite side wager amount > req.amount
     # home
     elif (prediction.is_home and (total_away_liquidity >= ( float(req_obj['amount']) * (int(prediction.odds)/100) ) ) ):
-      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,
+      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds, lower_cancel_odds=req_obj['lowest'], higher_cancel_odds=req_obj['highest'],
                         initial_amount=float(req_obj['amount']), current_amount=float(req_obj['amount']),
                         initial_fill=float(req_obj['amount']), liquidityProviderBool=False,
                         placed_by_user_id=req_obj['user_id'], prediction_id=req_obj['db_predictions_id'])
@@ -106,7 +108,7 @@ def add_wager():
     # 3.b Opposite side total wagers amount > req.amount
     # away
     elif ((prediction.is_home is False) and (total_home_liquidity >= ( float(req_obj['amount']) * (int(prediction.odds)/100) ) ) ):
-      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,
+      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds, lower_cancel_odds=req_obj['lowest'], higher_cancel_odds=req_obj['highest'],
                         initial_amount=float(req_obj['amount']), current_amount=float(req_obj['amount']),
                         initial_fill=float(req_obj['amount']), liquidityProviderBool=False,
                         placed_by_user_id=req_obj['user_id'], prediction_id=req_obj['db_predictions_id'])
@@ -142,7 +144,7 @@ def add_wager():
     # home
     elif (prediction.is_home and (total_away_liquidity <= ( float(req_obj['amount']) * (int(prediction.odds)/100) ) ) ):
 
-      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,
+      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds, lower_cancel_odds=req_obj['lowest'], higher_cancel_odds=req_obj['highest'],
                         initial_amount=float(req_obj['amount']), current_amount=float(req_obj['amount']),
                         initial_fill=0, liquidityProviderBool=True,
                         placed_by_user_id=req_obj['user_id'], prediction_id=req_obj['db_predictions_id'])
@@ -164,7 +166,7 @@ def add_wager():
     # away
     elif ((prediction.is_home is False) and (total_home_liquidity <= ( float(req_obj['amount']) * (int(prediction.odds)/100) ) ) ):
 
-      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,
+      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,lower_cancel_odds=req_obj['lowest'], higher_cancel_odds=req_obj['highest'],
                         initial_amount=float(req_obj['amount']), current_amount=float(req_obj['amount']),
                         initial_fill=0, liquidityProviderBool=True,
                         placed_by_user_id=req_obj['user_id'], prediction_id=req_obj['db_predictions_id'])
@@ -199,7 +201,7 @@ def add_wager():
 
     # 1. No Opposite side wagers No Same side wagers
     if ((len(event_home_prediction_wagers_arr) == 0) and (len(event_away_prediction_wagers_arr) == 0)):
-      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,
+      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,lower_cancel_odds=req_obj['lowest'], higher_cancel_odds=req_obj['highest'],
                         initial_amount=float(req_obj['amount']), current_amount=float(req_obj['amount']),
                         initial_fill=0, liquidityProviderBool=True,
                         placed_by_user_id=req_obj['user_id'], prediction_id=req_obj['db_predictions_id'])
@@ -208,13 +210,13 @@ def add_wager():
 
     # 2. No Opposite side wagers YES same side wagers in queue
     elif (prediction.is_home and (len(event_away_prediction_wagers_arr) == 0)):
-      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,
+      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,lower_cancel_odds=req_obj['lowest'], higher_cancel_odds=req_obj['highest'],
                         initial_amount=float(req_obj['amount']), current_amount=float(req_obj['amount']),
                         initial_fill=0, liquidityProviderBool=True,
                         placed_by_user_id=req_obj['user_id'], prediction_id=req_obj['db_predictions_id'])
       db.session.add(new_wager)
     elif ((prediction.is_home is False) and (len(event_home_prediction_wagers_arr) == 0)):
-      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,
+      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,lower_cancel_odds=req_obj['lowest'], higher_cancel_odds=req_obj['highest'],
                         initial_amount=float(req_obj['amount']), current_amount=float(req_obj['amount']),
                         initial_fill=0, liquidityProviderBool=True,
                         placed_by_user_id=req_obj['user_id'], prediction_id=req_obj['db_predictions_id'])
@@ -222,7 +224,7 @@ def add_wager():
     # 3.a Opposite side wager amount > req.amount
     # home
     elif (prediction.is_home and (total_away_liquidity >= ( float(req_obj['amount']) / (int(prediction.odds)/100 * -1) ) ) ):
-      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,
+      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,lower_cancel_odds=req_obj['lowest'], higher_cancel_odds=req_obj['highest'],
                         initial_amount=float(req_obj['amount']), current_amount=float(req_obj['amount']),
                         initial_fill=float(req_obj['amount']), liquidityProviderBool=False,
                         placed_by_user_id=req_obj['user_id'], prediction_id=req_obj['db_predictions_id'])
@@ -256,7 +258,7 @@ def add_wager():
     # 3.b Opposite side total wagers amount > req.amount
     # away
     elif ((prediction.is_home is False) and (total_home_liquidity >= ( float(req_obj['amount']) / (int(prediction.odds)/100) * -1 ) ) ):
-      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,
+      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,lower_cancel_odds=req_obj['lowest'], higher_cancel_odds=req_obj['highest'],
                         initial_amount=float(req_obj['amount']), current_amount=float(req_obj['amount']),
                         initial_fill=float(req_obj['amount']), liquidityProviderBool=False,
                         placed_by_user_id=req_obj['user_id'], prediction_id=req_obj['db_predictions_id'])
@@ -291,7 +293,7 @@ def add_wager():
     # home
     elif (prediction.is_home and (total_away_liquidity <= ( float(req_obj['amount']) / (int(prediction.odds)/100) * -1 ) ) ):
 
-      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,
+      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,lower_cancel_odds=req_obj['lowest'], higher_cancel_odds=req_obj['highest'],
                         initial_amount=float(req_obj['amount']), current_amount=float(req_obj['amount']),
                         initial_fill=0, liquidityProviderBool=True,
                         placed_by_user_id=req_obj['user_id'], prediction_id=req_obj['db_predictions_id'])
@@ -313,7 +315,7 @@ def add_wager():
     # away
     elif ((prediction.is_home is False) and (total_home_liquidity <= ( float(req_obj['amount']) / (int(prediction.odds)/100) *  -1 ) ) ):
 
-      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,
+      new_wager = Wager(initial_event_line='0', initial_odds=prediction.odds,lower_cancel_odds=req_obj['lowest'], higher_cancel_odds=req_obj['highest'],
                         initial_amount=float(req_obj['amount']), current_amount=float(req_obj['amount']),
                         initial_fill=0, liquidityProviderBool=True,
                         placed_by_user_id=req_obj['user_id'], prediction_id=req_obj['db_predictions_id'])
