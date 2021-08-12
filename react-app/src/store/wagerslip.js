@@ -19,6 +19,9 @@ export const removeOne = (prediction_id) => {
 };
 export const submitWager =
   (user_id, db_predictions_id, amount, lowest, highest) => async (dispatch) => {
+    const formatLeadingSign = (numStr) => {
+      return parseInt(numStr).toString();
+    };
     //1. send db_predictions_id in req.body to /api/wagers/
     console.log('highest', highest);
     const res = await fetch('/api/wagers/add', {
@@ -30,8 +33,8 @@ export const submitWager =
         user_id: user_id,
         db_predictions_id: db_predictions_id,
         amount: amount,
-        lowest: lowest ? lowest : null,
-        highest: highest ? highest : null,
+        lowest: lowest ? formatLeadingSign(lowest) : null,
+        highest: highest ? formatLeadingSign(highest) : null,
       }),
     });
     // 2. update session.balance
