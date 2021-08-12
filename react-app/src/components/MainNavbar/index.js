@@ -91,8 +91,9 @@ const MainNavbar = (props) => {
             <>
               <Link
                 color="textSecondary"
-                component={RouterLink}
-                to="/"
+                href="https://www.youtube.com/watch?v=QJMexFQzM8U"
+                target="_blank"
+                rel="noopener noreferrer"
                 underline="none"
                 variant="body1"
                 mr={6}
