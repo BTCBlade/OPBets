@@ -7,6 +7,8 @@ class Wager(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     initial_event_line = db.Column(db.Text, nullable=False)
     initial_odds = db.Column(db.Text, nullable=False)
+    lower_cancel_odds = db.Column(db.Text, nullable=True)
+    higher_cancel_odds = db.Column(db.Text, nullable=True)
     initial_amount = db.Column(db.Float, nullable=False)
     current_amount = db.Column(db.Float, nullable=False)
     initial_fill = db.Column(db.Float, nullable=False)
@@ -26,6 +28,8 @@ class Wager(db.Model):
             "id": self.id,
             "initial_event_line": self.initial_event_line,
             "initial_odds": self.initial_odds,
+            "lower_cancel_odds": self.lower_cancel_odds,
+            "higher_cancel_odds": self.higher_cancel_odds,
             "initial_amount": self.initial_amount,
             "current_amount": self.current_amount,
             "initial_fill": self.initial_fill,
@@ -39,6 +43,8 @@ class Wager(db.Model):
             "id": self.id,
             "initial_event_line": self.initial_event_line,
             "initial_odds": self.initial_odds,
+            "lower_cancel_odds": self.lower_cancel_odds,
+            "higher_cancel_odds": self.higher_cancel_odds,
             "initial_amount": self.initial_amount,
             "current_amount": self.current_amount,
             "initial_fill": self.initial_fill,

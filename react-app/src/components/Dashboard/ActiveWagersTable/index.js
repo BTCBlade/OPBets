@@ -58,6 +58,7 @@ const ActiveWagersTable = () => {
                 <TableCell>WagerId</TableCell>
                 <TableCell>Team</TableCell>
                 <TableCell>Initial Odds</TableCell>
+                <TableCell>WiseWager™</TableCell>
                 <TableCell>Current Amount</TableCell>
                 <TableCell>Percentage Filled</TableCell>
                 <TableCell align="right">Actions</TableCell>
@@ -80,6 +81,14 @@ const ActiveWagersTable = () => {
                   .join(' ');
                 const initialOddsStr = american_to_str(wager.initial_odds);
                 const currentOddsStr = american_to_str(wager.prediction.odds);
+                const cancelOddsStr =
+                  (wager.lower_cancel_odds
+                    ? american_to_str(wager.lower_cancel_odds)
+                    : '') +
+                  ' | ' +
+                  (wager.higher_cancel_odds
+                    ? american_to_str(wager.higher_cancel_odds)
+                    : '');
                 const current_amount = wager.current_amount;
                 const initial_amount = wager.initial_amount;
                 const percentageFilled = Math.round(
@@ -105,6 +114,7 @@ const ActiveWagersTable = () => {
                     </TableCell>
                     <TableCell>{teamName}</TableCell>
                     <TableCell>{initialOddsStr}</TableCell>
+                    <TableCell align="center">{cancelOddsStr}</TableCell>
                     <TableCell>
                       {current_amount.toFixed(2)}/
                       <Typography color="textSecondary" variant="body2">
