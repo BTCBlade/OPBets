@@ -135,35 +135,43 @@ export default function EventsTable() {
 
   let rows = [];
   Object.values(events).forEach((event, index) => {
-    const event_date = new Date(event.time * 1000);
+    if (event.predictions[0].id && event.predictions[1].id) {
+      const event_date = new Date(event.time * 1000);
 
-    const date_1 = event_date.toLocaleString().split(',');
-    const time_parts = date_1[1].split(' ');
-    const hour_min = time_parts[1].split(':');
-    const date_display =
-      date_1[0] + '  ' + hour_min[0] + ':' + hour_min[1] + ' ' + time_parts[2];
-    const home_obj = {
-      db_predictions_id: event.predictions[0].id,
-      is_home: event.predictions[0].is_home,
-      league_name: event.league.name,
-      time: date_display,
-      team_name: event.home.name,
-      team_img: event.home.image_id,
-      odds: db_american_to_string(event.predictions[0].odds),
-      wagers: event.predictions[0].wagers,
-    };
-    const away_obj = {
-      db_predictions_id: event.predictions[1].id,
-      is_home: event.predictions[1].is_home,
-      league_name: event.league.name,
-      time: date_display,
-      team_name: event.away.name,
-      team_img: event.away.image_id,
-      odds: db_american_to_string(event.predictions[1].odds),
-      wagers: event.predictions[1].wagers,
-    };
-    rows.push(home_obj);
-    rows.push(away_obj);
+      const date_1 = event_date.toLocaleString().split(',');
+      const time_parts = date_1[1].split(' ');
+      const hour_min = time_parts[1].split(':');
+      const date_display =
+        date_1[0] +
+        '  ' +
+        hour_min[0] +
+        ':' +
+        hour_min[1] +
+        ' ' +
+        time_parts[2];
+      const home_obj = {
+        db_predictions_id: event.predictions[0].id,
+        is_home: event.predictions[0].is_home,
+        league_name: event.league.name,
+        time: date_display,
+        team_name: event.home.name,
+        team_img: event.home.image_id,
+        odds: db_american_to_string(event.predictions[0].odds),
+        wagers: event.predictions[0].wagers,
+      };
+      const away_obj = {
+        db_predictions_id: event.predictions[1].id,
+        is_home: event.predictions[1].is_home,
+        league_name: event.league.name,
+        time: date_display,
+        team_name: event.away.name,
+        team_img: event.away.image_id,
+        odds: db_american_to_string(event.predictions[1].odds),
+        wagers: event.predictions[1].wagers,
+      };
+      rows.push(home_obj);
+      rows.push(away_obj);
+    }
   });
 
   return (
