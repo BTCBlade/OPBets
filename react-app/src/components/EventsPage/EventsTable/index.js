@@ -135,7 +135,7 @@ export default function EventsTable() {
 
   let rows = [];
   Object.values(events).forEach((event, index) => {
-    if (event.predictions[0].id && event.predictions[1].id) {
+    if (event.predictions[0] && event.predictions[1]) {
       const event_date = new Date(event.time * 1000);
 
       const date_1 = event_date.toLocaleString().split(',');
