@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { ThemeProvider } from '@material-ui/core';
 import { createTheme } from './theme';
-import GlobalStyles from './components/GlobalStyles';
+// import GlobalStyles from './components/GlobalStyles';
 import useSettings from './hooks/useSettings';
 import SettingsMenu from './components/SettingsMenu';
 
