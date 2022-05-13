@@ -38,8 +38,11 @@ export default function EventsPage() {
     setDisplayStr = query_str;
   }
 
+  //*************************************** */
+
   setInterval(() => fetch('/api/betsapi/update_events'), 4000000);
 
+  //*************************************** */
   return (
     <>
       <Hidden lgDown>
