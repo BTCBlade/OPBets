@@ -219,7 +219,7 @@ const DashboardSidebar = (props) => {
             onClick={() => fetch('/api/betsapi/update_events')}
             variant="contained"
           >
-            Email
+            Update Odds
           </Button>
         </Box>
       </Scrollbar>

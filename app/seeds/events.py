@@ -60,10 +60,10 @@ def seed_events_predictions():
     #     db_event_id += 1
     ## aa event lols seeds
     aaEvent1 = Event(betsapi_id='1', bet365_id='1',
-                                    sport_id='1', home=json.dumps({'name': "YES - a/A will have a live cohort before end of 2021" }),
+                                    sport_id='1', home=json.dumps({'name': "Will a/A still be a thing in 2029" }),
                                     away=json.dumps({'name': 'NO - The COVID rekted the world'}),
                                     league=json.dumps({'name': "Covid - There will be a in person cohort by end of year"}),
-                                    time='1640947654', time_status='0')
+                                    time='1659823656', time_status='0')
     aaPrediction1 = Prediction(db_event_id=db_event_id, is_home=True, event_line='0',
                                     odds='105',
                                     betsapi_event_id='0',
@@ -78,8 +78,8 @@ def seed_events_predictions():
     aaEvent2 = Event(betsapi_id='2', bet365_id='2',
                                     sport_id='1', home=json.dumps({'name': "YES - SF rains alot during spring" }),
                                     away=json.dumps({'name': 'NO - Clear skies ahead'}),
-                                    league=json.dumps({'name': "Weather - Will it rain on in SF Christmas 12/23/2021"}),
-                                    time='1640301127', time_status='0')
+                                    league=json.dumps({'name': "Weather - Will it rain on in SF Christmas 12/23/****"}),
+                                    time='1659823656', time_status='0')
     aaPrediction3 = Prediction(db_event_id=db_event_id, is_home=True, event_line='0',
                                     odds='-125',
                                     betsapi_event_id='0',
@@ -110,8 +110,8 @@ def seed_events_predictions():
     aaEvent4 = Event(betsapi_id='3', bet365_id='3',
                                     sport_id='1', home=json.dumps({'name': "YES - a/A whipped my mind back into shape" }),
                                     away=json.dumps({'name': 'NO - : ('}),
-                                    league=json.dumps({'name': "OPBets - The maker of this app will get his first job before end of 2021 to a/A : )"}),
-                                    time='1640947824', time_status='0')
+                                    league=json.dumps({'name': "OPBets - The maker of this app will get his first job before end of 2030 due to a/A : )"}),
+                                    time='1659823656', time_status='0')
     aaPrediction7 = Prediction(db_event_id=db_event_id, is_home=True, event_line='0',
                                     odds='-150',
                                     betsapi_event_id='0',
@@ -158,8 +158,8 @@ def seed_events_predictions():
     small_cap_crypto_Event2 = Event(betsapi_id='5', bet365_id='5',
                         sport_id='2', home=json.dumps({'name': "YES - Nothing is better than Doges" }),
                         away=json.dumps({'name': 'NO - I dont pick up doge sh*tcoins'}),
-                        league=json.dumps({'name': "Dogecoin will hit 1 USD before 12/31/2021"}),
-                        time='1640947824', time_status='0')
+                        league=json.dumps({'name': "Dogecoin will hit 1 USD before 12/31/2030"}),
+                        time='1659823656', time_status='0')
     small_cap_crypto_Prediction3 = Prediction(db_event_id=db_event_id, is_home=True, event_line='0',
                                     odds='200',
                                     betsapi_event_id='0',
