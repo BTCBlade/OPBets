@@ -158,7 +158,7 @@ Contributions are what make the open source community such an amazing place to b
 5. Open a Pull Request
 
 ********************
-email: tommynchen@gmail.com or tochen@student.42.us.org
+email: tommynchen@gmail.com
 *******************
 <!-- CONTACT -->
 
