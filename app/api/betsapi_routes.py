@@ -26,11 +26,21 @@ BETSAPI_KEY = os.environ.get('BETSAPI_KEY')
 def update_events():
 
     upcoming_events = []
+
+    ## Get total num of pages according to betsapi
     res = json.loads((requests.get(f'https://api.b365api.com/v2/events/upcoming?sport_id=151&token={BETSAPI_KEY}').content).decode('utf-8'))
-    total_pages = math.ceil(res['pager']['total']/50)
+    print(res)
+    if res["success"] == 1:
+        total_pages = math.ceil(res['pager']['total']/res["pager"]["per_page"])
+    else:
+        total_pages = 0
+
+    ## Push x events at a time into upcoming_events List
     for x in range(1, total_pages + 1):
-        fifty_events = json.loads((requests.get(f'https://api.b365api.com/v2/events/upcoming?sport_id=151&token={BETSAPI_KEY}&page={x}').content).decode('utf-8'))['results']
-        upcoming_events.extend(fifty_events)
+        per_page_events = json.loads((requests.get(f'https://api.b365api.com/v2/events/upcoming?sport_id=151&token={BETSAPI_KEY}&page={x}').content).decode('utf-8'))['results']
+        upcoming_events.extend(per_page_events)
+
+
     for event in upcoming_events:
         if event.get('bet365_id'):
             db_event = Event.query.filter_by(bet365_id=event['bet365_id']).first()
@@ -44,17 +54,24 @@ def update_events():
 
             if res['success'] == 1:
                 res = res['results'][0]
+                ##
+                ## previous had v2 v3 betsapi parsing problems
+                ##
+                if res["schedule"]["sp"]["main"]:
+                    home_odds = decimal_to_american(float(res['schedule']['sp']['main'][0]['odds']))
+                    away_odds = decimal_to_american(float(res['schedule']['sp']['main'][1]['odds']))
+                    pair_odds = despread_odds_pair(home_odds, away_odds)
+                    if home_odds > away_odds:
+                        home_odds = pair_odds
+                        away_odds = pair_odds * -1
+                    else:
+                        home_odds = pair_odds * -1
+                        away_odds = pair_odds
+                else:
+                    home_odds = "-143"
+                    away_odds = "141"
             else:
                 continue
-            home_odds = decimal_to_american(float(res['schedule']['sp']['main'][0]['odds']))
-            away_odds = decimal_to_american(float(res['schedule']['sp']['main'][1]['odds']))
-            pair_odds = despread_odds_pair(home_odds, away_odds)
-            if home_odds > away_odds:
-                home_odds = pair_odds
-                away_odds = pair_odds * -1
-            else:
-                home_odds = pair_odds * -1
-                away_odds = pair_odds
 
             # Event already exists in db
             if db_event is not None:
