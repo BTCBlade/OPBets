@@ -23,6 +23,7 @@ COPY . .
 COPY --from=build-stage /react-app/build/* app/static/
 
 # Install Python Dependencies
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 RUN pip install psycopg2
 
