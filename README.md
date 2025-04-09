@@ -107,7 +107,7 @@ Here is everything we need you to do to get started with Skybnb.
 
 4. Create a postgreSQL user
    ```sh
-   CREATE USERS <<your username>> WITH PASSWORD <<your password>> CREATEDB;
+   CREATE USER <<your username>> WITH PASSWORD <<your password>> CREATEDB;
    ```
 5. Create your database
    ```sh
