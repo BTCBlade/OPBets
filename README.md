@@ -1,4 +1,4 @@
-# **Welcome to the [OPBets](https://opbets.herokuapp.com/) github repo! Click here for [Demo Video](https://www.youtube.com/watch?v=QJMexFQzM8U)**
+# **Welcome to the [OPBets](https://9dyp2rbkcq.us-west-2.awsapprunner.com/) github repo! Click here for [Demo Video](https://www.youtube.com/watch?v=QJMexFQzM8U)**
 
 <br />
 <p align="center">
